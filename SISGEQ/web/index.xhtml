@@ -1,12 +1,56 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui">
     <h:head>
-        <title>Facelet Title</title>
+        <title>SISGEQ - Sistema Gerenciador de Questionários</title>
+        <link type="text/css" rel="stylesheet" href="skin.css"/>
     </h:head>
-    <h:body>
-        Hello from Facelets
+    <h:body style="font-size: 10pt">
+        <h:form>
+            <!-- <p:layout fullPage="true">
+                <p:layoutUnit position="top" height="100" header="QUEBRANDO PARADIGMAS">
+                    <p:panel header="SISGEQ - Sistema Gerenciador de Questionários" style="text-align: left">
+                    </p:panel>
+                </p:layoutUnit>
+            -->
+            <p:layoutUnit position="center" header="Entrar">
+                <br/><br/>
+                <div align="center">
+                    <h:panelGrid columns="1">
+                        <p:messages />
+                        <p:panel header="Entrar no Sistema" style="text-align: left">
+                            <h:panelGrid columns="2">
+                                <h:outputLabel value="Login"/>
+                                <h:inputText id="login" required="true" value=""
+                                             requiredMessage="Campo Login Obrigatório!"/>
+                                <h:outputLabel value="Senha"/>
+                                <p:password value="" minLength="6"/>
+                            </h:panelGrid>
+                        </p:panel>
+                    </h:panelGrid>
+                </div>
+            </p:layoutUnit>
+            <!--
+                        <p:layoutUnit position="left" width="250" header="Calendario">
+                            <p:panel header="Calendário" style="text-align: left">
+                                <p:calendar mode="inline" />
+                            </p:panel>
+                        </p:layoutUnit>
+
+                        <p:layoutUnit position="right" width="200" header="Right">
+                            <p:panel header="Direita" style="text-align: left">
+                            </p:panel>
+                        </p:layoutUnit>
+
+                        <p:layoutUnit position="bottom" height="75" header="Bottom">
+                            <p:panel header="www.natal.uern.br" style="text-align: center">
+                            </p:panel>
+                        </p:layoutUnit>
+                        </p:layout>
+            -->
+        </h:form>
     </h:body>
 </html>
 

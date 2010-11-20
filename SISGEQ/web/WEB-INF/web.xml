@@ -18,7 +18,11 @@
             30
         </session-timeout>
     </session-config>
+    <context-param>
+        <param-name>primefaces.skin</param-name>
+        <param-value>none</param-value>
+    </context-param>
     <welcome-file-list>
-        <welcome-file>index.xhtml</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 </web-app>
