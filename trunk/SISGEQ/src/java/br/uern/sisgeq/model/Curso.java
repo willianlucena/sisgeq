@@ -1,19 +1,27 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package br.uern.sisgeq.model;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import org.hibernate.annotations.Entity;
 
 /**
  *
  * @author rafael
  */
+@Entity
+@Table(name = "curso")
 public class Curso {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true, nullable = false)
+    private Integer id;
+    @Column
     private String nome;
-    private int id;
-    private int departamento_id;
+    @Column
+    private Integer departamento_id;
 
     public int getDepartamento_id() {
         return departamento_id;
