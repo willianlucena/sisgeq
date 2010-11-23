@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="sisgeq"/>
+  <table-filter match-name="disciplina"/>
+  <table-filter match-name="alternativa"/>
+  <table-filter match-name="departamento"/>
+  <table-filter match-name="campus"/>
+  <table-filter match-name="pessoa_questionario"/>
+  <table-filter match-name="restricao"/>
+  <table-filter match-name="nucleo"/>
+  <table-filter match-name="questionario"/>
+  <table-filter match-name="curso"/>
+  <table-filter match-name="pessoa"/>
+  <table-filter match-name="pessoa_turma"/>
+  <table-filter match-name="turma"/>
+  <table-filter match-name="pessoa_perfil"/>
+  <table-filter match-name="perfil"/>
+  <table-filter match-name="pergunta"/>
+  <table-filter match-name="resposta"/>
+</hibernate-reverse-engineering>

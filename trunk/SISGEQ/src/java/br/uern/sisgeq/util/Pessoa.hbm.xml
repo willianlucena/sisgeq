@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/11/2010 09:58:33 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="sisgeq" name="br.uern.sisgeq.pojo.Pessoa" table="pessoa">
+    <id name="matriculaCpf" type="string">
+      <column length="11" name="matriculaCpf"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="br.uern.sisgeq.pojo.Departamento" fetch="select" name="departamento">
+      <column name="departamento_id" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="br.uern.sisgeq.pojo.Curso" fetch="select" name="curso">
+      <column name="curso_id" not-null="true"/>
+    </many-to-one>
+    <property name="nome" type="string">
+      <column length="60" name="nome" not-null="true"/>
+    </property>
+    <property name="cidade" type="string">
+      <column length="45" name="cidade"/>
+    </property>
+    <property name="estado" type="string">
+      <column length="45" name="estado"/>
+    </property>
+    <property name="naturalidade" type="string">
+      <column length="45" name="naturalidade"/>
+    </property>
+    <property name="nacionalidade" type="string">
+      <column length="45" name="nacionalidade"/>
+    </property>
+    <set inverse="true" name="pessoaTurmas">
+      <key>
+        <column length="11" name="pessoa_matriculaCpf" not-null="true"/>
+      </key>
+      <one-to-many class="br.uern.sisgeq.pojo.PessoaTurma"/>
+    </set>
+    <set inverse="false" name="perfils" table="pessoa_perfil">
+      <key>
+        <column length="11" name="matriculaCpf" not-null="true"/>
+      </key>
+      <many-to-many entity-name="br.uern.sisgeq.pojo.Perfil">
+        <column name="perfil_id" not-null="true"/>
+      </many-to-many>
+    </set>
+    <set inverse="true" name="pessoaQuestionarios">
+      <key>
+        <column length="11" name="pessoa_matriculaCpf" not-null="true"/>
+      </key>
+      <one-to-many class="br.uern.sisgeq.pojo.PessoaQuestionario"/>
+    </set>
+  </class>
+</hibernate-mapping>

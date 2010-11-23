@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.Entity;
 
@@ -14,13 +15,9 @@ import org.hibernate.annotations.Entity;
 @Entity
 @Table(name = "curso")
 public class Curso {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique = true, nullable = false)
+
     private Integer id;
-    @Column
     private String nome;
-    @Column
     private Integer departamento_id;
 
     public int getDepartamento_id() {
