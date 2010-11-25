@@ -1,4 +1,4 @@
-package br.uern.sisgeq.util;
+package br.uern.sisgeq.model;
 // Generated 23/11/2010 09:58:27 by Hibernate Tools 3.2.1.GA
 
 

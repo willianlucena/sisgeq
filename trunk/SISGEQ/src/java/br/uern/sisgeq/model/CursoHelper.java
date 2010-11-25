@@ -1,5 +1,6 @@
-package br.uern.sisgeq.util;
+package br.uern.sisgeq.model;
 
+import br.uern.sisgeq.util.HibernateUtil;
 import javax.management.Query;
 import org.hibernate.Session;
 
