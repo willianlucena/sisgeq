@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package br.uern.sisgeq.controller;
 
 import br.uern.sisgeq.model.Login;
@@ -11,10 +6,10 @@ import br.uern.sisgeq.model.Login;
  *
  * @author rafael
  */
-public class LoginManagedBean {
+public class LoginMB {
     private Login login;
 
-    public LoginManagedBean(){
+    public LoginMB(){
         login = new Login();
     }
 
