@@ -1,31 +1,27 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.uern.sisgeq.controller;
 
 import br.uern.sisgeq.dao.DisciplinaDao;
 import br.uern.sisgeq.model.Disciplina;
 import java.util.List;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
 /**
  *
- * @author rafael
+ * @author Felipe Lemos
  */
 @ManagedBean
 @SessionScoped
-public class DisciplinaMB {
+public class DisciplinaController {
 
     private Disciplina disciplina;
     private DataModel listaDisciplinas;
     private DisciplinaDao disciplinaDao;
 
-    public DisciplinaMB() {
+    public DisciplinaController() {
     }
 
     public DataModel getListarDisciplinas() {

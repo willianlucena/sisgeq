@@ -1,15 +1,19 @@
 package br.uern.sisgeq.controller;
 
 import br.uern.sisgeq.model.Login;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 
 /**
  *
  * @author rafael
  */
-public class LoginMB {
+@ManagedBean(name="loginManagedBean")
+@RequestScoped
+public class LoginController {
     private Login login;
 
-    public LoginMB(){
+    public LoginController(){
         login = new Login();
     }
 

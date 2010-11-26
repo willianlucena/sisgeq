@@ -10,11 +10,11 @@ import javax.faces.bean.RequestScoped;
  */
 @ManagedBean(name="nucleoManagedBean")
 @RequestScoped
-public class NucleoMB {
+public class NucleoController {
 
     private Nucleo nucleo;
-    /** Creates a new instance of NucleoMB */
-    public NucleoMB() {
+    /** Creates a new instance of NucleoController */
+    public NucleoController() {
     }
 
     public Nucleo getNucleo() {

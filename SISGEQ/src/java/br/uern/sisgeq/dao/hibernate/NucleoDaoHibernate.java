@@ -17,19 +17,19 @@ public class NucleoDaoHibernate  extends HibernateDaoSupport implements NucleoDa
     }
 
     public List<Nucleo> getNucleos() {
-        throw new UnsupportedOperationException("Not supported yet.");
+       return getHibernateTemplate().find("from Nucleo");
     }
 
     public List<Nucleo> getNucleosByCampus(Campus campus) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return getHibernateTemplate().find("from Nucleo as n where n.campus.id = ?", campus.getId());
     }
 
-    public void saveOrUpdateNucleo(Nucleo Nucleo) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void saveOrUpdateNucleo(Nucleo nucleo) {
+        getHibernateTemplate().saveOrUpdate(nucleo);
     }
 
-    public void removeNucleo(Nucleo Nucleo) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void removeNucleo(Nucleo nucleo) {
+        getHibernateTemplate().delete(nucleo);
     }
 
 }

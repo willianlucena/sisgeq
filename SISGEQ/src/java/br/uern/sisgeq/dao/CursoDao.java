@@ -22,7 +22,7 @@ public interface CursoDao extends DAO {
 
     public List<Curso> getCursosByNucleo(Nucleo nucleo);
 
-    public List<Curso> getCursos(int inicio, int fim);
+    public List<Curso> getCursos(int inicio, int numeroResultados);
 
     public void saveOrUpdateCurso(Curso curso);
 

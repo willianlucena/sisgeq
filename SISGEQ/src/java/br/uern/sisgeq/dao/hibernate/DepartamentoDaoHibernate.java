@@ -18,23 +18,23 @@ public class DepartamentoDaoHibernate extends HibernateDaoSupport implements Dep
     }
 
     public List<Departamento> getDepartamentos() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return getHibernateTemplate().find("from Departamento");
     }
 
     public List<Departamento> getDepartamentosByCampus(Campus campus) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String query = "select d from Departamento as d where d.nucleo.id in (select from Nucleo as n where n.campus.id = :campus)";
+        return getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(query).setParameter("campus", campus.getId()).list();
     }
 
     public List<Departamento> getDepartamentosByNucleo(Nucleo nucleo) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return getHibernateTemplate().find("from Departamento as d where d.nucleo.id = ?", nucleo.getId());
     }
 
-    public void saveOrUpdateDepartamento(Departamento Departamento) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void saveOrUpdateDepartamento(Departamento departamento) {
+        getHibernateTemplate().saveOrUpdate(departamento);
     }
 
-    public void removeDepartamento(Departamento Departamento) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void removeDepartamento(Departamento departamento) {
+        getHibernateTemplate().delete(departamento);
     }
-
 }

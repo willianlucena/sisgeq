@@ -19,7 +19,7 @@ public interface DepartamentoDao extends DAO {
 
     public List<Departamento> getDepartamentosByNucleo(Nucleo nucleo);
 
-    public void saveOrUpdateDepartamento(Departamento Departamento);
+    public void saveOrUpdateDepartamento(Departamento departamento);
 
-    public void removeDepartamento(Departamento Departamento);
+    public void removeDepartamento(Departamento departamento);
 }

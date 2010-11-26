@@ -16,15 +16,15 @@ public class CampusDaoHibernate  extends HibernateDaoSupport implements CampusDa
     }
 
     public List<Campus> getCampi() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return getHibernateTemplate().find("from Campus");
     }
 
     public void saveOrUpdateCampus(Campus Campus) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        getHibernateTemplate().saveOrUpdate(Campus);
     }
 
     public void removeCampus(Campus Campus) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        getHibernateTemplate().delete(Campus);
     }
 
 }
