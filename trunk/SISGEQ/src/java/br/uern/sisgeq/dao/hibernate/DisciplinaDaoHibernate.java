@@ -42,8 +42,10 @@ public class DisciplinaDaoHibernate extends HibernateDaoSupport implements Disci
     }
 
     public void update(Disciplina disciplina) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t = session.beginTransaction();
+        session.update(disciplina);
+        t.commit();
     }
-    
 
 }

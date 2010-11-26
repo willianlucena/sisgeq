@@ -10,11 +10,11 @@ import javax.faces.bean.RequestScoped;
  */
 @ManagedBean(name="campusManagedBean")
 @RequestScoped
-public class CampusMB {
+public class CampusController {
 
     private Campus campus;
-    /** Creates a new instance of CampusMB */
-    public CampusMB() {
+    /** Creates a new instance of CampusController */
+    public CampusController() {
     }
 
     public Campus getCampus() {

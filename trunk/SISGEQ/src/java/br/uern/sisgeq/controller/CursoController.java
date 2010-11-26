@@ -14,7 +14,7 @@ import javax.faces.model.ListDataModel;
  */
 @ManagedBean(name = "cursoManagedBean")
 @ViewScoped
-public class CursoMB extends Sessao {
+public class CursoController extends Sessao {
 
     private int inicio;
     private int fim;
@@ -24,14 +24,14 @@ public class CursoMB extends Sessao {
     private int pageSize = 10;
     private Curso curso = new Curso();
 
-    /** Creates a new instance of CursoMB */
-    public CursoMB() {
+    /** Creates a new instance of CursoController */
+    public CursoController() {
         super();
         this.inicio = 1;
         this.fim = 10;
     }
 
-    public CursoMB(int inicio, int fim) {
+    public CursoController(int inicio, int fim) {
         super();
         this.inicio = inicio;
         this.fim = fim;

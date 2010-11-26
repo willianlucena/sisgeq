@@ -10,12 +10,12 @@ import javax.faces.bean.RequestScoped;
  */
 @ManagedBean(name="departamentoManagedBean")
 @RequestScoped
-public class DepartamentoMB {
+public class DepartamentoController {
 
     private Departamento departamento;
 
-    /** Creates a new instance of DepartamentoMB */
-    public DepartamentoMB() {
+    /** Creates a new instance of DepartamentoController */
+    public DepartamentoController() {
     }
 
     public Departamento getDepartamento() {
