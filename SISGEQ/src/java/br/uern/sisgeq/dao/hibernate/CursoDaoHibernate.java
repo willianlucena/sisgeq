@@ -35,12 +35,12 @@ public class CursoDaoHibernate extends HibernateDaoSupport implements CursoDao {
     }
 
     public List<Curso> getCursosByCampus(Campus campus) {
-        String query = "select d from Curso as c where c.departamento.id in (select from Departamento as d where d.nucleo.id in (select from Nucleo as n where n.campus.id = :campus))";
+        String query = "select d from Curso as c where c.departamento.id in (select d.id from Departamento as d where d.nucleo.id in (select d.id from Nucleo as n where n.campus.id = :campus))";
         return getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(query).setParameter("campus", campus.getId()).list();
     }
 
     public List<Curso> getCursosByNucleo(Nucleo nucleo) {
-        String query = "select d from Curso as c where c.departamento.id in (select from Departamento as d where d.nucleo.id = :nucleo)";
+        String query = "select d from Curso as c where c.departamento.id in (select d.id from Departamento as d where d.nucleo.id = :nucleo)";
         return getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(query).setParameter("nucleo", nucleo.getId()).list();
     }
 
