@@ -22,7 +22,7 @@ public class DepartamentoDaoHibernate extends HibernateDaoSupport implements Dep
     }
 
     public List<Departamento> getDepartamentosByCampus(Campus campus) {
-        String query = "select d from Departamento as d where d.nucleo.id in (select from Nucleo as n where n.campus.id = :campus)";
+        String query = "select d from Departamento as d where d.nucleo.id in (select n.id from Nucleo as n where n.campus.id = :campus)";
         return getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(query).setParameter("campus", campus.getId()).list();
     }
 
