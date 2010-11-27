@@ -4,25 +4,10 @@
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sisgeq</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sisgeq?createDatabaseIfNotExist=true</property>
     <property name="hibernate.connection.username">sisgeq</property>
     <property name="hibernate.connection.password">sisgeq</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.current_session_context_class">thread</property>
-    <mapping resource="br.uern.sisgeq.util/Restricao.hbm.xml"/>
-    <mapping resource="br.uern.sisgeq.util/Pessoa.hbm.xml"/>
-    <mapping resource="br.uern.sisgeq.util/PessoaQuestionario.hbm.xml"/>
-    <mapping resource="br.uern.sisgeq.util/Questionario.hbm.xml"/>
-    <mapping resource="br.uern.sisgeq.util/Disciplina.hbm.xml"/>
-    <mapping resource="br.uern.sisgeq.util/Turma.hbm.xml"/>
-    <mapping resource="br.uern.sisgeq.util/Resposta.hbm.xml"/>
-    <mapping resource="br.uern.sisgeq.util/Nucleo.hbm.xml"/>
-    <mapping resource="br.uern.sisgeq.util/Departamento.hbm.xml"/>
-    <mapping resource="br.uern.sisgeq.util/Pergunta.hbm.xml"/>
-    <mapping resource="br.uern.sisgeq.util/Perfil.hbm.xml"/>
-    <mapping resource="br.uern.sisgeq.util/Campus.hbm.xml"/>
-    <mapping resource="br.uern.sisgeq.util/Curso.hbm.xml"/>
-    <mapping resource="br.uern.sisgeq.util/Alternativa.hbm.xml"/>
-    <mapping resource="br.uern.sisgeq.util/PessoaTurma.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
