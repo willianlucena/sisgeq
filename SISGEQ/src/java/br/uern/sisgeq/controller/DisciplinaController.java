@@ -13,7 +13,7 @@ import javax.faces.model.ListDataModel;
  *
  * @author Felipe Lemos
  */
-@ManagedBean
+@ManagedBean( name="disciplinaManagedBean")
 @SessionScoped
 public class DisciplinaController {
 
