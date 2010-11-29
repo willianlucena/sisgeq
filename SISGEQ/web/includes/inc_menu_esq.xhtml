@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.prime.com.tr/ui">
+
+    <h:body>
+        <h:form id="form">
+            <p:messages id="messages"/>
+            <p:menu style="width:200px">
+                <p:submenu>
+                    <p:menuitem value="Campus"/>
+                </p:submenu>
+                <p:submenu>
+                    <p:menuitem value="Núcleo"/>
+                </p:submenu>
+                <p:submenu>
+                    <p:menuitem value="Departamentos"/>
+                </p:submenu>
+                <p:submenu>
+                    <p:menuitem value="Disciplina"
+                                url="disciplina.jsf"
+                                update="messages"/>
+                </p:submenu>
+                <p:submenu>
+                    <p:menuitem value="Curso"/>
+                </p:submenu>
+                <p:submenu>
+                    <p:menuitem value="Turma"/>
+                </p:submenu>
+                <p:submenu>
+                    <p:menuitem value="Usuário"/>
+                </p:submenu>
+                <p:submenu>
+                    <p:menuitem value="Perfil"/>
+                </p:submenu>
+
+            </p:menu>
+        </h:form>
+    </h:body>
+</html>
