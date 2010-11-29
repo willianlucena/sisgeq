@@ -21,10 +21,8 @@
                 <ui:include src="includes/inc_menu_direito.xhtml"/>
             </p:layoutUnit>
 
-            <p:layoutUnit position="left" width="200" header="Atividades" resizable="true" closable="true" collapsible="true">
-                <h:form prependId="false">
-                    <p:commandLink value="Nova Disciplina" actionListener="#{disciplinaController.prepararAdicionarDisciplina}" update="infosDisciplina" oncomplete="dialogGerDisciplina.show()"/>
-                </h:form>
+            <p:layoutUnit position="left" width="200" header="Menu">
+                <ui:include src="includes/inc_menu_esq.xhtml"/>
             </p:layoutUnit>
 
             <p:layoutUnit position="bottom" height="50">
@@ -33,6 +31,9 @@
 
             <p:layoutUnit position="center">
                 <h1>Gerenciador de Disciplinas</h1>
+                <h:form prependId="false">
+                    <p:commandLink value="Nova Disciplina" actionListener="#{disciplinaController.prepararAdicionarDisciplina}" update="infosDisciplina" oncomplete="dialogGerDisciplina.show()"/>
+                </h:form>
                 <br/>
                 <h:form prependId="false">
                     <p:dataTable id="tabela" var="disciplina" value="#{disciplinaController.listarDisciplinas}">
