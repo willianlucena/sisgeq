@@ -1,53 +1,46 @@
 package br.uern.sisgeq.model;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import javax.persistence.Table;
 
 /**
- * @author Willian
+ *
+ * @author Felipe Lemos
  */
 @Entity
-@Table(name="Perfil")
+@Table (name = "perfil")
 public class Perfil implements Serializable {
 
     @Id
     @GeneratedValue
     private Integer id;
     private String tipo;
-    @ManyToMany(mappedBy = "perfis")
-    private Set<Pessoa> pessoas;
 
     public Perfil() {
-        this.pessoas = new HashSet<Pessoa>();
     }
 
-    public Integer getId() {
-        return this.id;
+    public Perfil(Integer id, String codigo, Integer departamento_id, String tipo) {
+        this.id = id;
+        this.tipo = tipo;
+    }
+   
+    public long getId() {
+        return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getTipo() {
-        return this.tipo;
+    public String getNome() {
+        return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setNome(String tipo) {
         this.tipo = tipo;
-    }
-
-    public Set<Pessoa> getPessoas() {
-        return this.pessoas;
-    }
-
-    public void setPessoas(Set<Pessoa> pessoas) {
-        this.pessoas = pessoas;
-    }
+    }   
 }
