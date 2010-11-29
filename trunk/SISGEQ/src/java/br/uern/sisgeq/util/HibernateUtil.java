@@ -1,6 +1,7 @@
 package br.uern.sisgeq.util;
 
 import br.uern.sisgeq.model.Disciplina;
+import br.uern.sisgeq.model.Perfil;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.SessionFactory;
 
@@ -24,6 +25,7 @@ public class HibernateUtil {
                 // config file.
                 AnnotationConfiguration ac = new AnnotationConfiguration();
                 ac.addAnnotatedClass(Disciplina.class);
+                ac.addAnnotatedClass(Perfil.class);
                 sessionFactory = ac.configure().buildSessionFactory();
                 //SchemaExport se = new SchemaExport(ac);
                 //se.create(true, true);
