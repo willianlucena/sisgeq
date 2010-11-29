@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:head>
+        <title>Gerenciador de Perfis</title>
+        <link type="text/css" rel="stylesheet" href="css/skin.css"/>
+    </h:head>
+    <h:body>
+        <p:layout fullPage="true">
+
+            <p:layoutUnit position="top" height="100" header="">
+                <ui:include src="includes/inc_topo.xhtml"/>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="right" width="200" header="Calendário">
+                <ui:include src="includes/inc_menu_direito.xhtml"/>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="left" width="200" header="Menu">
+                <ui:include src="includes/inc_menu_esq.xhtml"/>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="bottom" height="50">
+                <ui:include src="includes/inc_rodape.xhtml"/>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center">
+                <h1>Gerenciador de Perfis</h1>
+                <h:form prependId="false">
+                    <p:commandLink value="Novo Perfil" actionListener="#{perfilController.prepararAdicionarPerfil}" update="infosPerfil" oncomplete="dialogGerPerfil.show()"/>
+                </h:form>
+                <br/>
+                <h:form prependId="false">
+                    <p:dataTable id="tabela" var="perfil" value="#{perfilController.listarPerfis}" rows="2" paginator="true">
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nome"/>
+                            </f:facet>
+                            <h:outputText value="#{perfil.nome}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Alterar"/>
+                            </f:facet>
+                            <p:commandButton actionListener="#{perfilController.prepararAlterarPerfil}" value="Alterar" update="infosDisciplina" oncomplete="dialogGerDisciplina.show()"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Excluir"/>
+                            </f:facet>
+                            <h:commandLink action="#{perfilController.excluirPerfil}" value="Excluir"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </p:layoutUnit>
+        </p:layout>
+
+        <p:dialog header="Gerencia de Perfil" widgetVar="dialogGerPerfil"  resizable="false" modal="true" showEffect="slide" width="500">
+            <h:form prependId="false">
+                <h:panelGrid id="infosPerfil" columns="2" style="margin-bottom:10px">
+
+                    <h:outputLabel for="nome" value="Nome:" />
+                    <h:inputText id="nome" value="#{perfilController.perfil.nome}"/>
+
+                    <p:commandButton update="tabela" oncomplete="dialogGerPerfil.hide();" actionListener="#{perfilController.adicionarPerfil}" value="Inserir Perfil"/>
+                    <p:commandButton update="tabela" oncomplete="dialogGerPerfil.hide();" actionListener="#{perfilController.alterarPerfil}" value="Alterar Perfil"/>
+
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+
+    </h:body>
+</html>
