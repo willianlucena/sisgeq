@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.prime.com.tr/ui">
+    <h:head>
+        <title>Gerenciador de Disciplinas</title>
+        <link type="text/css" rel="stylesheet" href="../css/skin.css"/>
+    </h:head>
+    <h:body>
+        <p:layout fullPage="true">
+            
+            <p:layoutUnit position="left" width="200" header="Atividades" resizable="true" closable="true" collapsible="true">
+                <h:form prependId="false">
+                    <p:commandLink value="Nova Disciplina" actionListener="#{disciplinaController.prepararAdicionarDisciplina}" update="infosDisciplina" oncomplete="dialogGerDisciplina.show()"/>
+                </h:form>
+            </p:layoutUnit>
+            <p:layoutUnit position="center">
+                <h1>Gerenciador de Disciplinas</h1>
+                <br/>
+                <h:form prependId="false">
+                    <p:dataTable id="tabela" var="disciplina" value="#{disciplinaController.listarDisciplinas}">
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Código"/>
+                            </f:facet>
+                            <h:outputText value="#{disciplina.codigo}" />
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nome"/>
+                            </f:facet>
+                            <h:outputText value="#{disciplina.nome}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Departamento"/>
+                            </f:facet>
+                            <h:outputText value="#{disciplina.departamento_id}"/>
+                        </p:column>                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Alterar"/>
+                            </f:facet>
+                            <p:commandButton actionListener="#{disciplinaController.prepararAlterarDisciplina}" value="Alterar" update="infosDisciplina" oncomplete="dialogGerDisciplina.show()"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Excluir"/>
+                            </f:facet>
+                            <h:commandLink action="#{disciplinaController.excluirDisciplina}" value="Excluir"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </p:layoutUnit>
+        </p:layout>
+
+        <p:dialog header="Gerencia de Disciplina" widgetVar="dialogGerDisciplina"  resizable="false" modal="true" showEffect="slide" width="500">
+            <h:form prependId="false">
+                <h:panelGrid id="infosDisciplina" columns="2" style="margin-bottom:10px">
+
+                    <h:outputLabel for="codigo" value="Código:" />
+                    <h:inputText id="codigo" value="#{disciplinaController.disciplina.codigo}"/>
+
+                    <h:outputLabel for="nome" value="Nome:" />
+                    <h:inputText id="nome" value="#{disciplinaController.disciplina.nome}"/>
+
+                    <h:outputLabel for="departamento_id" value="Departamento:" />
+                    <h:selectOneMenu id="departamento_id" value="#{disciplinaController.disciplina.departamento_id}">
+                        <f:selectItem itemLabel="1" itemValue="1"/>
+                        <f:selectItem itemLabel="2" itemValue="2"/>
+                        <f:selectItem itemLabel="3" itemValue="3"/>
+                        <f:selectItem itemLabel="4" itemValue="4"/>
+                        <f:selectItem itemLabel="5" itemValue="5"/>
+                    </h:selectOneMenu>
+
+                    <p:commandButton update="tabela" oncomplete="dialogGerDisciplina.hide();" actionListener="#{disciplinaController.adicionarDisciplina}" value="Inserir Disciplina"/>
+                    <p:commandButton update="tabela" oncomplete="dialogGerDisciplina.hide();" actionListener="#{disciplinaController.alterarDisciplina}" value="Alterar Disciplina"/>
+
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+
+    </h:body>
+</html>

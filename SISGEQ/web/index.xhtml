@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.prime.com.tr/ui">
+    <h:head>
+        <title>Sistema de Gerenciamento Estatístico</title>
+        <link type="text/css" rel="stylesheet" href="css/skin.css"/>
+    </h:head>
+    <h:body>
+        <p:layout fullPage="true" >
+            <p:layoutUnit position="top" height="100" header="">
+                <center><h:graphicImage url="css/images/Logo_UERN.png" /></center>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center" header="">
+                <br></br>
+                <div align="center">
+                    <h:panelGrid columns="1">
+                        <p:panel header="Entrar no Sistema" style="text-align: left">
+                            <h:panelGrid columns="2">
+                                <h:outputLabel value="Login:"/>
+                                <h:inputText />
+                                <h:outputLabel value="Senha:"/>
+                                <h:inputText />
+                                <h:commandButton value="Entrar" />
+                            </h:panelGrid>
+                        </p:panel>
+                    </h:panelGrid>
+                </div>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="right" width="200" header="Calendário">
+                <p:calendar mode="inline" />
+
+            </p:layoutUnit>
+
+            <p:layoutUnit position="left" width="200" header="Menu">
+                <h:form id="form">
+                    <p:messages id="messages"/>
+                    <p:menu style="width:200px">
+                        <p:submenu>
+                            <p:menuitem value="Campus"/>
+                        </p:submenu>
+                        <p:submenu>
+                            <p:menuitem value="Núcleo"/>
+                        </p:submenu>
+                        <p:submenu>
+                            <p:menuitem value="Departamentos"/>
+                        </p:submenu>
+                        <p:submenu>
+                            <p:menuitem value="Disciplina"
+                                        url="pages/disciplina.jsf"
+                                        update="messages"/>
+                        </p:submenu>
+                        <p:submenu>
+                            <p:menuitem value="Curso"/>
+                        </p:submenu>
+                        <p:submenu>
+                            <p:menuitem value="Turma"/>
+                        </p:submenu>
+                        <p:submenu>
+                            <p:menuitem value="Usuário"/>
+                        </p:submenu>
+                        <p:submenu>
+                            <p:menuitem value="Perfil"/>
+                        </p:submenu>
+                        
+                    </p:menu>
+                </h:form>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="bottom" height="50">
+                <br/><center><h:outputText value="@2010 SisGeq. Todos os direitos reservados." style="font: 10pt; font-weight: bold;" /></center>
+            </p:layoutUnit>
+
+        </p:layout>
+    </h:body>
+</html>
