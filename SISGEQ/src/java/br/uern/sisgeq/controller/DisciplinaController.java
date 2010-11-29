@@ -48,7 +48,7 @@ public class DisciplinaController {
         Disciplina disciplinaTemp = (Disciplina) (listaDisciplinas.getRowData());
         DisciplinaDao dao = new DisciplinaDaoHibernate();
         dao.remove(disciplinaTemp);
-        return "index";
+        return "disciplina";
 
     }
 
