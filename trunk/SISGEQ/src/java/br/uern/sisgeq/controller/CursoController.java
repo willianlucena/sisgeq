@@ -2,7 +2,6 @@ package br.uern.sisgeq.controller;
 
 import br.uern.sisgeq.dao.CursoDao;
 import br.uern.sisgeq.model.Curso;
-import br.uern.sisgeq.util.Sessao;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.model.DataModel;
@@ -14,7 +13,7 @@ import javax.faces.model.ListDataModel;
  */
 @ManagedBean(name = "cursoManagedBean")
 @ViewScoped
-public class CursoController extends Sessao {
+public class CursoController {
 
     private int inicio;
     private int fim;
