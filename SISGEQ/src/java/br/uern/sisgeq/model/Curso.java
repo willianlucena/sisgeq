@@ -7,11 +7,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * @author Rafael
  */
 @Entity
+@Table(name="Curso")
 public class Curso implements java.io.Serializable {
 
     @Id
