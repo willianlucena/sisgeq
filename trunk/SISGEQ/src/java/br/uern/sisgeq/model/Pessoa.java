@@ -7,11 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * @author Willian
  */
 @Entity
+@Table(name="Pessoa")
 public class Pessoa implements Serializable {
     @Id
     private String matriculaCpf;

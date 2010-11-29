@@ -7,11 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * @author Willian
  */
 @Entity
+@Table(name="Campus")
 public class Campus implements Serializable {
 
     @Id

@@ -4,7 +4,10 @@ import br.uern.sisgeq.dao.DepartamentoDao;
 import br.uern.sisgeq.model.Campus;
 import br.uern.sisgeq.model.Departamento;
 import br.uern.sisgeq.model.Nucleo;
+import br.uern.sisgeq.util.HibernateUtil;
 import java.util.List;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  *
@@ -13,27 +16,37 @@ import java.util.List;
 public class DepartamentoDaoHibernate implements DepartamentoDao {
 
     public Departamento getDepartamento(Integer id) {
-        return null;//(Departamento) getHibernateTemplate().get(Departamento.class, id);
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        return (Departamento) session.load(Departamento.class, id);
     }
 
     public List<Departamento> getDepartamentos() {
-        return null;//getHibernateTemplate().find("from Departamento");
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        return session.createQuery("from Departamento").list();
     }
 
     public List<Departamento> getDepartamentosByCampus(Campus campus) {
-        String query = "select d from Departamento as d where d.nucleo.id in (select n.id from Nucleo as n where n.campus.id = :campus)";
-        return null;//getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(query).setParameter("campus", campus.getId()).list();
+        String query = "from Departamento as d where d.nucleo.id in (select n.id from Nucleo as n where n.campus.id = :campus)";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        return session.createSQLQuery(query).setParameter("campus", campus.getId()).list();
     }
 
     public List<Departamento> getDepartamentosByNucleo(Nucleo nucleo) {
-        return null;//getHibernateTemplate().find("from Departamento as d where d.nucleo.id = ?", nucleo.getId());
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        return session.createSQLQuery("from Departamento as d where d.nucleo.id = :nucleo").setParameter("nucleo", nucleo.getId()).list();
     }
 
-    public void saveOrUpdateDepartamento(Departamento departamento) {
-        //getHibernateTemplate().saveOrUpdate(departamento);
+    public void saveOrUpdate(Departamento departamento) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t = session.beginTransaction();
+        session.saveOrUpdate(departamento);
+        t.commit();
     }
 
-    public void removeDepartamento(Departamento departamento) {
-        //getHibernateTemplate().delete(departamento);
+    public void remove(Departamento departamento) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t = session.beginTransaction();
+        session.delete(departamento);
+        t.commit();
     }
 }

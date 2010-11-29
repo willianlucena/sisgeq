@@ -8,11 +8,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * @author Willian
  */
 @Entity
+@Table(name="Nucleo")
 public class Nucleo implements Serializable {
 
     @Id

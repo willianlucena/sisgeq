@@ -7,12 +7,14 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 
 /**
  * @author Willian
  */
 @Entity
+@Table(name = "Questionario")
 public class Questionario implements Serializable {
 
     @Id

@@ -5,7 +5,11 @@ import br.uern.sisgeq.model.Campus;
 import br.uern.sisgeq.model.Curso;
 import br.uern.sisgeq.model.Departamento;
 import br.uern.sisgeq.model.Nucleo;
+import br.uern.sisgeq.util.HibernateUtil;
 import java.util.List;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  *
@@ -14,39 +18,51 @@ import java.util.List;
 public class CursoDaoHibernate implements CursoDao {
 
     public Curso getCurso(Integer id) {
-        return null;//(Curso) getHibernateTemplate().get(Curso.class, id);
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        return (Curso) session.load(Curso.class, id);
     }
 
     public List<Curso> getCursos() {
-        return null;//getHibernateTemplate().find("from Curso");
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        return session.createQuery("from Curso").list();
     }
 
     public List<Curso> getCursos(int inicio, int numeroResultados) {
-//        Criteria criteria =  getHibernateTemplate().getSessionFactory().getCurrentSession().createCriteria(Curso.class);
-//        criteria.setFirstResult(inicio);
-//        criteria.setMaxResults(numeroResultados);
-        return null;//criteria.list();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Criteria criteria = session.createCriteria(Curso.class);
+        criteria.setFirstResult(inicio);
+        criteria.setMaxResults(numeroResultados);
+        return criteria.list();
     }
 
     public List<Curso> getCursosByDepartamento(Departamento departamento) {
-        return null;//getHibernateTemplate().find("from Curso as d where d.departamento.id = ?", departamento.getId());
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        return session.createSQLQuery("from Curso as d where d.departamento.id = :departamento").setParameter("departamento", departamento.getId()).list();
     }
 
     public List<Curso> getCursosByCampus(Campus campus) {
-        String query = "select d from Curso as c where c.departamento.id in (select d.id from Departamento as d where d.nucleo.id in (select d.id from Nucleo as n where n.campus.id = :campus))";
-        return null;//getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(query).setParameter("campus", campus.getId()).list();
+        String query = "from Curso as c where c.departamento.id in (select d.id from Departamento as d where d.nucleo.id in (select d.id from Nucleo as n where n.campus.id = :campus))";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        return session.createSQLQuery(query).setParameter("campus", campus.getId()).list();
     }
 
     public List<Curso> getCursosByNucleo(Nucleo nucleo) {
         String query = "select d from Curso as c where c.departamento.id in (select d.id from Departamento as d where d.nucleo.id = :nucleo)";
-        return null;//getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(query).setParameter("nucleo", nucleo.getId()).list();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        return session.createSQLQuery(query).setParameter("nucleo", nucleo.getId()).list();
     }
 
-    public void saveOrUpdateCurso(Curso curso) {
-       // getHibernateTemplate().saveOrUpdate(curso);
+    public void saveOrUpdate(Curso curso) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t = session.beginTransaction();
+        session.saveOrUpdate(curso);
+        t.commit();
     }
 
-    public void removeCurso(Curso curso) {
-        //getHibernateTemplate().delete(curso);
+    public void remove(Curso curso) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t = session.beginTransaction();
+        session.delete(curso);
+        t.commit();
     }
 }
