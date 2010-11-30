@@ -12,7 +12,7 @@ import javax.persistence.Table;
  * @author Felipe Lemos
  */
 @Entity
-@Table (name = "perfil")
+@Table(name = "perfil")
 public class Perfil implements Serializable {
 
     @Id
@@ -23,11 +23,11 @@ public class Perfil implements Serializable {
     public Perfil() {
     }
 
-    public Perfil(Integer id, String codigo, Integer departamento_id, String tipo) {
+    public Perfil(Integer id, String tipo) {
         this.id = id;
         this.tipo = tipo;
     }
-   
+
     public long getId() {
         return id;
     }
@@ -36,11 +36,11 @@ public class Perfil implements Serializable {
         this.id = id;
     }
 
-    public String getNome() {
+    public String getTipo() {
         return tipo;
     }
 
-    public void setNome(String tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
-    }   
+    }
 }
