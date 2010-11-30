@@ -1,34 +1,84 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.prime.com.tr/ui">
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
     <h:head>
-        <title>SISGEQ - Campus</title>
+        <title>Gerenciador de Campus</title>
+        <link type="text/css" rel="stylesheet" href="css/skin.css"/>
     </h:head>
     <h:body>
-        <f:view>
-            <h:form>
-                <h:dataTable value="#{campusManagedBean.listaCampi}" var="campus">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Nome"/>
-                        </f:facet>
-                        <h:outputText value="#{campus.nome}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Remover"/>
-                        </f:facet>
-                        <h:commandLink value="remover">
-                            <p:collector value="#{campus}" removeFrom="#{campusManagedBean.listaCampi}"/>
-                        </h:commandLink>
-                    </h:column>
-                </h:dataTable>
+        <p:layout fullPage="true">
+
+            <p:layoutUnit position="top" height="100" header="">
+                <ui:include src="includes/inc_topo.xhtml"/>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="right" width="200" header="Calendário">
+                <ui:include src="includes/inc_menu_direito.xhtml"/>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="left" width="200" header="Menu">
+                <ui:include src="includes/inc_menu_esq.xhtml"/>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="bottom" height="50">
+                <ui:include src="includes/inc_rodape.xhtml"/>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center">
+                <h1>Gerenciador de Campus</h1>
+                <h:form prependId="false">
+                    <p:commandLink value="Novo Campus" actionListener="#{campusManagedBean.prepararAdicionarCampus}" update="infosCampus" oncomplete="dialogGerCampus.show()"/>
+                </h:form>
+                <br/>
+                <h:form prependId="false">
+                    <p:dataTable id="tabela" var="campus" value="#{campusManagedBean.listarCampuss}" rows="2" paginator="true">
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nome"/>
+                            </f:facet>
+                            <h:outputText value="#{campus.nome}" />
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nucleo"/>
+                            </f:facet>
+                            <h:outputText value="#{campus.nucleo_id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Alterar"/>
+                            </f:facet>
+                            <p:commandButton actionListener="#{campusManagedBean.prepararAlterarCampus}" value="Alterar" update="infosCampus" oncomplete="dialogGerCampus.show()"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Excluir"/>
+                            </f:facet>
+                            <h:commandLink action="#{campusManagedBean.excluirCampus}" value="Excluir"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </p:layoutUnit>
+        </p:layout>
+
+        <p:dialog header="Gerência de Campus" widgetVar="dialogGerCampus"  resizable="false" modal="true" showEffect="slide" width="500">
+            <h:form prependId="false">
+                <h:panelGrid id="infosCampus" columns="2" style="margin-bottom:10px">
+
+                    <h:outputLabel for="nome" value="Nome:" />
+                    <h:inputText id="nome" value="#{campusManagedBean.campus.nome}"/>
+
+                    <p:commandButton update="tabela" oncomplete="dialogGerCampus.hide();" actionListener="#{campusManagedBean.adicionarCampus}" value="Inserir Campus"/>
+                    <p:commandButton update="tabela" oncomplete="dialogGerCampus.hide();" actionListener="#{campusManagedBean.alterarCampus}" value="Alterar Campus"/>
+
+                </h:panelGrid>
             </h:form>
-        </f:view>
+        </p:dialog>
 
     </h:body>
 </html>
-

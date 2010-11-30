@@ -13,7 +13,7 @@ import javax.persistence.Table;
  * @author Rafael
  */
 @Entity
-@Table(name="Curso")
+@Table(name="curso")
 public class Curso implements java.io.Serializable {
 
     @Id
