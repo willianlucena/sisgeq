@@ -32,36 +32,49 @@
             <p:layoutUnit position="center">
                 <h1>Gerenciador de Disciplinas</h1>
                 <h:form prependId="false">
-                    <p:commandLink value="Nova Disciplina" actionListener="#{disciplinaController.prepararAdicionarDisciplina}" update="infosDisciplina" oncomplete="dialogGerDisciplina.show()"/>
+                    <p:commandLink value="Nova Disciplina"
+                                   actionListener="#{disciplinaController.prepararAdicionarDisciplina}"
+                                   update="infosDisciplina"
+                                   oncomplete="dialogGerDisciplina.show()"/>
                 </h:form>
                 <br/>
                 <h:form prependId="false">
-                    <p:dataTable id="tabela" var="disciplina" value="#{disciplinaController.listarDisciplinas}" rows="2" paginator="true">
-                        <p:column>
-                            <f:facet name="header">
+                    <p:dataTable id="tabela" emptyMessage="Não há registros"                                 
+                                 var="disciplina" value="#{disciplinaController.listarDisciplinas}"
+                                 rows="2" paginator="true"
+                                 onselectComplete="dialog.show()"
+                                 selection="#{disciplinaController.disciplina}"
+                                 selectionMode="single" update="panel">
+
+                        <p:column style="text-align: center">
+                                  <f:facet name="header">
                                 <h:outputText value="Código"/>
                             </f:facet>
                             <h:outputText value="#{disciplina.codigo}" />
                         </p:column>
-                        <p:column>
+
+                        <p:column style="text-align: center">
                             <f:facet name="header">
                                 <h:outputText value="Nome"/>
                             </f:facet>
                             <h:outputText value="#{disciplina.nome}"/>
                         </p:column>
-                        <p:column>
+
+                        <p:column style="text-align: center">
                             <f:facet name="header">
                                 <h:outputText value="Departamento"/>
                             </f:facet>
                             <h:outputText value="#{disciplina.departamento_id}"/>
                         </p:column>
-                        <p:column>
+
+                        <p:column style="text-align: center">
                             <f:facet name="header">
                                 <h:outputText value="Alterar"/>
                             </f:facet>
                             <p:commandButton actionListener="#{disciplinaController.prepararAlterarDisciplina}" value="Alterar" update="infosDisciplina" oncomplete="dialogGerDisciplina.show()"/>
                         </p:column>
-                        <p:column>
+
+                        <p:column style="text-align: center">
                             <f:facet name="header">
                                 <h:outputText value="Excluir"/>
                             </f:facet>
@@ -71,6 +84,18 @@
                 </h:form>
             </p:layoutUnit>
         </p:layout>
+
+        <p:dialog widgetVar="dialog" modal="true" header="Informações">
+            <h:panelGrid columns="2" id="panel">
+                <h:outputText value="Código:" />
+                <h:outputText value="#{disciplinaController.disciplina.codigo}" />
+                <h:outputText value="Nome:" />
+                <h:outputText value="#{disciplinaController.disciplina.nome}" />
+                <h:outputText value="Departamento:" />
+                <h:outputText value="#{disciplinaController.disciplina.departamento_id}" />
+            </h:panelGrid>
+        </p:dialog>
+
 
         <p:dialog header="Gerencia de Disciplina" widgetVar="dialogGerDisciplina"  resizable="false" modal="true" showEffect="slide" width="500">
             <h:form prependId="false">
