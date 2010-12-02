@@ -7,5 +7,22 @@
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sisgeq</property>
     <property name="hibernate.connection.username">sisgeq</property>
     <property name="hibernate.connection.password">sisgeq</property>
+    <property name="hibernate.show_sql">true</property>
+    <mapping class="br.uern.sisgeq.model.Alternativa"/>
+    <mapping class="br.uern.sisgeq.model.Campus"/>
+    <mapping class="br.uern.sisgeq.model.Curso"/>
+    <mapping class="br.uern.sisgeq.model.Departamento"/>
+    <mapping class="br.uern.sisgeq.model.Disciplina"/>
+    <mapping class="br.uern.sisgeq.model.Login"/>
+    <mapping class="br.uern.sisgeq.model.Nucleo"/>
+    <mapping class="br.uern.sisgeq.model.Perfil"/>
+    <mapping class="br.uern.sisgeq.model.Pergunta"/>
+    <mapping class="br.uern.sisgeq.model.Pessoa"/>
+    <mapping class="br.uern.sisgeq.model.PessoaQuestionario"/>
+    <mapping class="br.uern.sisgeq.model.PessoaTurma"/>
+    <mapping class="br.uern.sisgeq.model.Questionario"/>
+    <mapping class="br.uern.sisgeq.model.Resposta"/>
+    <mapping class="br.uern.sisgeq.model.Restricao"/>
+    <mapping class="br.uern.sisgeq.model.Turma"/>
   </session-factory>
 </hibernate-configuration>

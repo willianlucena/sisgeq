@@ -7,13 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
  * @author Willian
  */
 @Entity
-@Table(name="Pessoa")
+@Table(name="pessoa")
 public class Pessoa implements Serializable {
     @Id
     private String matriculaCpf;
@@ -28,9 +29,12 @@ public class Pessoa implements Serializable {
     private String nacionalidade;
     @ManyToMany
     private Set<Perfil> perfis;
+    @OneToMany(mappedBy = "pessoa")
+    private Set<PessoaTurma> pessoaTurmas;
 
     public Pessoa() {
         this.perfis = new HashSet<Perfil>();
+        this.pessoaTurmas = new HashSet<PessoaTurma>();
     }
 
     public String getMatriculaCpf() {
@@ -103,5 +107,13 @@ public class Pessoa implements Serializable {
 
     public void setPerfis(Set<Perfil> perfis) {
         this.perfis = perfis;
+    }
+
+    public Set<PessoaTurma> getPessoaTurmas() {
+        return pessoaTurmas;
+    }
+
+    public void setPessoaTurmas(Set<PessoaTurma> pessoaTurmas) {
+        this.pessoaTurmas = pessoaTurmas;
     }
 }

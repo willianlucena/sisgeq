@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -18,25 +19,19 @@ public class Disciplina implements Serializable {
     @GeneratedValue
     private Integer id;
     private String codigo;
-    private Integer departamento_id;
+    @ManyToOne
+    private Departamento departamento;
     private String nome;
 
     public Disciplina() {
     }
 
-    public Disciplina(Integer id, String codigo, Integer departamento_id, String nome) {
-        this.id = id;
-        this.codigo = codigo;
-        this.departamento_id = departamento_id;
-        this.nome = nome;
+    public Departamento getDepartamento() {
+        return departamento;
     }
 
-    public Integer getDepartamento_id() {
-        return departamento_id;
-    }
-
-    public void setDepartamento_id(Integer departamento_id) {
-        this.departamento_id = departamento_id;
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
     }
 
     public long getId() {

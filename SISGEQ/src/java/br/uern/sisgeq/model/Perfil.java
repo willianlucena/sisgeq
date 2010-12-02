@@ -1,10 +1,12 @@
 package br.uern.sisgeq.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
@@ -19,13 +21,11 @@ public class Perfil implements Serializable {
     @GeneratedValue
     private Integer id;
     private String tipo;
+    @ManyToMany
+    private Set<Pessoa> pessoas;
 
     public Perfil() {
-    }
-
-    public Perfil(Integer id, String tipo) {
-        this.id = id;
-        this.tipo = tipo;
+        this.pessoas = new HashSet<Pessoa>();
     }
 
     public long getId() {
@@ -43,4 +43,13 @@ public class Perfil implements Serializable {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+
+    public Set<Pessoa> getPessoas() {
+        return pessoas;
+    }
+
+    public void setPessoas(Set<Pessoa> pessoas) {
+        this.pessoas = pessoas;
+    }
+    
 }

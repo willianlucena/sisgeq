@@ -32,17 +32,11 @@
             <p:layoutUnit position="center">
                 <h1>Gerenciador de Núcleos</h1>
                 <h:form prependId="false">
-                    <p:commandLink value="Novo Núcleo" actionListener="#{nucleoManagedBean.prepararAdicionarNucleo}" update="infosNucleo" oncomplete="dialogGerNucleo.show()"/>
+                    <p:commandLink value="Novo Núcleo" actionListener="#{nucleoController.prepararAdicionarNucleo}" update="infosNucleo" oncomplete="dialogGerNucleo.show()"/>
                 </h:form>
                 <br/>
                 <h:form prependId="false">
-                    <p:dataTable id="tabela" var="nucleo" value="#{nucleoManagedBean.listarNucleo}" rows="2" paginator="true">
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Campus"/>
-                            </f:facet>
-                            <h:outputText value="#{nucleo.campus_id}" />
-                        </p:column>
+                    <p:dataTable id="tabela" var="nucleo" value="#{nucleoController.listarNucleos}" rows="2" paginator="true">
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Nome"/>
@@ -51,27 +45,21 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="Departamento"/>
+                                <h:outputText value="Campus"/>
                             </f:facet>
-                            <h:outputText value="#{nucleo.departamento_id}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Turma"/>
-                            </f:facet>
-                            <h:outputText value="#{nucleo.turma_id}"/>
+                            <h:outputText value="#{nucleo.campus.nome}" />
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Alterar"/>
                             </f:facet>
-                            <p:commandButton actionListener="#{nucleoManagedBean.prepararAlterarNucleo}" value="Alterar" update="infosNucleo" oncomplete="dialogGerNucleo.show()"/>
+                            <p:commandButton actionListener="#{nucleoController.prepararAlterarNucleo}" value="Alterar" update="infosNucleo" oncomplete="dialogGerNucleo.show()"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Excluir"/>
                             </f:facet>
-                            <h:commandLink action="#{nucleoManagedBean.excluirNucleo}" value="Excluir"/>
+                            <h:commandLink action="#{nucleoController.excluirNucleo}" value="Excluir"/>
                         </p:column>
                     </p:dataTable>
                 </h:form>
@@ -82,32 +70,16 @@
             <h:form prependId="false">
                 <h:panelGrid id="infosNucleo" columns="2" style="margin-bottom:10px">
 
-                    <h:outputLabel for="campus" value="Campus:" />
-                    <h:selectOneMenu id="campus_id" value="#{campusManagedBean.listarCampi}"/>
-
                     <h:outputLabel for="nome" value="Nome:" />
-                    <h:inputText id="nome" value="#{nucleoManagedBean.nucleo.nome}"/>
+                    <h:inputText id="nome" value="#{nucleoController.nucleo.nome}"/>
 
-                    <h:outputLabel for="departamento_id" value="Departamento:" />
-                    <h:selectOneMenu id="departamento_id" value="#{nucleoManagedBean.nucleo.departamentos_id}">
-                        <f:selectItem itemLabel="1" itemValue="1"/>
-                        <f:selectItem itemLabel="2" itemValue="2"/>
-                        <f:selectItem itemLabel="3" itemValue="3"/>
-                        <f:selectItem itemLabel="4" itemValue="4"/>
-                        <f:selectItem itemLabel="5" itemValue="5"/>
+                    <h:outputLabel for="campus" value="Campus:" />
+                    <h:selectOneMenu id="campus" value="#{nucleoController.campus}">
+                        <f:selectItems value="#{campusController.listarCampi}" var="c" itemLabel="#{c.nome}" itemValue="#{c}"/>
                     </h:selectOneMenu>
 
-                    <h:outputLabel for="turma_id" value="Turmas:" />
-                    <h:selectOneMenu id="turma_id" value="#{nucleoManagedBean.nucleo.turma_id}">
-                        <f:selectItem itemLabel="1" itemValue="1"/>
-                        <f:selectItem itemLabel="2" itemValue="2"/>
-                        <f:selectItem itemLabel="3" itemValue="3"/>
-                        <f:selectItem itemLabel="4" itemValue="4"/>
-                        <f:selectItem itemLabel="5" itemValue="5"/>
-                    </h:selectOneMenu>
-
-                    <p:commandButton update="tabela" oncomplete="dialogGerNucleo.hide();" actionListener="#{nucleoManagedBean.adicionarNucleo}" value="Inserir Núcleo"/>
-                    <p:commandButton update="tabela" oncomplete="dialogGerNucleo.hide();" actionListener="#{nucleoManagedBean.alterarNucleo}" value="Alterar Núcleo"/>
+                    <p:commandButton update="tabela" oncomplete="dialogGerNucleo.hide();" actionListener="#{nucleoController.adicionarNucleo}" value="Inserir Núcleo"/>
+                    <p:commandButton update="tabela" oncomplete="dialogGerNucleo.hide();" actionListener="#{nucleoController.alterarNucleo}" value="Alterar Núcleo"/>
 
                 </h:panelGrid>
             </h:form>

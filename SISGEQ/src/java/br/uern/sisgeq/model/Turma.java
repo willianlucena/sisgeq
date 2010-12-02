@@ -25,7 +25,7 @@ public class Turma implements Serializable {
     @ManyToOne
     private Disciplina disciplina;
     private String periodo;
-    @OneToMany(mappedBy = "campus")
+    @OneToMany(mappedBy = "turma")
     private Set<PessoaTurma> pessoaTurmas;
 
     public Turma() {
