@@ -2,6 +2,7 @@ package br.uern.sisgeq.controller;
 
 import br.uern.sisgeq.dao.NucleoDao;
 import br.uern.sisgeq.dao.hibernate.NucleoDaoHibernate;
+import br.uern.sisgeq.model.Campus;
 import br.uern.sisgeq.model.Nucleo;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -20,19 +21,12 @@ public class NucleoController {
 
     private Nucleo nucleo;
     private DataModel listaNucleos;
+    private Campus campus = new Campus();
 
     public DataModel getListarNucleos() {
         List<Nucleo> lista = new NucleoDaoHibernate().getNucleos();
         listaNucleos = new ListDataModel(lista);
         return listaNucleos;
-    }
-
-    public Nucleo getNucleo() {
-        return nucleo;
-    }
-
-    public void setNucleo(Nucleo Nucleo) {
-        this.nucleo = Nucleo;
     }
 
     public void prepararAdicionarNucleo(ActionEvent actionEvent) {
@@ -59,7 +53,32 @@ public class NucleoController {
     }
 
     private void saveOrUpdate() {
+        System.out.println(nucleo.getNome());
+        System.out.println(nucleo.getId());
+        System.out.println(nucleo.getCampus().getNome());
+        System.out.println(nucleo.getCampus().getId());
         NucleoDao dao = new NucleoDaoHibernate();
         dao.saveOrUpdate(nucleo);
     }
+
+    public Campus getCampus() {
+        return campus;
+    }
+
+    public void setCampus(Campus campus) {
+        this.campus = campus;
+    }
+
+    public void setListaNucleos(DataModel listaNucleos) {
+        this.listaNucleos = listaNucleos;
+    }
+
+    public Nucleo getNucleo() {
+        return nucleo;
+    }
+
+    public void setNucleo(Nucleo nucleo) {
+        this.nucleo = nucleo;
+    }
+
 }

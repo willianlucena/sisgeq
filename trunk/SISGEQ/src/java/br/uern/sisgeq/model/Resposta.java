@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -16,15 +17,11 @@ public class Resposta implements Serializable {
     @Id
     @GeneratedValue
     private Integer id;
+    @ManyToOne
     private Pergunta pergunta;
     private String descricao;
 
     public Resposta() {
-    }
-
-    public Resposta(Pergunta pergunta, String descricao) {
-        this.pergunta = pergunta;
-        this.descricao = descricao;
     }
 
     public Integer getId() {

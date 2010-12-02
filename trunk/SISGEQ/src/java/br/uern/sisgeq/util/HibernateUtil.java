@@ -24,9 +24,9 @@ public class HibernateUtil {
                 // Create the SessionFactory from standard (hibernate.cfg.xml)
                 // config file.
                 AnnotationConfiguration ac = new AnnotationConfiguration();
-                ac.addAnnotatedClass(Disciplina.class);
-                ac.addAnnotatedClass(Perfil.class);
-                sessionFactory = ac.configure().buildSessionFactory();
+//                ac.addAnnotatedClass(Disciplina.class);
+//                ac.addAnnotatedClass(Perfil.class);
+                sessionFactory = ac.configure("hibernate.cfg.xml").buildSessionFactory();
                 //SchemaExport se = new SchemaExport(ac);
                 //se.create(true, true);
 

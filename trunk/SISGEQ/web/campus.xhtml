@@ -32,11 +32,11 @@
             <p:layoutUnit position="center">
                 <h1>Gerenciador de Campus</h1>
                 <h:form prependId="false">
-                    <p:commandLink value="Novo Campus" actionListener="#{campusManagedBean.prepararAdicionarCampus}" update="infosCampus" oncomplete="dialogGerCampus.show()"/>
+                    <p:commandLink value="Novo Campus" actionListener="#{campusController.prepararAdicionarCampus}" update="infosCampus" oncomplete="dialogGerCampus.show()"/>
                 </h:form>
                 <br/>
                 <h:form prependId="false">
-                    <p:dataTable id="tabela" var="campus" value="#{campusManagedBean.listarCampuss}" rows="2" paginator="true">
+                    <p:dataTable id="tabela" var="campus" value="#{campusController.listarCampi}" rows="2" paginator="true">
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Nome"/>
@@ -45,21 +45,15 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="Nucleo"/>
-                            </f:facet>
-                            <h:outputText value="#{campus.nucleo_id}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
                                 <h:outputText value="Alterar"/>
                             </f:facet>
-                            <p:commandButton actionListener="#{campusManagedBean.prepararAlterarCampus}" value="Alterar" update="infosCampus" oncomplete="dialogGerCampus.show()"/>
+                            <p:commandButton actionListener="#{campusController.prepararAlterarCampus}" value="Alterar" update="infosCampus" oncomplete="dialogGerCampus.show()"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Excluir"/>
                             </f:facet>
-                            <h:commandLink action="#{campusManagedBean.excluirCampus}" value="Excluir"/>
+                            <h:commandLink action="#{campusController.excluirCampus}" value="Excluir"/>
                         </p:column>
                     </p:dataTable>
                 </h:form>
@@ -71,10 +65,10 @@
                 <h:panelGrid id="infosCampus" columns="2" style="margin-bottom:10px">
 
                     <h:outputLabel for="nome" value="Nome:" />
-                    <h:inputText id="nome" value="#{campusManagedBean.campus.nome}"/>
+                    <h:inputText id="nome" value="#{campusController.campus.nome}"/>
 
-                    <p:commandButton update="tabela" oncomplete="dialogGerCampus.hide();" actionListener="#{campusManagedBean.adicionarCampus}" value="Inserir Campus"/>
-                    <p:commandButton update="tabela" oncomplete="dialogGerCampus.hide();" actionListener="#{campusManagedBean.alterarCampus}" value="Alterar Campus"/>
+                    <p:commandButton update="tabela" oncomplete="dialogGerCampus.hide();" actionListener="#{campusController.adicionarCampus}" value="Inserir Campus"/>
+                    <p:commandButton update="tabela" oncomplete="dialogGerCampus.hide();" actionListener="#{campusController.alterarCampus}" value="Alterar Campus"/>
 
                 </h:panelGrid>
             </h:form>

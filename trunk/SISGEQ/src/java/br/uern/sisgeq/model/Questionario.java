@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -27,6 +28,7 @@ public class Questionario implements Serializable {
     private Date dataInicio;
     private String descricao;
     private Integer situacao;
+    @OneToMany(mappedBy = "questionario")
     private Set<Pergunta> perguntas;
 
     public Questionario() {
