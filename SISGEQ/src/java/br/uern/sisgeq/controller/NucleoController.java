@@ -4,6 +4,7 @@ import br.uern.sisgeq.dao.NucleoDao;
 import br.uern.sisgeq.dao.hibernate.NucleoDaoHibernate;
 import br.uern.sisgeq.model.Campus;
 import br.uern.sisgeq.model.Nucleo;
+import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -17,7 +18,7 @@ import javax.faces.model.ListDataModel;
  */
 @ManagedBean
 @SessionScoped
-public class NucleoController {
+public class NucleoController implements Serializable {
 
     private Nucleo nucleo;
     private DataModel listaNucleos;
@@ -31,6 +32,7 @@ public class NucleoController {
 
     public void prepararAdicionarNucleo(ActionEvent actionEvent) {
         nucleo = new Nucleo();
+        nucleo.setCampus(new Campus());
     }
 
     public void prepararAlterarNucleo(ActionEvent actionEvent) {
@@ -45,18 +47,11 @@ public class NucleoController {
     }
 
     public void adicionarNucleo(ActionEvent actionEvent) {
-        saveOrUpdate();
+        NucleoDao dao = new NucleoDaoHibernate();
+        dao.saveOrUpdate(nucleo);
     }
 
     public void alterarNucleo(ActionEvent actionEvent) {
-        saveOrUpdate();
-    }
-
-    private void saveOrUpdate() {
-        System.out.println(nucleo.getNome());
-        System.out.println(nucleo.getId());
-        System.out.println(nucleo.getCampus().getNome());
-        System.out.println(nucleo.getCampus().getId());
         NucleoDao dao = new NucleoDaoHibernate();
         dao.saveOrUpdate(nucleo);
     }
@@ -80,5 +75,4 @@ public class NucleoController {
     public void setNucleo(Nucleo nucleo) {
         this.nucleo = nucleo;
     }
-
 }

@@ -2,7 +2,9 @@ package br.uern.sisgeq.controller;
 
 import br.uern.sisgeq.dao.DisciplinaDao;
 import br.uern.sisgeq.dao.hibernate.DisciplinaDaoHibernate;
+import br.uern.sisgeq.model.Departamento;
 import br.uern.sisgeq.model.Disciplina;
+import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -16,7 +18,7 @@ import javax.faces.model.ListDataModel;
  */
 @ManagedBean
 @SessionScoped
-public class DisciplinaController {
+public class DisciplinaController implements Serializable {
 
     private Disciplina disciplina;
     private DataModel listaDisciplinas;
@@ -37,6 +39,7 @@ public class DisciplinaController {
 
     public void prepararAdicionarDisciplina(ActionEvent actionEvent) {
         disciplina = new Disciplina();
+        disciplina.setDepartamento(new Departamento());
     }
 
     public void prepararAlterarDisciplina(ActionEvent actionEvent) {

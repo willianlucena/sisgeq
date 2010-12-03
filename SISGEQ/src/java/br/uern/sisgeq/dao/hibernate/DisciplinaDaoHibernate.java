@@ -18,6 +18,7 @@ public class DisciplinaDaoHibernate implements DisciplinaDao {
         Transaction t = session.beginTransaction();
         session.save(disciplina);
         t.commit();
+        session.close();
     }
 
     public Disciplina getDisciplina(long id) {
@@ -30,6 +31,7 @@ public class DisciplinaDaoHibernate implements DisciplinaDao {
         Transaction t = session.beginTransaction();
         List lista = session.createQuery("from Disciplina").list();
         t.commit();
+        session.close();
         return lista;
     }
 
@@ -38,6 +40,7 @@ public class DisciplinaDaoHibernate implements DisciplinaDao {
         Transaction t = session.beginTransaction();
         session.delete(disciplina);
         t.commit();
+        session.close();
     }
 
     public void update(Disciplina disciplina) {
@@ -45,5 +48,6 @@ public class DisciplinaDaoHibernate implements DisciplinaDao {
         Transaction t = session.beginTransaction();
         session.update(disciplina);
         t.commit();
+        session.close();
     }
 }

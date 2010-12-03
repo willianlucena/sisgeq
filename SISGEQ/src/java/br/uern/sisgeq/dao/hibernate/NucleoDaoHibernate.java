@@ -21,7 +21,11 @@ public class NucleoDaoHibernate implements NucleoDao {
 
     public List<Nucleo> getNucleos() {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        return session.createQuery("from Nucleo").list();
+        Transaction t = session.beginTransaction();
+        List lista = session.createQuery("from Nucleo").list();
+        t.commit();
+        session.close();
+        return lista;
     }
 
     public List<Nucleo> getNucleosByCampus(Campus campus) {
@@ -34,6 +38,7 @@ public class NucleoDaoHibernate implements NucleoDao {
         Transaction t = session.beginTransaction();
         session.saveOrUpdate(nucleo);
         t.commit();
+        session.close();
     }
 
     public void remove(Nucleo nucleo) {
@@ -41,5 +46,6 @@ public class NucleoDaoHibernate implements NucleoDao {
         Transaction t = session.beginTransaction();
         session.delete(nucleo);
         t.commit();
+        session.close();
     }
 }

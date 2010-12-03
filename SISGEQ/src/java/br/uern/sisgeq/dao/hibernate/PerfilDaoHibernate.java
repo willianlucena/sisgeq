@@ -18,6 +18,7 @@ public class PerfilDaoHibernate implements PerfilDao {
         Transaction t = session.beginTransaction();
         session.save(perfil);
         t.commit();
+        session.close();
     }
 
     public Perfil getPerfil(long id) {
@@ -30,6 +31,7 @@ public class PerfilDaoHibernate implements PerfilDao {
         Transaction t = session.beginTransaction();
         List lista = session.createQuery("from Perfil").list();
         t.commit();
+        session.close();
         return lista;
     }
 
@@ -38,6 +40,7 @@ public class PerfilDaoHibernate implements PerfilDao {
         Transaction t = session.beginTransaction();
         session.delete(perfil);
         t.commit();
+        session.close();
     }
 
     public void update(Perfil perfil) {
@@ -45,5 +48,6 @@ public class PerfilDaoHibernate implements PerfilDao {
         Transaction t = session.beginTransaction();
         session.update(perfil);
         t.commit();
+        session.close();
     }
 }
