@@ -3,6 +3,7 @@ package br.uern.sisgeq.controller;
 import br.uern.sisgeq.dao.PerfilDao;
 import br.uern.sisgeq.dao.hibernate.PerfilDaoHibernate;
 import br.uern.sisgeq.model.Perfil;
+import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -16,7 +17,7 @@ import javax.faces.model.ListDataModel;
  */
 @ManagedBean
 @SessionScoped
-public class PerfilController {
+public class PerfilController implements Serializable {
 
     private Perfil perfil;
     private DataModel listaPerfis;

@@ -41,6 +41,7 @@ public class DepartamentoDaoHibernate implements DepartamentoDao {
         Transaction t = session.beginTransaction();
         session.saveOrUpdate(departamento);
         t.commit();
+        session.close();
     }
 
     public void remove(Departamento departamento) {
@@ -48,5 +49,6 @@ public class DepartamentoDaoHibernate implements DepartamentoDao {
         Transaction t = session.beginTransaction();
         session.delete(departamento);
         t.commit();
+        session.close();
     }
 }

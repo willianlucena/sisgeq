@@ -57,6 +57,7 @@ public class CursoDaoHibernate implements CursoDao {
         Transaction t = session.beginTransaction();
         session.saveOrUpdate(curso);
         t.commit();
+        session.close();
     }
 
     public void remove(Curso curso) {
@@ -64,5 +65,6 @@ public class CursoDaoHibernate implements CursoDao {
         Transaction t = session.beginTransaction();
         session.delete(curso);
         t.commit();
+        session.close();
     }
 }

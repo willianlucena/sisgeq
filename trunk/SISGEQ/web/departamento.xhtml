@@ -32,109 +32,89 @@
             <p:layoutUnit position="center">
                 <h1>Gerenciador de Departamento</h1>
                 <h:form prependId="false">
-                    <p:commandLink value="Novo Departamento" actionListener="#{departamentoManagedBean.prepararAdicionarDepartamento}" update="infosDeparamento" oncomplete="dialogGerDepartamento.show()"/>
+                    <p:commandLink value="Novo Departamento" 
+                                   actionListener="#{departamentoController.prepararAdicionarDepartamento}"
+                                   update="infosDeparamento" oncomplete="dialogGerDepartamento.show()"/>
                 </h:form>
                 <br/>
                 <h:form prependId="false">
-                    <p:dataTable id="tabela" var="departamento" value="#{departamentoManagedBean.listarDepartamentos}" rows="2" paginator="true">
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Núcleo"/>
-                            </f:facet>
-                            <h:outputText value="#{departamento.nucleo}" />
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Área"/>
-                            </f:facet>
-                            <h:outputText value="#{departamento.area}" />
-                        </p:column>
-                        <p:column>
+                    <p:dataTable id="tabela" emptyMessage="Não há registros"
+                                 var="departamento" value="#{departamentoController.listarDepartamentos}"
+                                 rows="10" paginator="true"
+                                 onselectComplete="dialog.show()"
+                                 selection="#{departamentoController.departamento}"
+                                 selectionMode="single" update="panel">
+
+                        <p:column style="text-align: center">
                             <f:facet name="header">
                                 <h:outputText value="Nome"/>
                             </f:facet>
                             <h:outputText value="#{departamento.nome}"/>
                         </p:column>
-                        <p:column>
+
+                        <p:column style="text-align: center">
                             <f:facet name="header">
-                                <h:outputText value="Pessoas"/>
+                                <h:outputText value="Área"/>
                             </f:facet>
-                            <h:outputText value="#{departamento.pessoas}"/>
+                            <h:outputText value="#{departamento.area}"/>
                         </p:column>
-                        <p:column>
+
+                        <p:column style="text-align: center">
                             <f:facet name="header">
-                                <h:outputText value="Cursos"/>
+                                <h:outputText value="Núcleo"/>
                             </f:facet>
-                            <h:outputText value="#{departamento.cursos}"/>
+                            <h:outputText value="#{departamento.nucleo.nome}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Departamento"/>
-                            </f:facet>
-                            <h:outputText value="#{departamento.departamentos}"/>
-                        </p:column>
-                        <p:column>
+
+                        <p:column style="text-align: center">
                             <f:facet name="header">
                                 <h:outputText value="Alterar"/>
                             </f:facet>
-                            <p:commandButton actionListener="#{departamentoManagedBean.prepararAlterarDepartamento}" value="Alterar" update="infosDepartamento" oncomplete="dialogGerDepartamento.show()"/>
+                            <p:commandButton actionListener="#{departamentoController.prepararAlterarDepartamento}"
+                                             value="Alterar" update="infosDepartamento"
+                                             oncomplete="dialogGerDepartamento.show()"/>
                         </p:column>
-                        <p:column>
+
+                        <p:column style="text-align: center">
                             <f:facet name="header">
                                 <h:outputText value="Excluir"/>
                             </f:facet>
-                            <h:commandLink action="#{departamentoManagedBean.excluirDepartamento}" value="Excluir"/>
+                            <h:commandLink action="#{departamentoController.excluirDepartamento}"
+                                           value="Excluir"/>
                         </p:column>
                     </p:dataTable>
                 </h:form>
             </p:layoutUnit>
         </p:layout>
 
-        <p:dialog header="Gerência de Departamento" widgetVar="dialogGerDepartamento"  resizable="false" modal="true" showEffect="slide" width="500">
+        <p:dialog widgetVar="dialog" modal="true" header="Informações">
+            <h:panelGrid columns="2" id="panel">
+                <h:outputText value="Nome:" />
+                <h:outputText value="#{departamentoController.departamento.nome}" />
+                <h:outputText value="Núcleo:" />
+                <h:outputText value="#{departamentoController.departamento.nucleo.nome}" />
+            </h:panelGrid>
+        </p:dialog>
+
+        <p:dialog header="Gerencia de Departamento" widgetVar="dialogGerDepartamento"
+                  resizable="false" modal="true" showEffect="slide" width="500">
             <h:form prependId="false">
-                <h:panelGrid id="infosDepartamento" columns="2" style="margin-bottom:10px">
-
-                    <h:outputLabel for="codigo" value="Código:" />
-                    <h:selectOneMenu id="nucleo_id" value="#{departamentoManagedBean.departamento.nucleo}"/>
-                    <f:selectItem itemLabel="1" itemValue="1"/>
-                    <f:selectItem itemLabel="2" itemValue="2"/>
-                    <f:selectItem itemLabel="3" itemValue="3"/>
-                    <f:selectItem itemLabel="4" itemValue="4"/>
-                    <h:outputLabel for="area" value="Área:" />
-                    <h:inputText id="area" value="#{departamentoManagedBean.departamento.area}"/>
-
+                <h:panelGrid id="infosCurso" columns="2" style="margin-bottom:10px">
                     <h:outputLabel for="nome" value="Nome:" />
-                    <h:inputText id="nome" value="#{departamentoManagedBean.departamento.nome}"/>
-
-                    <h:outputLabel for="pessoa_id" value="Pessoa:" />
-                    <h:selectOneMenu id="pessoa_id" value="#{departamentoManagedBean.departamento.pessoas}"/>
-                    <f:selectItem itemLabel="1" itemValue="1"/>
-                    <f:selectItem itemLabel="2" itemValue="2"/>
-                    <f:selectItem itemLabel="3" itemValue="3"/>
-                    <f:selectItem itemLabel="4" itemValue="4"/>
-
-                    <h:outputLabel for="curso_id" value="Curso:" />
-                    <h:selectOneMenu id="curso_id" value="#{departamentoManagedBean.departamento.curso_id}">
-                        <f:selectItem itemLabel="1" itemValue="1"/>
-                        <f:selectItem itemLabel="2" itemValue="2"/>
-                        <f:selectItem itemLabel="3" itemValue="3"/>
-                        <f:selectItem itemLabel="4" itemValue="4"/>
-                        <f:selectItem itemLabel="5" itemValue="5"/>
+                    <h:inputText id="nome" value="#{departamentoController.departamento.nome}"/>
+                    <h:outputLabel for="area" value="Área"/>
+                    <h:inputText id="area" value="#{departamentoController.departamento.area}"/>
+                    <h:outputLabel for="nucleo" value="Núcleo"/>
+                    <h:selectOneMenu id="nucleo" value="#{departamentoController.departamento.nucleo.id}">
+                        <f:selectItems value="#{nucleoController.listarNucleos}" var="nuc"
+                                       itemLabel="#{nuc.nome}" itemValue="#{nuc.id}"/>
                     </h:selectOneMenu>
-
-
-                    <h:outputLabel for="departamento_id" value="Departamento:" />
-                    <h:selectOneMenu id="departamento_id" value="#{departamentoManagedBean.departamento.departamentos}">
-                        <f:selectItem itemLabel="1" itemValue="1"/>
-                        <f:selectItem itemLabel="2" itemValue="2"/>
-                        <f:selectItem itemLabel="3" itemValue="3"/>
-                        <f:selectItem itemLabel="4" itemValue="4"/>
-                        <f:selectItem itemLabel="5" itemValue="5"/>
-                    </h:selectOneMenu>
-
-                    <p:commandButton update="tabela" oncomplete="dialogGerDepartamento.hide();" actionListener="#{departamentoManagedBean.adicionarDepartamento}" value="Inserir Departamento"/>
-                    <p:commandButton update="tabela" oncomplete="dialogGerDepartamento.hide();" actionListener="#{departamentoManagedBean.alterarDepartamento}" value="Alterar Departamento"/>
-
+                    <p:commandButton update="tabela" oncomplete="dialogGerCurso.hide();"
+                                     actionListener="#{departamentoController.adicionarDepartamento}"
+                                     value="Inserir"/>
+                    <p:commandButton update="tabela" oncomplete="dialogGerCurso.hide();"
+                                     actionListener="#{departamentoController.alterarDepartamento}"
+                                     value="Alterar"/>
                 </h:panelGrid>
             </h:form>
         </p:dialog>

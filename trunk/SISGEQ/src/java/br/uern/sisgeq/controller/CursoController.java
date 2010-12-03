@@ -3,6 +3,8 @@ package br.uern.sisgeq.controller;
 import br.uern.sisgeq.dao.CursoDao;
 import br.uern.sisgeq.dao.hibernate.CursoDaoHibernate;
 import br.uern.sisgeq.model.Curso;
+import br.uern.sisgeq.model.Departamento;
+import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -16,7 +18,7 @@ import javax.faces.model.ListDataModel;
  */
 @ManagedBean
 @SessionScoped
-public class CursoController {
+public class CursoController implements Serializable {
 
     private Curso curso;
     private DataModel listaCursos;
@@ -37,6 +39,7 @@ public class CursoController {
 
     public void prepararAdicionarCurso(ActionEvent actionEvent) {
         curso = new Curso();
+        curso.setDepartamento(new Departamento());
     }
 
     public void prepararAlterarCurso(ActionEvent actionEvent) {

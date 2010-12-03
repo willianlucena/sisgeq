@@ -3,6 +3,7 @@ package br.uern.sisgeq.controller;
 import br.uern.sisgeq.dao.CampusDao;
 import br.uern.sisgeq.dao.hibernate.CampusDaoHibernate;
 import br.uern.sisgeq.model.Campus;
+import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -16,7 +17,7 @@ import javax.faces.model.ListDataModel;
  */
 @ManagedBean
 @SessionScoped
-public class CampusController {
+public class CampusController implements Serializable {
 
     private Campus campus;
     private DataModel listaCampi;

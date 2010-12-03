@@ -36,7 +36,7 @@
                 </h:form>
                 <br/>
                 <h:form prependId="false">
-                    <p:dataTable id="tabela" var="nucleo" value="#{nucleoController.listarNucleos}" rows="2" paginator="true">
+                    <p:dataTable id="tabela" var="nucleo" value="#{nucleoController.listarNucleos}" rows="10" paginator="true">
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Nome"/>
@@ -74,12 +74,12 @@
                     <h:inputText id="nome" value="#{nucleoController.nucleo.nome}"/>
 
                     <h:outputLabel for="campus" value="Campus:" />
-                    <h:selectOneMenu id="campus" value="#{nucleoController.campus}">
-                        <f:selectItems value="#{campusController.listarCampi}" var="c" itemLabel="#{c.nome}" itemValue="#{c}"/>
+                    <h:selectOneMenu id="campus" value="#{nucleoController.campus.id}">
+                        <f:selectItems value="#{campusController.listarCampi}" var="c" itemLabel="#{c.nome}" itemValue="#{c.id}"/>
                     </h:selectOneMenu>
 
-                    <p:commandButton update="tabela" oncomplete="dialogGerNucleo.hide();" actionListener="#{nucleoController.adicionarNucleo}" value="Inserir Núcleo"/>
-                    <p:commandButton update="tabela" oncomplete="dialogGerNucleo.hide();" actionListener="#{nucleoController.alterarNucleo}" value="Alterar Núcleo"/>
+                    <p:commandButton update="tabela" oncomplete="dialogGerNucleo.hide();" actionListener="#{nucleoController.adicionarNucleo}" value="Inserir"/>
+                    <p:commandButton update="tabela" oncomplete="dialogGerNucleo.hide();" actionListener="#{nucleoController.alterarNucleo}" value="Alterar"/>
 
                 </h:panelGrid>
             </h:form>

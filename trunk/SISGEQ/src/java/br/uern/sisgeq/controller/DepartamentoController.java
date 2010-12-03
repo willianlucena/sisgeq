@@ -3,6 +3,8 @@ package br.uern.sisgeq.controller;
 import br.uern.sisgeq.dao.DepartamentoDao;
 import br.uern.sisgeq.dao.hibernate.DepartamentoDaoHibernate;
 import br.uern.sisgeq.model.Departamento;
+import br.uern.sisgeq.model.Nucleo;
+import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -16,7 +18,7 @@ import javax.faces.model.ListDataModel;
  */
 @ManagedBean
 @SessionScoped
-public class DepartamentoController {
+public class DepartamentoController implements Serializable {
 
     private Departamento departamento;
     private DataModel listaDepartamentos;
@@ -37,6 +39,7 @@ public class DepartamentoController {
 
     public void prepararAdicionarDepartamento(ActionEvent actionEvent) {
         departamento = new Departamento();
+        departamento.setNucleo(new Nucleo());
     }
 
     public void prepararAlterarDepartamento(ActionEvent actionEvent) {
@@ -51,14 +54,11 @@ public class DepartamentoController {
     }
 
     public void adicionarDepartamento(ActionEvent actionEvent) {
-        saveOrUpdate();
+        DepartamentoDao dao = new DepartamentoDaoHibernate();
+        dao.saveOrUpdate(departamento);
     }
 
     public void alterarDepartamento(ActionEvent actionEvent) {
-        saveOrUpdate();
-    }
-
-    private void saveOrUpdate() {
         DepartamentoDao dao = new DepartamentoDaoHibernate();
         dao.saveOrUpdate(departamento);
     }

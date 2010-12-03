@@ -21,6 +21,7 @@ public class Curso implements java.io.Serializable {
     private Integer id;
     @ManyToOne
     private Departamento departamento;
+    private String codigo;
     private String nome;
     @OneToMany(mappedBy = "curso")
     private Set<Pessoa> pessoas;
@@ -60,4 +61,13 @@ public class Curso implements java.io.Serializable {
     public void setPessoas(Set<Pessoa> pessoas) {
         this.pessoas = pessoas;
     }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+    
 }

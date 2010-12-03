@@ -28,6 +28,7 @@ public class CampusDaoHibernate implements CampusDao {
         Transaction t = session.beginTransaction();
         session.saveOrUpdate(Campus);
         t.commit();
+        session.close();
     }
 
     public void remove(Campus Campus) {
@@ -35,5 +36,6 @@ public class CampusDaoHibernate implements CampusDao {
         Transaction t = session.beginTransaction();
         session.delete(Campus);
         t.commit();
+        session.close();
     }
 }
