@@ -13,7 +13,9 @@ public interface CampusDao extends DAO {
 
     public List<Campus> getCampi();
 
-    public void saveOrUpdate(Campus Campus);
+    public void save(Campus Campus);
+
+    public void update(Campus campus);
 
     public void remove(Campus Campus);
 }

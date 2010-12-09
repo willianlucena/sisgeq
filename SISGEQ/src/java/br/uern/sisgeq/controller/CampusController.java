@@ -48,19 +48,16 @@ public class CampusController implements Serializable {
         Campus campusTemp = (Campus) (listaCampi.getRowData());
         CampusDao dao = new CampusDaoHibernate();
         dao.remove(campusTemp);
-        return "index";
+        return "campus";
     }
 
     public void adicionarCampus(ActionEvent actionEvent) {
-        saveOrUpdate();
+        CampusDao dao = new CampusDaoHibernate();
+        dao.save(campus);
     }
 
     public void alterarCampus(ActionEvent actionEvent) {
-        saveOrUpdate();
-    }
-
-    private void saveOrUpdate() {
         CampusDao dao = new CampusDaoHibernate();
-        dao.saveOrUpdate(campus);
+        dao.update(campus);
     }
 }

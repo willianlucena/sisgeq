@@ -43,17 +43,17 @@ public class NucleoController implements Serializable {
         Nucleo nucleoTemp = (Nucleo) (listaNucleos.getRowData());
         NucleoDao dao = new NucleoDaoHibernate();
         dao.remove(nucleoTemp);
-        return "index";
+        return "nucleo";
     }
 
     public void adicionarNucleo(ActionEvent actionEvent) {
         NucleoDao dao = new NucleoDaoHibernate();
-        dao.saveOrUpdate(nucleo);
+        dao.save(nucleo);
     }
 
     public void alterarNucleo(ActionEvent actionEvent) {
         NucleoDao dao = new NucleoDaoHibernate();
-        dao.saveOrUpdate(nucleo);
+        dao.update(nucleo);
     }
 
     public Campus getCampus() {

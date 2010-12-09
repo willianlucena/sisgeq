@@ -50,16 +50,16 @@ public class DepartamentoController implements Serializable {
         Departamento departamentoTemp = (Departamento) (listaDepartamentos.getRowData());
         DepartamentoDao dao = new DepartamentoDaoHibernate();
         dao.remove(departamentoTemp);
-        return "index";
+        return "departamento";
     }
 
     public void adicionarDepartamento(ActionEvent actionEvent) {
         DepartamentoDao dao = new DepartamentoDaoHibernate();
-        dao.saveOrUpdate(departamento);
+        dao.save(departamento);
     }
 
     public void alterarDepartamento(ActionEvent actionEvent) {
         DepartamentoDao dao = new DepartamentoDaoHibernate();
-        dao.saveOrUpdate(departamento);
+        dao.update(departamento);
     }
 }

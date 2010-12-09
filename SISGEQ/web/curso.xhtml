@@ -34,7 +34,7 @@
                     <p:commandLink value="Novo Curso"
                                    actionListener="#{cursoController.prepararAdicionarCurso}"
                                    update="infosCurso"
-                                   oncomplete="dialogGerCurso.show()"/>
+                                   oncomplete="dialogInserirCurso.show()"/>
                 </h:form>
                 <br/>
                 <h:form prependId="false">
@@ -70,7 +70,7 @@
                             <f:facet name="header">
                                 <h:outputText value="Alterar"/>
                             </f:facet>
-                            <p:commandButton actionListener="#{cursoController.prepararAlterarCurso}" value="Alterar" update="infosCurso" oncomplete="dialogGerCurso.show()"/>
+                            <p:commandButton actionListener="#{cursoController.prepararAlterarCurso}" value="Alterar" update="atualizarCurso" oncomplete="dialogAtualizarCurso.show()"/>
                         </p:column>
 
                         <p:column style="text-align: center">
@@ -95,7 +95,7 @@
             </h:panelGrid>
         </p:dialog>
 
-        <p:dialog header="Gerencia de Curso" widgetVar="dialogGerCurso"  resizable="false" modal="true" showEffect="slide" width="500">
+        <p:dialog header="Inserir Curso" widgetVar="dialogInserirCurso"  resizable="false" modal="true" showEffect="slide" width="500">
             <h:form prependId="false">
                 <h:panelGrid id="infosCurso" columns="2" style="margin-bottom:10px">
 
@@ -110,8 +110,28 @@
                         <f:selectItems value="#{departamentoController.listarDepartamentos}" var="dep" itemLabel="#{dep.nome}" itemValue="#{dep.id}"/>
                     </h:selectOneMenu>
 
-                    <p:commandButton update="tabela" oncomplete="dialogGerCurso.hide();" actionListener="#{cursoController.adicionarCurso}" value="Inserir"/>
-                    <p:commandButton update="tabela" oncomplete="dialogGerCurso.hide();" actionListener="#{cursoController.alterarCurso}" value="Alterar"/>
+                    <p:commandButton update="tabela" oncomplete="dialogInserirCurso.hide();" actionListener="#{cursoController.adicionarCurso}" value="Inserir"/>
+
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog header="Atualizar Curso" widgetVar="dialogAtualizarCurso"  resizable="false" modal="true" showEffect="slide" width="500">
+            <h:form prependId="false">
+                <h:panelGrid id="atualizarCurso" columns="2" style="margin-bottom:10px">
+
+                    <h:outputLabel for="codigo" value="Código:" />
+                    <h:inputText id="atualizarCodigo" value="#{cursoController.curso.codigo}"/>
+
+                    <h:outputLabel for="nome" value="Nome:" />
+                    <h:inputText id="atualizarNome" value="#{cursoController.curso.nome}"/>
+
+                    <h:outputLabel for="departamento" value="Departamento:" />
+                    <h:selectOneMenu id="atualizarDepartamento" value="#{cursoController.curso.departamento.id}">
+                        <f:selectItems value="#{departamentoController.listarDepartamentos}" var="dep" itemLabel="#{dep.nome}" itemValue="#{dep.id}"/>
+                    </h:selectOneMenu>
+
+                    <p:commandButton update="tabela" oncomplete="dialogAtualizarCurso.hide();" actionListener="#{cursoController.alterarCurso}" value="Atualizar"/>
 
                 </h:panelGrid>
             </h:form>

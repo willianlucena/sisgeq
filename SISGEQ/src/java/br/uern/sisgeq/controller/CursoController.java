@@ -50,19 +50,16 @@ public class CursoController implements Serializable {
         Curso cursoTemp = (Curso) (listaCursos.getRowData());
         CursoDao dao = new CursoDaoHibernate();
         dao.remove(cursoTemp);
-        return "index";
+        return "curso";
     }
 
     public void adicionarCurso(ActionEvent actionEvent) {
-        saveOrUpdate();
+        CursoDao dao = new CursoDaoHibernate();
+        dao.save(curso);
     }
 
     public void alterarCurso(ActionEvent actionEvent) {
-        saveOrUpdate();
-    }
-
-    private void saveOrUpdate() {
         CursoDao dao = new CursoDaoHibernate();
-        dao.saveOrUpdate(curso);
+        dao.update(curso);
     }
 }

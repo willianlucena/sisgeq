@@ -24,7 +24,11 @@ public class CursoDaoHibernate implements CursoDao {
 
     public List<Curso> getCursos() {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        return session.createQuery("from Curso").list();
+        Transaction t = session.beginTransaction();
+        List lista = session.createQuery("from Curso").list();
+        t.commit();
+        session.close();
+        return lista;
     }
 
     public List<Curso> getCursos(int inicio, int numeroResultados) {
@@ -52,10 +56,18 @@ public class CursoDaoHibernate implements CursoDao {
         return session.createSQLQuery(query).setParameter("nucleo", nucleo.getId()).list();
     }
 
-    public void saveOrUpdate(Curso curso) {
+    public void save(Curso curso) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();
-        session.saveOrUpdate(curso);
+        session.save(curso);
+        t.commit();
+        session.close();
+    }
+
+    public void update(Curso curso) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t = session.beginTransaction();
+        session.update(curso);
         t.commit();
         session.close();
     }

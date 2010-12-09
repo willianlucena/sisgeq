@@ -34,7 +34,7 @@
                 <h:form prependId="false">
                     <p:commandLink value="Novo Departamento" 
                                    actionListener="#{departamentoController.prepararAdicionarDepartamento}"
-                                   update="infosDeparamento" oncomplete="dialogGerDepartamento.show()"/>
+                                   update="infosDeparamento" oncomplete="dialogInserirDepartamento.show()"/>
                 </h:form>
                 <br/>
                 <h:form prependId="false">
@@ -71,8 +71,8 @@
                                 <h:outputText value="Alterar"/>
                             </f:facet>
                             <p:commandButton actionListener="#{departamentoController.prepararAlterarDepartamento}"
-                                             value="Alterar" update="infosDepartamento"
-                                             oncomplete="dialogGerDepartamento.show()"/>
+                                             value="Alterar" update="atualizarDepartamento"
+                                             oncomplete="dialogAtualizarDepartamento.show()"/>
                         </p:column>
 
                         <p:column style="text-align: center">
@@ -96,10 +96,10 @@
             </h:panelGrid>
         </p:dialog>
 
-        <p:dialog header="Gerencia de Departamento" widgetVar="dialogGerDepartamento"
+        <p:dialog header="Inserir Departamento" widgetVar="dialogInserirDepartamento"
                   resizable="false" modal="true" showEffect="slide" width="500">
             <h:form prependId="false">
-                <h:panelGrid id="infosCurso" columns="2" style="margin-bottom:10px">
+                <h:panelGrid id="infosDepartamento" columns="2" style="margin-bottom:10px">
                     <h:outputLabel for="nome" value="Nome:" />
                     <h:inputText id="nome" value="#{departamentoController.departamento.nome}"/>
                     <h:outputLabel for="area" value="Área"/>
@@ -109,12 +109,30 @@
                         <f:selectItems value="#{nucleoController.listarNucleos}" var="nuc"
                                        itemLabel="#{nuc.nome}" itemValue="#{nuc.id}"/>
                     </h:selectOneMenu>
-                    <p:commandButton update="tabela" oncomplete="dialogGerCurso.hide();"
+                    <p:commandButton update="tabela" oncomplete="dialogInserirDepartamento.hide();"
                                      actionListener="#{departamentoController.adicionarDepartamento}"
                                      value="Inserir"/>
-                    <p:commandButton update="tabela" oncomplete="dialogGerCurso.hide();"
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog header="Atualizar Departamento" widgetVar="dialogAtualizarDepartamento"
+                  resizable="false" modal="true" showEffect="slide" width="500">
+            <h:form prependId="false">
+                <h:panelGrid id="atualizarDepartamento" columns="2" style="margin-bottom:10px">
+                    <h:outputLabel for="nome" value="Nome:" />
+                    <h:inputText id="atualizarNome" value="#{departamentoController.departamento.nome}"/>
+                    <h:outputLabel for="area" value="Área"/>
+                    <h:inputText id="atualizarArea" value="#{departamentoController.departamento.area}"/>
+                    <h:outputLabel for="nucleo" value="Núcleo"/>
+                    <h:selectOneMenu id="atualizarNucleo" value="#{departamentoController.departamento.nucleo.id}">
+                        <f:selectItems value="#{nucleoController.listarNucleos}" var="nuc"
+                                       itemLabel="#{nuc.nome}" itemValue="#{nuc.id}"/>
+                    </h:selectOneMenu>
+
+                    <p:commandButton update="tabela" oncomplete="dialogAtualizarDepartamento.hide();"
                                      actionListener="#{departamentoController.alterarDepartamento}"
-                                     value="Alterar"/>
+                                     value="Atualizar"/>
                 </h:panelGrid>
             </h:form>
         </p:dialog>

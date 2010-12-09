@@ -32,24 +32,24 @@
             <p:layoutUnit position="center">
                 <h1>Gerenciador de Campus</h1>
                 <h:form prependId="false">
-                    <p:commandLink value="Novo Campus" actionListener="#{campusController.prepararAdicionarCampus}" update="infosCampus" oncomplete="dialogGerCampus.show()"/>
+                    <p:commandLink value="Novo Campus" actionListener="#{campusController.prepararAdicionarCampus}" update="infosCampus" oncomplete="dialogInserirCampus.show()"/>
                 </h:form>
                 <br/>
                 <h:form prependId="false">
                     <p:dataTable id="tabela" var="campus" value="#{campusController.listarCampi}" rows="10" paginator="true">
-                        <p:column>
+                        <p:column style="text-align: center">
                             <f:facet name="header">
                                 <h:outputText value="Nome"/>
                             </f:facet>
                             <h:outputText value="#{campus.nome}" />
                         </p:column>
-                        <p:column>
+                        <p:column style="text-align: center">
                             <f:facet name="header">
                                 <h:outputText value="Alterar"/>
                             </f:facet>
-                            <p:commandButton actionListener="#{campusController.prepararAlterarCampus}" value="Alterar" update="infosCampus" oncomplete="dialogGerCampus.show()"/>
+                            <p:commandButton actionListener="#{campusController.prepararAlterarCampus}" value="Alterar" update="atualizarCampus" oncomplete="dialogAtualizarCampus.show()"/>
                         </p:column>
-                        <p:column>
+                        <p:column style="text-align: center">
                             <f:facet name="header">
                                 <h:outputText value="Excluir"/>
                             </f:facet>
@@ -60,15 +60,27 @@
             </p:layoutUnit>
         </p:layout>
 
-        <p:dialog header="Gerência de Campus" widgetVar="dialogGerCampus"  resizable="false" modal="true" showEffect="slide" width="500">
+        <p:dialog header="Inserir Campus" widgetVar="dialogInserirCampus"  resizable="false" modal="true" showEffect="slide" width="500">
             <h:form prependId="false">
                 <h:panelGrid id="infosCampus" columns="2" style="margin-bottom:10px">
 
                     <h:outputLabel for="nome" value="Nome:" />
                     <h:inputText id="nome" value="#{campusController.campus.nome}"/>
 
-                    <p:commandButton update="tabela" oncomplete="dialogGerCampus.hide();" actionListener="#{campusController.adicionarCampus}" value="Inserir Campus"/>
-                    <p:commandButton update="tabela" oncomplete="dialogGerCampus.hide();" actionListener="#{campusController.alterarCampus}" value="Alterar Campus"/>
+                    <p:commandButton update="tabela" oncomplete="dialogInserirCampus.hide();" actionListener="#{campusController.adicionarCampus}" value="Inserir"/>
+
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+        
+        <p:dialog header="Atualizar Campus" widgetVar="dialogAtualizarCampus"  resizable="false" modal="true" showEffect="slide" width="500">
+            <h:form prependId="false">
+                <h:panelGrid id="atualizarCampus" columns="2" style="margin-bottom:10px">
+
+                    <h:outputLabel for="nome" value="Nome:" />
+                    <h:inputText id="nomeAtualizar" value="#{campusController.campus.nome}"/>
+
+                    <p:commandButton update="tabela" oncomplete="dialogAtualizarCampus.hide();" actionListener="#{campusController.alterarCampus}" value="Atualizar"/>
 
                 </h:panelGrid>
             </h:form>

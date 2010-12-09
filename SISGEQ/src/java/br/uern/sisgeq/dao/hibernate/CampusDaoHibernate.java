@@ -20,21 +20,33 @@ public class CampusDaoHibernate implements CampusDao {
 
     public List<Campus> getCampi() {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        return session.createQuery("from Campus").list();
+        Transaction t = session.beginTransaction();
+        List lista = session.createQuery("from Campus").list();
+        t.commit();
+        session.close();
+        return lista;
     }
 
-    public void saveOrUpdate(Campus Campus) {
+    public void save(Campus campus) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();
-        session.saveOrUpdate(Campus);
+        session.save(campus);
         t.commit();
         session.close();
     }
 
-    public void remove(Campus Campus) {
+    public void update(Campus campus) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();
-        session.delete(Campus);
+        session.update(campus);
+        t.commit();
+        session.close();
+    }
+
+    public void remove(Campus campus) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t = session.beginTransaction();
+        session.delete(campus);
         t.commit();
         session.close();
     }

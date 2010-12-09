@@ -22,7 +22,11 @@ public class DepartamentoDaoHibernate implements DepartamentoDao {
 
     public List<Departamento> getDepartamentos() {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        return session.createQuery("from Departamento").list();
+        Transaction t = session.beginTransaction();
+        List lista = session.createQuery("from Departamento").list();
+        t.commit();
+        session.close();
+        return lista;
     }
 
     public List<Departamento> getDepartamentosByCampus(Campus campus) {
@@ -36,10 +40,18 @@ public class DepartamentoDaoHibernate implements DepartamentoDao {
         return session.createSQLQuery("from Departamento as d where d.nucleo.id = :nucleo").setParameter("nucleo", nucleo.getId()).list();
     }
 
-    public void saveOrUpdate(Departamento departamento) {
+    public void save(Departamento departamento) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();
-        session.saveOrUpdate(departamento);
+        session.save(departamento);
+        t.commit();
+        session.close();
+    }
+
+    public void update(Departamento departamento) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t = session.beginTransaction();
+        session.update(departamento);
         t.commit();
         session.close();
     }
