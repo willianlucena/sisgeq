@@ -35,7 +35,7 @@
                     <p:commandLink value="Novo Perfil"
                                    actionListener="#{perfilController.prepararAdicionarPerfil}"
                                    update="infosPerfil"
-                                   oncomplete="dialogGerPerfil.show()"/>
+                                   oncomplete="dialogInserirPerfil.show()"/>
                 </h:form>
                 <br/>
                 <h:form prependId="false">
@@ -59,8 +59,8 @@
                             </f:facet>
                             <p:commandButton actionListener="#{perfilController.prepararAlterarPerfil}"
                                              value="Alterar"
-                                             update="infosPerfil"
-                                             oncomplete="dialogGerPerfil.show()"/>
+                                             update="atualizarPerfil"
+                                             oncomplete="dialogAtualizarPerfil.show()"/>
                         </p:column>
 
                         <p:column style="text-align: center">
@@ -83,7 +83,7 @@
             </h:panelGrid>
         </p:dialog>
 
-        <p:dialog header="Gerencia de Perfil" widgetVar="dialogGerPerfil"
+        <p:dialog header="Inserir Perfil" widgetVar="dialogInserirPerfil"
                   resizable="false" modal="true" showEffect="slide" width="500">
             <h:form prependId="false">
                 <h:panelGrid id="infosPerfil" columns="2" style="margin-bottom:10px">
@@ -91,8 +91,21 @@
                     <h:outputLabel for="tipo" value="Tipo:" />
                     <h:inputText id="tipo" value="#{perfilController.perfil.tipo}"/>
 
-                    <p:commandButton update="tabela" oncomplete="dialogGerPerfil.hide();" actionListener="#{perfilController.adicionarPerfil}" value="Inserir Perfil"/>
-                    <p:commandButton update="tabela" oncomplete="dialogGerPerfil.hide();" actionListener="#{perfilController.alterarPerfil}" value="Alterar Perfil"/>
+                    <p:commandButton update="tabela" oncomplete="dialogInserirPerfil.hide();" actionListener="#{perfilController.adicionarPerfil}" value="Inserir"/>
+
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog header="Atualizar Perfil" widgetVar="dialogAtualizarPerfil"
+                  resizable="false" modal="true" showEffect="slide" width="500">
+            <h:form prependId="false">
+                <h:panelGrid id="atualizarPerfil" columns="2" style="margin-bottom:10px">
+
+                    <h:outputLabel for="tipo" value="Tipo:" />
+                    <h:inputText id="atualizarTipo" value="#{perfilController.perfil.tipo}"/>
+
+                    <p:commandButton update="tabela" oncomplete="dialogAtualizarPerfil.hide();" actionListener="#{perfilController.alterarPerfil}" value="Alterar"/>
 
                 </h:panelGrid>
             </h:form>

@@ -33,10 +33,18 @@ public class NucleoDaoHibernate implements NucleoDao {
         return session.createSQLQuery("from Nucleo as n where n.campus.id = :campus").setParameter("campus", campus.getId()).list();
     }
 
-    public void saveOrUpdate(Nucleo nucleo) {
+    public void save(Nucleo nucleo) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();
-        session.saveOrUpdate(nucleo);
+        session.save(nucleo);
+        t.commit();
+        session.close();
+    }
+
+    public void update(Nucleo nucleo) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t = session.beginTransaction();
+        session.update(nucleo);
         t.commit();
         session.close();
     }

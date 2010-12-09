@@ -32,41 +32,47 @@
             <p:layoutUnit position="center">
                 <h1>Gerenciador de Núcleos</h1>
                 <h:form prependId="false">
-                    <p:commandLink value="Novo Núcleo" actionListener="#{nucleoController.prepararAdicionarNucleo}" update="infosNucleo" oncomplete="dialogGerNucleo.show()"/>
+                    <p:commandLink value="Novo Núcleo" actionListener="#{nucleoController.prepararAdicionarNucleo}" update="infosNucleo" oncomplete="dialogInserirNucleo.show()"/>
                 </h:form>
                 <br/>
                 <h:form prependId="false">
                     <p:dataTable id="tabela" var="nucleo" value="#{nucleoController.listarNucleos}" rows="10" paginator="true">
-                        <p:column>
+
+                        <p:column style="text-align: center">
                             <f:facet name="header">
                                 <h:outputText value="Nome"/>
                             </f:facet>
                             <h:outputText value="#{nucleo.nome}"/>
                         </p:column>
-                        <p:column>
+
+                        <p:column style="text-align: center">
                             <f:facet name="header">
                                 <h:outputText value="Campus"/>
                             </f:facet>
                             <h:outputText value="#{nucleo.campus.nome}" />
                         </p:column>
-                        <p:column>
+
+                        <p:column style="text-align: center">
                             <f:facet name="header">
                                 <h:outputText value="Alterar"/>
                             </f:facet>
-                            <p:commandButton actionListener="#{nucleoController.prepararAlterarNucleo}" value="Alterar" update="infosNucleo" oncomplete="dialogGerNucleo.show()"/>
+                            <p:commandButton actionListener="#{nucleoController.prepararAlterarNucleo}" value="Alterar" update="atualizarNucleo" oncomplete="dialogAtualizarNucleo.show()"/>
                         </p:column>
-                        <p:column>
+
+                        <p:column style="text-align: center">
                             <f:facet name="header">
                                 <h:outputText value="Excluir"/>
                             </f:facet>
                             <h:commandLink action="#{nucleoController.excluirNucleo}" value="Excluir"/>
                         </p:column>
+
                     </p:dataTable>
+                    
                 </h:form>
             </p:layoutUnit>
         </p:layout>
 
-        <p:dialog header="Gerência de Núcleo" widgetVar="dialogGerNucleo"  resizable="false" modal="true" showEffect="slide" width="500">
+        <p:dialog header="Inserir Núcleo" widgetVar="dialogInserirNucleo"  resizable="false" modal="true" showEffect="slide" width="500">
             <h:form prependId="false">
                 <h:panelGrid id="infosNucleo" columns="2" style="margin-bottom:10px">
 
@@ -74,12 +80,29 @@
                     <h:inputText id="nome" value="#{nucleoController.nucleo.nome}"/>
 
                     <h:outputLabel for="campus" value="Campus:" />
-                    <h:selectOneMenu id="campus" value="#{nucleoController.campus.id}">
+                    <h:selectOneMenu id="campus" value="#{nucleoController.nucleo.campus.id}">
                         <f:selectItems value="#{campusController.listarCampi}" var="c" itemLabel="#{c.nome}" itemValue="#{c.id}"/>
                     </h:selectOneMenu>
 
-                    <p:commandButton update="tabela" oncomplete="dialogGerNucleo.hide();" actionListener="#{nucleoController.adicionarNucleo}" value="Inserir"/>
-                    <p:commandButton update="tabela" oncomplete="dialogGerNucleo.hide();" actionListener="#{nucleoController.alterarNucleo}" value="Alterar"/>
+                    <p:commandButton update="tabela" oncomplete="dialogInserirNucleo.hide();" actionListener="#{nucleoController.adicionarNucleo}" value="Inserir"/>
+
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog header="Atualizar Núcleo" widgetVar="dialogAtualizarNucleo"  resizable="false" modal="true" showEffect="slide" width="500">
+            <h:form prependId="false">
+                <h:panelGrid id="atualizarNucleo" columns="2" style="margin-bottom:10px">
+
+                    <h:outputLabel for="nome" value="Nome:" />
+                    <h:inputText id="nomeAtualizar" value="#{nucleoController.nucleo.nome}"/>
+
+                    <h:outputLabel for="campus" value="Campus:" />
+                    <h:selectOneMenu id="campusAtualizar" value="#{nucleoController.nucleo.campus.id}">
+                        <f:selectItems value="#{campusController.listarCampi}" var="c" itemLabel="#{c.nome}" itemValue="#{c.id}"/>
+                    </h:selectOneMenu>
+
+                    <p:commandButton update="tabela" oncomplete="dialogAtualizarNucleo.hide();" actionListener="#{nucleoController.alterarNucleo}" value="Atualizar"/>
 
                 </h:panelGrid>
             </h:form>

@@ -112,8 +112,8 @@
                               <f:selectItems value="#{departamentoController.listarDepartamentos}" var="dep" itemLabel="#{dep.nome}" itemValue="#{dep.id}"/>
                     </h:selectOneMenu>
 
-                    <p:commandButton update="tabela" oncomplete="dialogGerDisciplina.hide();" actionListener="#{disciplinaController.adicionarDisciplina}" value="Inserir Disciplina"/>
-                    <p:commandButton update="tabela" oncomplete="dialogGerDisciplina.hide();" actionListener="#{disciplinaController.alterarDisciplina}" value="Alterar Disciplina"/>
+                    <p:commandButton update="tabela" oncomplete="dialogGerDisciplina.hide();" actionListener="#{disciplinaController.adicionarDisciplina}" value="Inserir"/>
+                    <p:commandButton update="tabela" oncomplete="dialogGerDisciplina.hide();" actionListener="#{disciplinaController.alterarDisciplina}" value="Alterar"/>
 
                 </h:panelGrid>
             </h:form>

@@ -24,7 +24,9 @@ public interface CursoDao extends DAO {
 
     public List<Curso> getCursos(int inicio, int numeroResultados);
 
-    public void saveOrUpdate(Curso curso);
+    public void save(Curso curso);
+
+    public void update(Curso curso);
 
     public void remove(Curso curso);
 }
