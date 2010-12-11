@@ -36,6 +36,7 @@
                 </h:form>
                 <br/>
                 <h:form prependId="false">
+                    <p:messages id="msg"/>
                     <p:dataTable id="tabela" var="nucleo" value="#{nucleoController.listarNucleos}" rows="10" paginator="true">
 
                         <p:column style="text-align: center">
@@ -77,14 +78,15 @@
                 <h:panelGrid id="infosNucleo" columns="2" style="margin-bottom:10px">
 
                     <h:outputLabel for="nome" value="Nome:" />
-                    <h:inputText id="nome" value="#{nucleoController.nucleo.nome}"/>
+                    <h:inputText id="nome" required="true" value="#{nucleoController.nucleo.nome}"
+                                 requiredMessage="Nome do Núcleo é Obrigatório!"/>
 
                     <h:outputLabel for="campus" value="Campus:" />
                     <h:selectOneMenu id="campus" value="#{nucleoController.nucleo.campus.id}">
                         <f:selectItems value="#{campusController.listarCampi}" var="c" itemLabel="#{c.nome}" itemValue="#{c.id}"/>
                     </h:selectOneMenu>
 
-                    <p:commandButton update="tabela" oncomplete="dialogInserirNucleo.hide();" actionListener="#{nucleoController.adicionarNucleo}" value="Inserir"/>
+                    <p:commandButton update="msg,tabela" oncomplete="dialogInserirNucleo.hide();" actionListener="#{nucleoController.adicionarNucleo}" value="Inserir"/>
 
                 </h:panelGrid>
             </h:form>
@@ -95,14 +97,15 @@
                 <h:panelGrid id="atualizarNucleo" columns="2" style="margin-bottom:10px">
 
                     <h:outputLabel for="nome" value="Nome:" />
-                    <h:inputText id="nomeAtualizar" value="#{nucleoController.nucleo.nome}"/>
+                    <h:inputText id="nomeAtualizar" required="true" value="#{nucleoController.nucleo.nome}"
+                                 requiredMessage="Nome do Núcleo é Obrigatório!"/>
 
                     <h:outputLabel for="campus" value="Campus:" />
                     <h:selectOneMenu id="campusAtualizar" value="#{nucleoController.nucleo.campus.id}">
                         <f:selectItems value="#{campusController.listarCampi}" var="c" itemLabel="#{c.nome}" itemValue="#{c.id}"/>
                     </h:selectOneMenu>
 
-                    <p:commandButton update="tabela" oncomplete="dialogAtualizarNucleo.hide();" actionListener="#{nucleoController.alterarNucleo}" value="Atualizar"/>
+                    <p:commandButton update="msg,tabela" oncomplete="dialogAtualizarNucleo.hide();" actionListener="#{nucleoController.alterarNucleo}" value="Atualizar"/>
 
                 </h:panelGrid>
             </h:form>

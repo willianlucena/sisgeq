@@ -38,6 +38,7 @@
                 </h:form>
                 <br/>
                 <h:form prependId="false">
+                    <p:messages id="msg"/>
                     <p:dataTable id="tabela" emptyMessage="Não há registros"
                                  var="departamento" value="#{departamentoController.listarDepartamentos}"
                                  rows="10" paginator="true"
@@ -101,15 +102,17 @@
             <h:form prependId="false">
                 <h:panelGrid id="infosDepartamento" columns="2" style="margin-bottom:10px">
                     <h:outputLabel for="nome" value="Nome:" />
-                    <h:inputText id="nome" value="#{departamentoController.departamento.nome}"/>
+                    <h:inputText id="nome" required="true" value="#{departamentoController.departamento.nome}"
+                                 requiredMessage="Nome do Departamento é Obrigatório!"/>
                     <h:outputLabel for="area" value="Área"/>
-                    <h:inputText id="area" value="#{departamentoController.departamento.area}"/>
+                    <h:inputText id="area" required="true" value="#{departamentoController.departamento.area}"
+                                 requiredMessage="Área do Departamento é Obrigatório!"/>
                     <h:outputLabel for="nucleo" value="Núcleo"/>
                     <h:selectOneMenu id="nucleo" value="#{departamentoController.departamento.nucleo.id}">
                         <f:selectItems value="#{nucleoController.listarNucleos}" var="nuc"
                                        itemLabel="#{nuc.nome}" itemValue="#{nuc.id}"/>
                     </h:selectOneMenu>
-                    <p:commandButton update="tabela" oncomplete="dialogInserirDepartamento.hide();"
+                    <p:commandButton update="msg,tabela" oncomplete="dialogInserirDepartamento.hide();"
                                      actionListener="#{departamentoController.adicionarDepartamento}"
                                      value="Inserir"/>
                 </h:panelGrid>
@@ -121,16 +124,18 @@
             <h:form prependId="false">
                 <h:panelGrid id="atualizarDepartamento" columns="2" style="margin-bottom:10px">
                     <h:outputLabel for="nome" value="Nome:" />
-                    <h:inputText id="atualizarNome" value="#{departamentoController.departamento.nome}"/>
+                    <h:inputText id="atualizarNome" required="true" value="#{departamentoController.departamento.nome}"
+                                 requiredMessage="Nome do Departamento é Obrigatório!"/>
                     <h:outputLabel for="area" value="Área"/>
-                    <h:inputText id="atualizarArea" value="#{departamentoController.departamento.area}"/>
+                    <h:inputText id="atualizarArea" required="true" value="#{departamentoController.departamento.area}"
+                                 requiredMessage="Área do Departamento é Obrigatório!"/>
                     <h:outputLabel for="nucleo" value="Núcleo"/>
                     <h:selectOneMenu id="atualizarNucleo" value="#{departamentoController.departamento.nucleo.id}">
                         <f:selectItems value="#{nucleoController.listarNucleos}" var="nuc"
                                        itemLabel="#{nuc.nome}" itemValue="#{nuc.id}"/>
                     </h:selectOneMenu>
 
-                    <p:commandButton update="tabela" oncomplete="dialogAtualizarDepartamento.hide();"
+                    <p:commandButton update="msg,tabela" oncomplete="dialogAtualizarDepartamento.hide();"
                                      actionListener="#{departamentoController.alterarDepartamento}"
                                      value="Atualizar"/>
                 </h:panelGrid>

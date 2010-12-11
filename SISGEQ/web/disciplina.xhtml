@@ -35,10 +35,11 @@
                     <p:commandLink value="Nova Disciplina"
                                    actionListener="#{disciplinaController.prepararAdicionarDisciplina}"
                                    update="infosDisciplina"
-                                   oncomplete="dialogGerDisciplina.show()"/>
+                                   oncomplete="dialogInserirDisciplina.show()"/>
                 </h:form>
                 <br/>
                 <h:form prependId="false">
+                    <p:messages id="msg"/>
                     <p:dataTable id="tabela" emptyMessage="Não há registros"                                 
                                  var="disciplina" value="#{disciplinaController.listarDisciplinas}"
                                  rows="10" paginator="true"
@@ -71,7 +72,7 @@
                             <f:facet name="header">
                                 <h:outputText value="Alterar"/>
                             </f:facet>
-                            <p:commandButton actionListener="#{disciplinaController.prepararAlterarDisciplina}" value="Alterar" update="infosDisciplina" oncomplete="dialogGerDisciplina.show()"/>
+                            <p:commandButton actionListener="#{disciplinaController.prepararAlterarDisciplina}" value="Alterar" update="atualizarDisciplina" oncomplete="dialogAtualizarDisciplina.show()"/>
                         </p:column>
 
                         <p:column style="text-align: center">
@@ -97,23 +98,47 @@
             </h:panelGrid>
         </p:dialog>
 
-        <p:dialog header="Gerencia de Disciplina" widgetVar="dialogGerDisciplina"  resizable="false" modal="true" showEffect="slide" width="500">
+        <p:dialog header="Inserir Disciplina" widgetVar="dialogInserirDisciplina"  resizable="false" modal="true" showEffect="slide" width="500">
             <h:form prependId="false">
                 <h:panelGrid id="infosDisciplina" columns="2" style="margin-bottom:10px">
 
                     <h:outputLabel for="codigo" value="Código:" />
-                    <h:inputText id="codigo" value="#{disciplinaController.disciplina.codigo}"/>
+                    <h:inputText id="codigo" required="true" value="#{disciplinaController.disciplina.codigo}"
+                                 requiredMessage="Código de Disciplina é Obrigatório!"/>
 
                     <h:outputLabel for="nome" value="Nome:" />
-                    <h:inputText id="nome" value="#{disciplinaController.disciplina.nome}"/>
+                    <h:inputText id="nome" required="true" value="#{disciplinaController.disciplina.nome}"
+                                 requiredMessage="Nome da Disciplina é Obrigatório!"/>
 
                           <h:outputLabel for="departamento" value="Departamento:" />
                           <h:selectOneMenu id="departamento" value="#{disciplinaController.disciplina.departamento.id}">
                               <f:selectItems value="#{departamentoController.listarDepartamentos}" var="dep" itemLabel="#{dep.nome}" itemValue="#{dep.id}"/>
                     </h:selectOneMenu>
 
-                    <p:commandButton update="tabela" oncomplete="dialogGerDisciplina.hide();" actionListener="#{disciplinaController.adicionarDisciplina}" value="Inserir"/>
-                    <p:commandButton update="tabela" oncomplete="dialogGerDisciplina.hide();" actionListener="#{disciplinaController.alterarDisciplina}" value="Alterar"/>
+                    <p:commandButton update="msg,tabela" oncomplete="dialogInserirDisciplina.hide();" actionListener="#{disciplinaController.adicionarDisciplina}" value="Inserir"/>
+
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog header="Atualizar Disciplina" widgetVar="dialogAtualizarDisciplina"  resizable="false" modal="true" showEffect="slide" width="500">
+            <h:form prependId="false">
+                <h:panelGrid id="atualizarDisciplina" columns="2" style="margin-bottom:10px">
+
+                    <h:outputLabel for="codigo" value="Código:" />
+                    <h:inputText id="atualizarCodigo" required="true" value="#{disciplinaController.disciplina.codigo}"
+                                 requiredMessage="Código de Disciplina é Obrigatório!"/>
+
+                    <h:outputLabel for="nome" value="Nome:" />
+                    <h:inputText id="atualizarNome" required="true" value="#{disciplinaController.disciplina.nome}"
+                                 requiredMessage="Nome da Disciplina é Obrigatório!"/>
+
+                          <h:outputLabel for="departamento" value="Departamento:" />
+                          <h:selectOneMenu id="atualizarDepartamento" value="#{disciplinaController.disciplina.departamento.id}">
+                              <f:selectItems value="#{departamentoController.listarDepartamentos}" var="dep" itemLabel="#{dep.nome}" itemValue="#{dep.id}"/>
+                    </h:selectOneMenu>
+
+                    <p:commandButton update="msg,tabela" oncomplete="dialogAtualizarDisciplina.hide();" actionListener="#{disciplinaController.alterarDisciplina}" value="Atualizar"/>
 
                 </h:panelGrid>
             </h:form>
