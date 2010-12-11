@@ -23,9 +23,11 @@
                         <p:panel header="Entrar no Sistema" style="text-align: left">
                             <h:panelGrid columns="2">
                                 <h:outputLabel value="Login:"/>
-                                <h:inputText />
+                                <h:inputText required="true"
+                                             requiredMessage="Login é Obrigatório!"/>
                                 <h:outputLabel value="Senha:"/>
-                                <h:inputText />
+                                <h:inputText required="true"
+                                             requiredMessage="Senha é Obrigatório!"/>
                                 <h:commandButton value="Entrar" />
                             </h:panelGrid>
                         </p:panel>

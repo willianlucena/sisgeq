@@ -39,9 +39,10 @@
                 </h:form>
                 <br/>
                 <h:form prependId="false">
+                    <p:messages id="msg"/>
                     <p:dataTable id="tabela" emptyMessage="Não há registros"
                                  var="perfil" value="#{perfilController.listarPerfis}"
-                                 rows="2" paginator="true"
+                                 rows="10" paginator="true"
                                  onselectComplete="dialog.show()"
                                  selection="#{perfilController.perfil}"
                                  selectionMode="single" update="panel">
@@ -89,9 +90,10 @@
                 <h:panelGrid id="infosPerfil" columns="2" style="margin-bottom:10px">
 
                     <h:outputLabel for="tipo" value="Tipo:" />
-                    <h:inputText id="tipo" value="#{perfilController.perfil.tipo}"/>
+                    <h:inputText id="tipo" required="true" value="#{perfilController.perfil.tipo}"
+                                 requiredMessage="Tipo de Perfil é Obrigatório!"/>
 
-                    <p:commandButton update="tabela" oncomplete="dialogInserirPerfil.hide();" actionListener="#{perfilController.adicionarPerfil}" value="Inserir"/>
+                    <p:commandButton update="msg,tabela" oncomplete="dialogInserirPerfil.hide();" actionListener="#{perfilController.adicionarPerfil}" value="Inserir"/>
 
                 </h:panelGrid>
             </h:form>
@@ -103,9 +105,10 @@
                 <h:panelGrid id="atualizarPerfil" columns="2" style="margin-bottom:10px">
 
                     <h:outputLabel for="tipo" value="Tipo:" />
-                    <h:inputText id="atualizarTipo" value="#{perfilController.perfil.tipo}"/>
+                    <h:inputText id="atualizarTipo" required="true" value="#{perfilController.perfil.tipo}"
+                                 requiredMessage="Tipo de Perfil é Obrigatório!"    />
 
-                    <p:commandButton update="tabela" oncomplete="dialogAtualizarPerfil.hide();" actionListener="#{perfilController.alterarPerfil}" value="Alterar"/>
+                    <p:commandButton update="msg,tabela" oncomplete="dialogAtualizarPerfil.hide();" actionListener="#{perfilController.alterarPerfil}" value="Alterar"/>
 
                 </h:panelGrid>
             </h:form>

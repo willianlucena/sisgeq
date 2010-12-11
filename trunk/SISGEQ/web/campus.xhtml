@@ -36,6 +36,7 @@
                 </h:form>
                 <br/>
                 <h:form prependId="false">
+                    <p:messages id="msg"/>
                     <p:dataTable id="tabela" var="campus" value="#{campusController.listarCampi}" rows="10" paginator="true">
                         <p:column style="text-align: center">
                             <f:facet name="header">
@@ -65,7 +66,8 @@
                 <h:panelGrid id="infosCampus" columns="2" style="margin-bottom:10px">
 
                     <h:outputLabel for="nome" value="Nome:" />
-                    <h:inputText id="nome" value="#{campusController.campus.nome}"/>
+                    <h:inputText id="nome" required="true" value="#{campusController.campus.nome}"
+                                 requiredMessage="Nome do Campus é Obrigatório!"/>
 
                     <p:commandButton update="tabela" oncomplete="dialogInserirCampus.hide();" actionListener="#{campusController.adicionarCampus}" value="Inserir"/>
 
@@ -78,9 +80,10 @@
                 <h:panelGrid id="atualizarCampus" columns="2" style="margin-bottom:10px">
 
                     <h:outputLabel for="nome" value="Nome:" />
-                    <h:inputText id="nomeAtualizar" value="#{campusController.campus.nome}"/>
+                    <h:inputText id="nomeAtualizar" required="true" value="#{campusController.campus.nome}"
+                                 requiredMessage="Nome do Campus é Obrigatório!"/>
 
-                    <p:commandButton update="tabela" oncomplete="dialogAtualizarCampus.hide();" actionListener="#{campusController.alterarCampus}" value="Atualizar"/>
+                    <p:commandButton update="msg,tabela" oncomplete="dialogAtualizarCampus.hide();" actionListener="#{campusController.alterarCampus}" value="Atualizar"/>
 
                 </h:panelGrid>
             </h:form>
