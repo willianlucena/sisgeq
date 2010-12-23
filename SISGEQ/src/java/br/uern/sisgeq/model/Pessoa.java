@@ -1,52 +1,72 @@
 package br.uern.sisgeq.model;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
- * @author Willian
+ *
+ * @author Felipe Lemos
  */
 @Entity
-@Table(name="pessoa")
+@Table(name = "pessoa")
 public class Pessoa implements Serializable {
+
     @Id
-    private String matriculaCpf;
-    @ManyToOne
-    private Departamento departamento;
-    @ManyToOne
-    private Curso curso;
+    @GeneratedValue
+    private Integer id;
+    private String matricula;
     private String nome;
-    private String cidade;
-    private String estado;
-    private String naturalidade;
-    private String nacionalidade;
-    @ManyToMany
-    private Set<Perfil> perfis;
-    @OneToMany(mappedBy = "pessoa")
-    private Set<PessoaTurma> pessoaTurmas;
+    private Integer curso_id;
+    private Integer departamento_id;
+
+    @ManyToOne
+    @JoinColumn(name="departamento_id", insertable=false, updatable=false)
+    private Departamento departamento;
+
+    @ManyToOne
+    @JoinColumn(name="curso_id", insertable=false, updatable=false)
+    private Curso curso;
 
     public Pessoa() {
-        this.perfis = new HashSet<Perfil>();
-        this.pessoaTurmas = new HashSet<PessoaTurma>();
     }
 
-    public String getMatriculaCpf() {
-        return this.matriculaCpf;
+    public Pessoa(Integer id, String matricula, String nome) {
+        this.id = id;
+        this.matricula = matricula;        
+        this.nome = nome;
     }
 
-    public void setMatriculaCpf(String matriculaCpf) {
-        this.matriculaCpf = matriculaCpf;
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public Departamento getDepartamento() {
-        return this.departamento;
+        return departamento;
     }
 
     public void setDepartamento(Departamento departamento) {
@@ -54,66 +74,26 @@ public class Pessoa implements Serializable {
     }
 
     public Curso getCurso() {
-        return this.curso;
+        return curso;
     }
 
     public void setCurso(Curso curso) {
         this.curso = curso;
     }
 
-    public String getNome() {
-        return this.nome;
+    public Integer getCurso_id() {
+        return curso_id;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setCurso_id(Integer curso_id) {
+        this.curso_id = curso_id;
     }
 
-    public String getCidade() {
-        return this.cidade;
+    public Integer getDepartamento_id() {
+        return departamento_id;
     }
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
-    public String getEstado() {
-        return this.estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public String getNaturalidade() {
-        return this.naturalidade;
-    }
-
-    public void setNaturalidade(String naturalidade) {
-        this.naturalidade = naturalidade;
-    }
-
-    public String getNacionalidade() {
-        return this.nacionalidade;
-    }
-
-    public void setNacionalidade(String nacionalidade) {
-        this.nacionalidade = nacionalidade;
-    }
-
-    public Set<Perfil> getPerfis() {
-        return perfis;
-    }
-
-    public void setPerfis(Set<Perfil> perfis) {
-        this.perfis = perfis;
-    }
-
-    public Set<PessoaTurma> getPessoaTurmas() {
-        return pessoaTurmas;
-    }
-
-    public void setPessoaTurmas(Set<PessoaTurma> pessoaTurmas) {
-        this.pessoaTurmas = pessoaTurmas;
-    }
+    public void setDepartamento_id(Integer departamento_id) {
+        this.departamento_id = departamento_id;
+    }   
 }

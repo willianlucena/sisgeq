@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:head>
+        <title>Gerência de Usuários</title>
+        <link type="text/css" rel="stylesheet" href="../skins/blue-sky/skin.css"/>
+        <script type="text/javascript" src="js.js"></script>
+    </h:head>
+    <h:body>
+
+        <p:layout fullPage="true">
+
+            <p:layoutUnit position="top" height="125" header="">
+                <ui:include src="includes/inc_topo.xhtml"/>                
+            </p:layoutUnit>
+
+            <p:layoutUnit position="right" width="200" header="Calendário">
+                <ui:include src="includes/inc_menu_direito.xhtml"/>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="left" width="200" header="Principal">
+                <ui:include src="includes/inc_menu_esq.xhtml"/>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="bottom" height="50">
+                <ui:include src="includes/inc_rodape.xhtml"/>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center" header="GERÊNCIA DE USUÁRIOS">
+                <br/>
+                <h:form prependId="false">
+                    <p:commandButton style="margin-left: 10px" actionListener="#{pessoaController.prepararAdicionarPessoa}"
+                                     update="infosPessoa" oncomplete="dialogGerPessoa.show()"
+                                     image="inserir"/>
+                </h:form>
+                <br/>
+                <h:form prependId="false">
+                    <p:dataTable id="tabela" var="pessoa"
+                                 value="#{pessoaController.listarPessoas}"
+                                 style="text-align: center"
+                                 rows="10" paginator="true"
+                                 onselectComplete="dialog.show();"
+                                 selection="#{pessoaController.pessoa}"
+                                 update="panel"
+                                 paginatorPosition="bottom"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="10,20,30"
+                                 emptyMessage="Nenhum registro encontrado."
+                                 selectionMode="single">
+
+                        <p:column headerText="MATRÍCULA"
+                                  filterBy="#{pessoa.matricula}"
+                                  sortBy="#{pessoa.matricula}">
+                            <h:outputText value="#{pessoa.matricula}"/>
+                        </p:column>
+
+                        <p:column headerText="NOME"
+                                  filterBy="#{pessoa.nome}"
+                                  sortBy="#{pessoa.nome}">
+                            <h:outputText value="#{pessoa.nome}"/>
+                        </p:column>
+
+                        <p:column headerText="CURSO"
+                                  filterBy="#{pessoa.curso.nome}"
+                                  sortBy="#{pessoa.curso.nome}">
+                            <h:outputText value="#{pessoa.curso.nome}"/>
+                        </p:column>
+
+                        <p:column headerText="DEPARTAMENTO"
+                                  filterBy="#{pessoa.departamento.nome}"
+                                  sortBy="#{pessoa.departamento.nome}">
+                            <h:outputText value="#{pessoa.departamento.nome}"/>
+                        </p:column>
+
+                        <p:column headerText="ALTERAR / EXCLUIR">
+                            <p:commandButton actionListener="#{pessoaController.prepararAlterarPessoa}"
+                                             update="infosPessoa"
+                                             oncomplete="dialogGerPessoa.show()"
+                                             image="editar"/>
+                            <h:commandLink style="margin-left: 10px" value="Excluir"
+                                           action="#{pessoaController.excluirPessoa}"/>
+                        </p:column>
+
+                    </p:dataTable>
+                </h:form>
+            </p:layoutUnit>
+        </p:layout>
+
+        <p:confirmDialog header="Titulo" message="Deseja?"
+                         severity="alert" widgetVar="cd" modal="true">
+            <h:form id="frmRemover">
+                <p:commandButton value="sim" actionListener="#{pessoaController.excluirPessoa}"
+                                 update="teste" oncomplete="cd.hide();"/>
+                <p:commandButton value="nao" onclick="cd.hide();" type="button"/>
+            </h:form>
+        </p:confirmDialog>
+
+        <p:dialog widgetVar="dialog" modal="true" header="INFORMAÇÕES">
+            <h:panelGrid columns="2" id="panel">
+                <h:outputText value="Matrícula:" style="font-weight: bold"/>
+                <h:outputText value="#{pessoaController.pessoa.matricula}" />
+                <h:outputText value="Nome:" style="font-weight: bold"/>
+                <h:outputText value="#{pessoaController.pessoa.nome}" />
+                <h:outputText value="Curso:" style="font-weight: bold"/>
+                <h:outputText value="#{pessoaController.pessoa.curso.nome}" />
+                <h:outputText value="Departamento:" style="font-weight: bold"/>
+                <h:outputText value="#{pessoaController.pessoa.departamento.nome}" />
+            </h:panelGrid>
+        </p:dialog>
+
+        <p:dialog header="GERÊNCIA DE USUÁRIO" widgetVar="dialogGerPessoa"
+                  resizable="true" modal="true" showEffect="slide" width="500">
+            <h:form prependId="false">
+                <h:panelGrid id="infosPessoa" columns="2" style="margin-bottom:10px">
+
+                    <h:outputLabel for="pessoa-matricula"
+                                   value="Matrícula:" style="font-weight: bold" />
+                    <h:inputText id="pessoa-matricula"
+                                 value="#{pessoaController.pessoa.matricula}"
+                                 required="true" requiredMessage="Campo Obrigatório!"/>
+
+                    <h:outputLabel for="pessoa-nome"
+                                   value="Nome:" style="font-weight: bold"/>
+                    <h:inputText id="pessoa-nome" value="#{pessoaController.pessoa.nome}"/>
+
+                    <h:outputLabel for="pessoa-curso"
+                                   value="Curso:" style="font-weight: bold"/>
+                    <h:selectOneMenu id="pessoa-curso" value="#{pessoaController.pessoa.curso_id}">
+                        <f:selectItems value="#{cursoController.listarCursos}"
+                                       var="curso" itemValue="#{curso.id}"
+                                       itemLabel="#{curso.nome}" />
+                    </h:selectOneMenu>
+
+                    <h:outputLabel for="pessoa-departamento"
+                                   value="Departamento:" style="font-weight: bold"/>
+
+                    <h:selectOneMenu id="pessoa-departamento" immediate="false"
+                                     value="#{pessoaController.pessoa.departamento_id}">
+                        <f:selectItems value="#{departamentoController.listarDepartamentos}"
+                                       var="departamento" itemValue="#{departamento.id}"
+                                       itemLabel="#{departamento.nome}" />
+                    </h:selectOneMenu>
+
+                    <p:commandButton update="tabela"
+                                     oncomplete="dialogGerPessoa.hide();"
+                                     actionListener="#{pessoaController.adicionarPessoa}"
+                                     value="Inserir Pessoa"/>
+                    <p:commandButton update="tabela"
+                                     oncomplete="dialogGerPessoa.hide();"
+                                     actionListener="#{pessoaController.alterarPessoa}"
+                                     value="Alterar Pessoa"/>
+
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+
+    </h:body>
+</html>

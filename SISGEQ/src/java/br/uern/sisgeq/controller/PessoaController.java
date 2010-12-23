@@ -3,29 +3,28 @@ package br.uern.sisgeq.controller;
 import br.uern.sisgeq.dao.PessoaDao;
 import br.uern.sisgeq.dao.hibernate.PessoaDaoHibernate;
 import br.uern.sisgeq.model.Pessoa;
-import java.awt.event.ActionEvent;
-import java.io.Serializable;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
+import javax.faces.event.ActionEvent;
 import javax.faces.model.DataModel;
+import javax.faces.model.ListDataModel;
 
 /**
  *
- * @author pepeto
+ * @author Felipe Lemos
  */
 @ManagedBean
-@RequestScoped
-public class PessoaController implements Serializable {
+@SessionScoped
+public class PessoaController {
 
     private Pessoa pessoa;
     private DataModel listaPessoas;
 
-    public DataModel getListaPessoa() {
+    public DataModel getListarPessoas() {
+        List<Pessoa> lista = new PessoaDaoHibernate().list();
+        listaPessoas = new ListDataModel(lista);
         return listaPessoas;
-    }
-
-    public void setListaPessoa(DataModel listaPessoa) {
-        this.listaPessoas = listaPessoa;
     }
 
     public Pessoa getPessoa() {

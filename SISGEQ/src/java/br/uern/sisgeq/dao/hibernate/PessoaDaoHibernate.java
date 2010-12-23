@@ -9,37 +9,28 @@ import org.hibernate.Transaction;
 
 /**
  *
- * @author pepeto
+ * @author Felipe Lemos
  */
-public class PessoaDaoHibernate implements PessoaDao{
-    public Pessoa getPessoa(Integer id) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        return (Pessoa) session.load(Pessoa.class, id);
-    }
-
-    public List<Pessoa> getPessoas() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction t = session.beginTransaction();
-        List lista = session.createQuery("from Pessoa").list();
-        t.commit();
-        session.close();
-        return lista;
-    }
+public class PessoaDaoHibernate implements PessoaDao {
 
     public void save(Pessoa pessoa) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();
         session.save(pessoa);
         t.commit();
-        session.close();
     }
 
-    public void update(Pessoa pessoa) {
+    public Pessoa getPessoa(long id) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        return (Pessoa) session.load(Pessoa.class, id);
+    }
+
+    public List<Pessoa> list() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();
-        session.update(pessoa);
+        List lista = session.createQuery("from Pessoa").list();
         t.commit();
-        session.close();
+        return lista;
     }
 
     public void remove(Pessoa pessoa) {
@@ -47,6 +38,12 @@ public class PessoaDaoHibernate implements PessoaDao{
         Transaction t = session.beginTransaction();
         session.delete(pessoa);
         t.commit();
-        session.close();
+    }
+
+    public void update(Pessoa pessoa) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t = session.beginTransaction();
+        session.update(pessoa);
+        t.commit();
     }
 }
