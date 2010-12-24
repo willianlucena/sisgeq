@@ -5,6 +5,7 @@ package br.uern.sisgeq.model;
  * @author rafael
  */
 public class Login {
+    
     private String login;
     private String password;
 

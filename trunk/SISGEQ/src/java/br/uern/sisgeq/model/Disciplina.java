@@ -22,6 +22,7 @@ public class Disciplina implements Serializable {
     @ManyToOne
     private Departamento departamento;
     private String nome;
+    private Boolean ativo;
 
     public Disciplina() {
     }
@@ -57,4 +58,13 @@ public class Disciplina implements Serializable {
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
+    }
+    
 }

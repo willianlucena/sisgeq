@@ -13,7 +13,7 @@ import javax.persistence.Table;
  * @author Willian
  */
 @Entity
-@Table(name="campus")
+@Table(name = "campus")
 public class Campus implements Serializable {
 
     @Id
@@ -22,6 +22,7 @@ public class Campus implements Serializable {
     private String nome;
     @OneToMany(mappedBy = "campus")
     private Set<Nucleo> nucleos;
+    private Boolean ativo;
 
     public Campus() {
         nucleos = new HashSet<Nucleo>();
@@ -49,5 +50,13 @@ public class Campus implements Serializable {
 
     public void setNucleos(Set<Nucleo> nucleos) {
         this.nucleos = nucleos;
+    }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
     }
 }

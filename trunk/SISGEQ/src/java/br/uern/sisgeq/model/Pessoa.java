@@ -23,13 +23,12 @@ public class Pessoa implements Serializable {
     private String nome;
     private Integer curso_id;
     private Integer departamento_id;
-
+    private Boolean ativo;
     @ManyToOne
-    @JoinColumn(name="departamento_id", insertable=false, updatable=false)
+    @JoinColumn(name = "departamento_id", insertable = false, updatable = false)
     private Departamento departamento;
-
     @ManyToOne
-    @JoinColumn(name="curso_id", insertable=false, updatable=false)
+    @JoinColumn(name = "curso_id", insertable = false, updatable = false)
     private Curso curso;
 
     public Pessoa() {
@@ -37,7 +36,7 @@ public class Pessoa implements Serializable {
 
     public Pessoa(Integer id, String matricula, String nome) {
         this.id = id;
-        this.matricula = matricula;        
+        this.matricula = matricula;
         this.nome = nome;
     }
 
@@ -95,5 +94,13 @@ public class Pessoa implements Serializable {
 
     public void setDepartamento_id(Integer departamento_id) {
         this.departamento_id = departamento_id;
-    }   
+    }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
+    }
 }

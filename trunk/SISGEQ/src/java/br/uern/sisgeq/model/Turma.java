@@ -27,6 +27,7 @@ public class Turma implements Serializable {
     private String periodo;
     @OneToMany(mappedBy = "turma")
     private Set<PessoaTurma> pessoaTurmas;
+    private Boolean ativo;
 
     public Turma() {
         this.pessoaTurmas = new HashSet<PessoaTurma>();
@@ -71,4 +72,13 @@ public class Turma implements Serializable {
     public void setPessoaTurmas(Set<PessoaTurma> pessoaTurmas) {
         this.pessoaTurmas = pessoaTurmas;
     }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
+    }
+    
 }

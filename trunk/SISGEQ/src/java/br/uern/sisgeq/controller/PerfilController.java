@@ -54,7 +54,6 @@ public class PerfilController implements Serializable {
     }
 
     public void adicionarPerfil(ActionEvent actionEvent) {
-
         PerfilDao dao = new PerfilDaoHibernate();
         dao.save(perfil);
 

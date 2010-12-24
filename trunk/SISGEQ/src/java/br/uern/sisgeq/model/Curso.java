@@ -13,7 +13,7 @@ import javax.persistence.Table;
  * @author Rafael
  */
 @Entity
-@Table(name="curso")
+@Table(name = "curso")
 public class Curso implements java.io.Serializable {
 
     @Id
@@ -25,6 +25,7 @@ public class Curso implements java.io.Serializable {
     private String nome;
     @OneToMany(mappedBy = "curso")
     private Set<Pessoa> pessoas;
+    private Boolean ativo;
 
     public Curso() {
         this.pessoas = new HashSet<Pessoa>();
@@ -69,5 +70,12 @@ public class Curso implements java.io.Serializable {
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
-    
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
+    }
 }

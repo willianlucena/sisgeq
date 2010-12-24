@@ -25,5 +25,6 @@
     <mapping class="br.uern.sisgeq.model.Resposta"/>
     <mapping class="br.uern.sisgeq.model.Restricao"/>
     <mapping class="br.uern.sisgeq.model.Turma"/>
+    <mapping class="br.uern.sisgeq.model.Situacao"/>
   </session-factory>
 </hibernate-configuration>

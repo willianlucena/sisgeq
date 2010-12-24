@@ -1,7 +1,5 @@
 package br.uern.sisgeq.util;
 
-import br.uern.sisgeq.model.Disciplina;
-import br.uern.sisgeq.model.Perfil;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.SessionFactory;
 

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -16,7 +17,9 @@ public class PessoaQuestionario implements Serializable {
     @Id
     @GeneratedValue
     private Integer id;
+    @ManyToOne
     private Questionario questionario;
+    @ManyToOne
     private Pessoa pessoa;
     private Integer situacao;
 

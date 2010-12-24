@@ -14,7 +14,7 @@ import javax.persistence.Table;
  * @author Willian
  */
 @Entity
-@Table(name="nucleo")
+@Table(name = "nucleo")
 public class Nucleo implements Serializable {
 
     @Id
@@ -27,6 +27,7 @@ public class Nucleo implements Serializable {
     private Set<Departamento> departamentos;
     @OneToMany(mappedBy = "nucleo")
     private Set<Turma> turmas;
+    private Boolean ativo;
 
     public Nucleo() {
         this.departamentos = new HashSet<Departamento>();
@@ -73,4 +74,11 @@ public class Nucleo implements Serializable {
         this.turmas = turmas;
     }
 
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
+    }
 }
