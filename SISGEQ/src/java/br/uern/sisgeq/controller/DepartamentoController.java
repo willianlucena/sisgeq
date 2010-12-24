@@ -55,6 +55,7 @@ public class DepartamentoController implements Serializable {
 
     public void adicionarDepartamento(ActionEvent actionEvent) {
         DepartamentoDao dao = new DepartamentoDaoHibernate();
+        departamento.setAtivo(Boolean.TRUE);
         dao.save(departamento);
     }
 

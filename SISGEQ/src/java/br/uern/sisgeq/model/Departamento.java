@@ -30,6 +30,7 @@ public class Departamento implements Serializable {
     private Set<Curso> cursos;
     @OneToMany(mappedBy = "departamento")
     private Set<Disciplina> disciplinas;
+    private Boolean ativo;
 
     public Departamento() {
         this.pessoas = new HashSet<Pessoa>();
@@ -92,4 +93,13 @@ public class Departamento implements Serializable {
     public void setDisciplinas(Set<Disciplina> disciplinas) {
         this.disciplinas = disciplinas;
     }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
+    }
+    
 }

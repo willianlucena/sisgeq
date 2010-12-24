@@ -21,6 +21,7 @@ public class Alternativa implements Serializable {
     private Pergunta pergunta;
     private String descricao;
     private int perguntaPosterior;
+    private Boolean ativo;
 
     public Alternativa() {
     }
@@ -56,4 +57,13 @@ public class Alternativa implements Serializable {
     public void setPerguntaPosterior(int perguntaPosterior) {
         this.perguntaPosterior = perguntaPosterior;
     }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
+    }
+    
 }

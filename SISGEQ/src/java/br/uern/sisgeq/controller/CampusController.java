@@ -53,6 +53,7 @@ public class CampusController implements Serializable {
 
     public void adicionarCampus(ActionEvent actionEvent) {
         CampusDao dao = new CampusDaoHibernate();
+        campus.setAtivo(Boolean.TRUE);
         dao.save(campus);
     }
 

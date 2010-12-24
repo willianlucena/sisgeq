@@ -56,8 +56,8 @@ public class DisciplinaController implements Serializable {
     }
 
     public void adicionarDisciplina(ActionEvent actionEvent) {
-
         DisciplinaDao dao = new DisciplinaDaoHibernate();
+        disciplina.setAtivo(Boolean.TRUE);
         dao.save(disciplina);
 
     }

@@ -29,6 +29,7 @@ public class Pergunta implements Serializable {
     private Set<Alternativa> alternativas;
     @OneToMany(mappedBy = "pergunta")
     private Set<Resposta> respostas;
+    private Boolean ativo;
 
     public Pergunta() {
         this.alternativas = new HashSet<Alternativa>();
@@ -89,5 +90,13 @@ public class Pergunta implements Serializable {
 
     public void setRespostas(Set<Resposta> respostas) {
         this.respostas = respostas;
+    }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
     }
 }

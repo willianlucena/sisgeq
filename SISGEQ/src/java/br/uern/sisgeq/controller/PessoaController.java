@@ -52,6 +52,7 @@ public class PessoaController {
 
     public void adicionarPessoa(ActionEvent actionEvent) {
         PessoaDao dao = new PessoaDaoHibernate();
+        pessoa.setAtivo(Boolean.TRUE);
         dao.save(pessoa);
     }
 

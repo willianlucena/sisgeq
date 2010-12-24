@@ -55,6 +55,7 @@ public class CursoController implements Serializable {
 
     public void adicionarCurso(ActionEvent actionEvent) {
         CursoDao dao = new CursoDaoHibernate();
+        curso.setAtivo(Boolean.TRUE);
         dao.save(curso);
     }
 

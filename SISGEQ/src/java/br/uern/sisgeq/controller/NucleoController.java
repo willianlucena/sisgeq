@@ -48,6 +48,7 @@ public class NucleoController implements Serializable {
 
     public void adicionarNucleo(ActionEvent actionEvent) {
         NucleoDao dao = new NucleoDaoHibernate();
+        nucleo.setAtivo(Boolean.TRUE);
         dao.save(nucleo);
     }
 
