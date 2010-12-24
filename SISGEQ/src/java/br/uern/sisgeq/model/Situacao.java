@@ -11,7 +11,7 @@ import javax.persistence.Table;
  * @author Will
  */
 @Entity
-@Table(name = "curso")
+@Table(name = "situacao")
 public class Situacao implements Serializable {
 
     @Id
