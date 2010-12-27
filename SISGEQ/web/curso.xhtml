@@ -81,6 +81,14 @@
                             </f:facet>
                             <h:commandLink action="#{cursoController.excluirCurso}" value="Excluir"/>
                         </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton actionListener="#{cursoController.prepararFiltrarCurso}"
+                                             value="Filtrar" update="filtrarCurso" oncomplete="dialogFiltrarCurso.show()"/>
+
+                            <p:commandButton update="tabela" action="#{cursoController.getListarCursos}"
+                                             value="Resetar Filtro"/>
+
+                        </f:facet>
                     </p:dataTable>
                 </h:form>
             </p:layoutUnit>
@@ -103,7 +111,7 @@
                     <h:outputLabel for="codigo" value="Código:" />
                     <h:inputText id="codigo" required="true" value="#{cursoController.curso.codigo}"
                                  requiredMessage="Código do Curso é Obrigatório!" />
-                    
+
                     <h:outputLabel for="nome" value="Nome:" />
                     <h:inputText id="nome" required="true" value="#{cursoController.curso.nome}"
                                  requiredMessage="Nome do Curso é Obrigatório!"/>
@@ -137,6 +145,23 @@
 
                     <p:commandButton update="msg,tabela" oncomplete="dialogAtualizarCurso.hide();" actionListener="#{cursoController.alterarCurso}" value="Atualizar"/>
 
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog header="Filtrar Curso" widgetVar="dialogFiltrarCurso"
+                  resizable="false" modal="true" showEffect="slide" width="500">
+            <h:form prependId="false">
+                <h:panelGrid id="filtrarCurso" columns="2" style="margin-bottom:10px">
+                    <h:outputLabel value="Código"/>
+                    <h:inputText id="filtrarCodigo" value="#{cursoController.codigo}"/>
+                    <h:outputLabel value="Nome:" />
+                    <h:inputText id="filtrarNome" value="#{cursoController.nome}"/>
+                    <h:outputLabel value="Departamento"/>
+                    <h:inputText id="filtrarDepartamento" value="#{cursoController.departamento}"/>
+                    <p:commandButton update="msg,tabela" oncomplete="dialogFiltrarCurso.hide();"
+                                     actionListener="#{cursoController.filtrarCurso}"
+                                     value="Filtrar"/>
                 </h:panelGrid>
             </h:form>
         </p:dialog>

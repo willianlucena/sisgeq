@@ -22,6 +22,8 @@ public interface CursoDao extends DAO {
 
     public List<Curso> getCursosByNucleo(Nucleo nucleo);
 
+    public List<Curso> getCursosComFiltros(String codigo, String nome, String departamento);
+
     public List<Curso> getCursos(int inicio, int numeroResultados);
 
     public void save(Curso curso);

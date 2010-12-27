@@ -10,6 +10,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -56,6 +57,37 @@ public class CursoDaoHibernate implements CursoDao {
         String query = "select d from Curso as c where c.departamento.id in (select d.id from Departamento as d where d.nucleo.id = :nucleo)";
         Session session = HibernateUtil.getSessionFactory().openSession();
         return session.createSQLQuery(query).setParameter("nucleo", nucleo.getId()).list();
+    }
+
+    public List<Curso> getCursosComFiltros(String codigo, String nome, String departamento) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t = session.beginTransaction();
+        Criteria criteria = session.createCriteria(Curso.class);
+        criteria.add(Restrictions.eq("ativo", true));
+
+        if (codigo != null && codigo.length() > 1) {
+            System.out.println("add codigo no criteria");
+            System.out.println("codigo " + codigo);
+            criteria.add(Restrictions.ilike("codigo", codigo + "%"));
+        }
+
+        if (nome != null && nome.length() > 1) {
+            System.out.println("add nome no criteria");
+            System.out.println("nome: " + nome);
+            criteria.add(Restrictions.ilike("nome", nome + "%"));
+        }
+
+        if (departamento != null && departamento.length() > 1) {
+            System.out.println("add departamento no criteria");
+            System.out.println("departamento: " + departamento);
+            //cria um novo criteria para acessar o campo departamento de curso
+            criteria.createCriteria("departamento").add(Restrictions.ilike("nome", departamento + "%"));
+        }
+        
+        List lista = criteria.list();
+        t.commit();
+        session.close();
+        return lista;
     }
 
     public void save(Curso curso) {
