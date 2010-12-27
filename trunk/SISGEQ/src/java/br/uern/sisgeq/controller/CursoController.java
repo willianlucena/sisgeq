@@ -21,12 +21,16 @@ import javax.faces.model.ListDataModel;
 public class CursoController implements Serializable {
 
     private Curso curso;
-    private DataModel listaCursos;
+    private DataModel dataModelCursos;
+    String codigo;
+    String nome;
+    String departamento;
 
     public DataModel getListarCursos() {
+        System.out.println("listar!!!!");
         List<Curso> lista = new CursoDaoHibernate().getCursos(true);
-        listaCursos = new ListDataModel(lista);
-        return listaCursos;
+        dataModelCursos = new ListDataModel(lista);
+        return dataModelCursos;
     }
 
     public Curso getCurso() {
@@ -43,14 +47,27 @@ public class CursoController implements Serializable {
     }
 
     public void prepararAlterarCurso(ActionEvent actionEvent) {
-        curso = (Curso) (listaCursos.getRowData());
+        curso = (Curso) (dataModelCursos.getRowData());
+    }
+
+     public void prepararFiltrarCurso(ActionEvent actionEvent) {
+        nome = codigo = departamento = null;
     }
 
     public String excluirCurso() {
-        Curso cursoTemp = (Curso) (listaCursos.getRowData());
+        Curso cursoTemp = (Curso) (dataModelCursos.getRowData());
         CursoDao dao = new CursoDaoHibernate();
         dao.remove(cursoTemp);
         return "curso";
+    }
+
+    public void filtrarCurso(ActionEvent actionEvent) {
+        List<Curso> lista = new CursoDaoHibernate().getCursosComFiltros(codigo, nome, departamento);
+        for (Curso c : lista) {
+            System.out.println(c.getNome());
+            System.out.println(c.getCodigo());
+        }
+        dataModelCursos = new ListDataModel(lista);
     }
 
     public void adicionarCurso(ActionEvent actionEvent) {
@@ -63,4 +80,37 @@ public class CursoController implements Serializable {
         CursoDao dao = new CursoDaoHibernate();
         dao.update(curso);
     }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public DataModel getDataModelCursos() {
+        return dataModelCursos;
+    }
+
+    public void setDataModelCursos(DataModel dataModelCursos) {
+        this.dataModelCursos = dataModelCursos;
+    }
+
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    
 }
