@@ -26,10 +26,12 @@ public class DisciplinaDaoHibernate implements DisciplinaDao {
         return (Disciplina) session.load(Disciplina.class, id);
     }
 
-    public List<Disciplina> list() {
+    public List<Disciplina> list(Boolean ativo) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();
-        List lista = session.createQuery("from Disciplina").list();
+        List lista = session.createQuery("from Disciplina where ativo = :ativo")
+                .setParameter("ativo", ativo)
+                .list();
         t.commit();
         session.close();
         return lista;

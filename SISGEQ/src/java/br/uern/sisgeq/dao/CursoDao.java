@@ -14,7 +14,7 @@ public interface CursoDao extends DAO {
 
     public Curso getCurso(Integer id);
 
-    public List<Curso> getCursos();
+    public List<Curso> getCursos(Boolean ativo);
 
     public List<Curso> getCursosByDepartamento(Departamento departamento);
 

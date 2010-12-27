@@ -18,10 +18,10 @@ public class CampusDaoHibernate implements CampusDao {
         return (Campus) session.load(Campus.class, id);
     }
 
-    public List<Campus> getCampi() {
+    public List<Campus> getCampi(Boolean ativo) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();
-        List lista = session.createQuery("from Campus").list();
+        List lista = session.createQuery("from Campus where ativo = :ativo").setParameter("ativo", ativo).list();
         t.commit();
         session.close();
         return lista;
@@ -49,5 +49,20 @@ public class CampusDaoHibernate implements CampusDao {
         session.delete(campus);
         t.commit();
         session.close();
+    }
+
+    public Campus getCampusByNome(String nome) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t = session.beginTransaction();
+        List lista = session.createQuery("from Campus where ativo = :ativo and nome like :nome")
+                .setParameter("ativo", true)
+                .setParameter("nome", nome)
+                .list();
+        t.commit();
+        session.close();
+         if (lista != null && lista.size() > 0) {
+            return (Campus) lista.get(0);
+        }
+        return null;
     }
 }

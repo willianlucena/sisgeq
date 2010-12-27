@@ -13,7 +13,7 @@ public interface DisciplinaDao {
 
     public Disciplina getDisciplina(long id);
 
-    public List<Disciplina> list();
+    public List<Disciplina> list(Boolean ativo);
 
     public void remove(Disciplina disciplina);
 

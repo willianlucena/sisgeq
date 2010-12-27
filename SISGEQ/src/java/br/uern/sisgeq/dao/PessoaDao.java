@@ -13,7 +13,7 @@ public interface PessoaDao {
 
     public Pessoa getPessoa(long id);
 
-    public List<Pessoa> list();
+    public List<Pessoa> list(Boolean ativo);
 
     public void remove(Pessoa pessoa);
 

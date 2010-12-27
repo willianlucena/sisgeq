@@ -22,7 +22,7 @@ public class PessoaController {
     private DataModel listaPessoas;
 
     public DataModel getListarPessoas() {
-        List<Pessoa> lista = new PessoaDaoHibernate().list();
+        List<Pessoa> lista = new PessoaDaoHibernate().list(true);
         listaPessoas = new ListDataModel(lista);
         return listaPessoas;
     }

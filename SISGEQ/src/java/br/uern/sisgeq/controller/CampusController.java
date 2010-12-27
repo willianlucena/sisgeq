@@ -23,7 +23,7 @@ public class CampusController implements Serializable {
     private DataModel listaCampi;
 
     public DataModel getListarCampi() {
-        List<Campus> lista = new CampusDaoHibernate().getCampi();
+        List<Campus> lista = new CampusDaoHibernate().getCampi(true);
         listaCampi = new ListDataModel(lista);
         return listaCampi;
     }

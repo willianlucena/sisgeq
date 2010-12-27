@@ -10,8 +10,9 @@ import java.util.List;
 public interface CampusDao extends DAO {
 
     public Campus getCampus(Integer id);
+    public Campus getCampusByNome(String nome);
 
-    public List<Campus> getCampi();
+    public List<Campus> getCampi(Boolean ativo);
 
     public void save(Campus Campus);
 

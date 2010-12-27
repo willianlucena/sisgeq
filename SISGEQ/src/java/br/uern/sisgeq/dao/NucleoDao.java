@@ -12,7 +12,7 @@ public interface NucleoDao extends DAO {
 
     public Nucleo getNucleo(Integer id);
 
-    public List<Nucleo> getNucleos();
+    public List<Nucleo> getNucleos(Boolean ativo);
 
     public List<Nucleo> getNucleosByCampus(Campus campus);
 

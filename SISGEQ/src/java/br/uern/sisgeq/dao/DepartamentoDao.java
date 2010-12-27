@@ -13,7 +13,7 @@ public interface DepartamentoDao extends DAO {
 
     public Departamento getDepartamento(Integer id);
 
-    public List<Departamento> getDepartamentos();
+    public List<Departamento> getDepartamentos(Boolean ativo);
 
     public List<Departamento> getDepartamentosByCampus(Campus campus);
 
