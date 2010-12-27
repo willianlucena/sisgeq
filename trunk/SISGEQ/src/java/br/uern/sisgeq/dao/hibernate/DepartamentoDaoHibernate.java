@@ -6,8 +6,11 @@ import br.uern.sisgeq.model.Departamento;
 import br.uern.sisgeq.model.Nucleo;
 import br.uern.sisgeq.util.HibernateUtil;
 import java.util.List;
+import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -32,12 +35,11 @@ public class DepartamentoDaoHibernate implements DepartamentoDao {
     }
 
     public List<Departamento> getDepartamentosByCampus(Campus campus) {
-        //String query = "from Departamento as d where d.nucleo.id in (select n.id from Nucleo as n where n.campus = :campus)";
-        //Session session = HibernateUtil.getSessionFactory().openSession();
-        //return session.createSQLQuery(query).setParameter("campus", campus).list();
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();
-        List lista = session.createQuery("select d from Departamento as d where d.ativo = :ativo and d.nucleo in (select n.id from Nucleo as n where n.campus = :campus)")
+        List lista = session.createQuery("select d from Departamento as d where "
+                + "d.ativo = :ativo and d.nucleo in (select n.id from Nucleo as"
+                + " n where n.campus = :campus)")
                 .setParameter("ativo", true)
                 .setParameter("campus", campus)
                 .list();
@@ -49,7 +51,9 @@ public class DepartamentoDaoHibernate implements DepartamentoDao {
 
     public List<Departamento> getDepartamentosByNucleo(Nucleo nucleo) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        return session.createSQLQuery("from Departamento as d where d.nucleo = :nucleo").setParameter("nucleo", nucleo).list();
+        return session.createSQLQuery("from Departamento as d where d.nucleo = :nucleo")
+                .setParameter("nucleo", nucleo)
+                .list();
     }
 
     public void save(Departamento departamento) {
@@ -74,5 +78,38 @@ public class DepartamentoDaoHibernate implements DepartamentoDao {
         session.delete(departamento);
         t.commit();
         session.close();
+    }
+
+    public List<Departamento> getDepartamentosComFiltros(String nome, String area, String nucleo, String campus) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t = session.beginTransaction();
+        Criteria criteria = session.createCriteria(Departamento.class);
+        criteria.add(Restrictions.eq("ativo", true));
+        if (nome != null && nome.length() > 1) {
+            System.out.println("add nome no criteria");
+            System.out.println("nome: " + nome);
+            criteria.add(Restrictions.ilike("nome", nome + "%"));
+        }
+        if (area != null && area.length() > 1) {
+            System.out.println("add area no criteria");
+            System.out.println("area: " + area);
+            criteria.add(Restrictions.ilike("area", area + "%"));
+        }
+        if (nucleo != null && nucleo.length() > 1) {
+            System.out.println("add nucleo no criteria");
+            System.out.println("nucleo: " + nucleo);
+            //cria um novo criteria para acessar o campo nucleo de departamento
+            criteria.createCriteria("nucleo").add(Restrictions.ilike("nome", nucleo + "%"));
+        }
+        if (campus != null && campus.length() > 1) {
+            System.out.println("add campus no criteria");
+            System.out.println("campus: " + campus);
+            //acessando o campo campus de nucleo
+            criteria.createCriteria("nucleo.campus").add(Restrictions.ilike("nome", campus + "%"));
+        }
+        List lista = criteria.list();
+        t.commit();
+        session.close();
+        return lista;
     }
 }

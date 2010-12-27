@@ -69,6 +69,13 @@
 
                         <p:column style="text-align: center">
                             <f:facet name="header">
+                                <h:outputText value="Campus"/>
+                            </f:facet>
+                            <h:outputText value="#{departamento.nucleo.campus.nome}"/>
+                        </p:column>
+
+                        <p:column style="text-align: center">
+                            <f:facet name="header">
                                 <h:outputText value="Alterar"/>
                             </f:facet>
                             <p:commandButton actionListener="#{departamentoController.prepararAlterarDepartamento}"
@@ -86,6 +93,10 @@
                         <f:facet name="footer">
                             <p:commandButton actionListener="#{departamentoController.prepararFiltrarDepartamento}"
                             value="Filtrar" update="filtrarDepartamento" oncomplete="dialogFiltrarDepartamento.show()"/>
+                            
+                            <p:commandButton update="tabela" action="#{departamentoController.getListarDepartamentos}"
+                            value="Resetar Filtro"/>
+                            
                         </f:facet>
                     </p:dataTable>
                 </h:form>
@@ -153,11 +164,11 @@
                     <h:outputLabel value="Nome:" />
                     <h:inputText id="filtrarNome" value="#{departamentoController.nome}"/>
                     <h:outputLabel value="Área"/>
-                    <h:inputText id="filtrarCampus" value="#{departamentoController.campus}"/>
-                    <h:outputLabel value="Campus"/>
                     <h:inputText id="filtrarArea" value="#{departamentoController.area}"/>
                     <h:outputLabel value="Núcleo"/>
                     <h:inputText id="filtrarNucleo" value="#{departamentoController.nucleo}"/>
+                    <h:outputLabel value="Campus"/>
+                    <h:inputText id="filtrarCampus" value="#{departamentoController.campus}"/>
                     <p:commandButton update="msg,tabela" oncomplete="dialogFiltrarDepartamento.hide();"
                                      actionListener="#{departamentoController.filtrarDepartamento}"
                                      value="Filtrar"/>

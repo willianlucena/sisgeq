@@ -1,9 +1,7 @@
 package br.uern.sisgeq.controller;
 
 import br.uern.sisgeq.dao.DepartamentoDao;
-import br.uern.sisgeq.dao.hibernate.CampusDaoHibernate;
 import br.uern.sisgeq.dao.hibernate.DepartamentoDaoHibernate;
-import br.uern.sisgeq.model.Campus;
 import br.uern.sisgeq.model.Departamento;
 import br.uern.sisgeq.model.Nucleo;
 import java.io.Serializable;
@@ -30,6 +28,7 @@ public class DepartamentoController implements Serializable {
     private String nucleo;
 
     public DataModel getListarDepartamentos() {
+        System.out.println("listar!!!!");
         List<Departamento> lista = new DepartamentoDaoHibernate().getDepartamentos(true);
         dataModelDepartamentos = new ListDataModel(lista);
         return dataModelDepartamentos;
@@ -53,7 +52,7 @@ public class DepartamentoController implements Serializable {
     }
 
     public void prepararFiltrarDepartamento(ActionEvent actionEvent) {
-        nome = nucleo = area = campus = "";
+        nome = nucleo = area = campus = null;
     }
 
     public String excluirDepartamento() {
@@ -65,18 +64,22 @@ public class DepartamentoController implements Serializable {
 
     public void filtrarDepartamento(ActionEvent actionEvent) {
         //List<Departamento> lista = new DepartamentoDaoHibernate().getDepartamentos(true);
-        Campus c = new CampusDaoHibernate().getCampusByNome(campus);
-        if (c != null){
-            System.out.println("CAMPUS");
-            System.out.println(c.getNome());
-            System.out.println("-> NUCLEOS");
-            for (Nucleo n : c.getNucleos()) {
-                System.out.println(n.getNome());
-            }
-        } else {
-            System.out.println(c);
+//        Campus c = new CampusDaoHibernate().getCampusByNome(campus);
+//        if (c != null){
+//            System.out.println("CAMPUS");
+//            System.out.println(c.getNome());
+//            System.out.println("-> NUCLEOS");
+//            for (Nucleo n : c.getNucleos()) {
+//                System.out.println(n.getNome());
+//            }
+//        } else {
+//            System.out.println(c);
+//        }
+        List<Departamento> lista = new DepartamentoDaoHibernate().getDepartamentosComFiltros(nome, area, nucleo, campus);
+        for (Departamento d : lista) {
+            System.out.println(d.getNome());
+            System.out.println(d.getArea());
         }
-        List<Departamento> lista = new DepartamentoDaoHibernate().getDepartamentosByCampus(c);
         dataModelDepartamentos = new ListDataModel(lista);
     }
 
