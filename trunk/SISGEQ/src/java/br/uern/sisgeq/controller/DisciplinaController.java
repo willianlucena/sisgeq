@@ -24,7 +24,7 @@ public class DisciplinaController implements Serializable {
     private DataModel listaDisciplinas;
 
     public DataModel getListarDisciplinas() {
-        List<Disciplina> lista = new DisciplinaDaoHibernate().list();
+        List<Disciplina> lista = new DisciplinaDaoHibernate().list(true);
         listaDisciplinas = new ListDataModel(lista);
         return listaDisciplinas;
     }

@@ -45,7 +45,6 @@ public class PerfilController implements Serializable {
     }
 
     public String excluirPerfil() {
-
         Perfil perfilTemp = (Perfil) (listaPerfis.getRowData());
         PerfilDao dao = new PerfilDaoHibernate();
         dao.remove(perfilTemp);
@@ -60,9 +59,7 @@ public class PerfilController implements Serializable {
     }
 
     public void alterarPerfil(ActionEvent actionEvent) {
-
         PerfilDao dao = new PerfilDaoHibernate();
         dao.update(perfil);
-
     }
 }

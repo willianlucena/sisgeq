@@ -20,24 +20,36 @@ public class DepartamentoDaoHibernate implements DepartamentoDao {
         return (Departamento) session.load(Departamento.class, id);
     }
 
-    public List<Departamento> getDepartamentos() {
+    public List<Departamento> getDepartamentos(Boolean ativo) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();
-        List lista = session.createQuery("from Departamento").list();
+        List lista = session.createQuery("from Departamento where ativo = :ativo")
+                .setParameter("ativo", ativo)
+                .list();
         t.commit();
         session.close();
         return lista;
     }
 
     public List<Departamento> getDepartamentosByCampus(Campus campus) {
-        String query = "from Departamento as d where d.nucleo.id in (select n.id from Nucleo as n where n.campus.id = :campus)";
+        //String query = "from Departamento as d where d.nucleo.id in (select n.id from Nucleo as n where n.campus = :campus)";
+        //Session session = HibernateUtil.getSessionFactory().openSession();
+        //return session.createSQLQuery(query).setParameter("campus", campus).list();
         Session session = HibernateUtil.getSessionFactory().openSession();
-        return session.createSQLQuery(query).setParameter("campus", campus.getId()).list();
+        Transaction t = session.beginTransaction();
+        List lista = session.createQuery("select d from Departamento as d where d.ativo = :ativo and d.nucleo in (select n.id from Nucleo as n where n.campus = :campus)")
+                .setParameter("ativo", true)
+                .setParameter("campus", campus)
+                .list();
+        t.commit();
+        session.close();
+        return lista;
+
     }
 
     public List<Departamento> getDepartamentosByNucleo(Nucleo nucleo) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        return session.createSQLQuery("from Departamento as d where d.nucleo.id = :nucleo").setParameter("nucleo", nucleo.getId()).list();
+        return session.createSQLQuery("from Departamento as d where d.nucleo = :nucleo").setParameter("nucleo", nucleo).list();
     }
 
     public void save(Departamento departamento) {

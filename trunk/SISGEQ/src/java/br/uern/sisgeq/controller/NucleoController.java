@@ -25,7 +25,7 @@ public class NucleoController implements Serializable {
     private Campus campus = new Campus();
 
     public DataModel getListarNucleos() {
-        List<Nucleo> lista = new NucleoDaoHibernate().getNucleos();
+        List<Nucleo> lista = new NucleoDaoHibernate().getNucleos(true);
         listaNucleos = new ListDataModel(lista);
         return listaNucleos;
     }

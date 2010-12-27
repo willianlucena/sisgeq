@@ -40,7 +40,7 @@
                 <h:form prependId="false">
                     <p:messages id="msg"/>
                     <p:dataTable id="tabela" emptyMessage="Não há registros"
-                                 var="departamento" value="#{departamentoController.listarDepartamentos}"
+                                 var="departamento" value="#{departamentoController.dataModelDepartamentos}"
                                  rows="10" paginator="true"
                                  onselectComplete="dialog.show()"
                                  selection="#{departamentoController.departamento}"
@@ -83,6 +83,10 @@
                             <h:commandLink action="#{departamentoController.excluirDepartamento}"
                                            value="Excluir"/>
                         </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton actionListener="#{departamentoController.prepararFiltrarDepartamento}"
+                            value="Filtrar" update="filtrarDepartamento" oncomplete="dialogFiltrarDepartamento.show()"/>
+                        </f:facet>
                     </p:dataTable>
                 </h:form>
             </p:layoutUnit>
@@ -138,6 +142,25 @@
                     <p:commandButton update="msg,tabela" oncomplete="dialogAtualizarDepartamento.hide();"
                                      actionListener="#{departamentoController.alterarDepartamento}"
                                      value="Atualizar"/>
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog header="Filtrar Departamento" widgetVar="dialogFiltrarDepartamento"
+                  resizable="false" modal="true" showEffect="slide" width="500">
+            <h:form prependId="false">
+                <h:panelGrid id="filtrarDepartamento" columns="2" style="margin-bottom:10px">
+                    <h:outputLabel value="Nome:" />
+                    <h:inputText id="filtrarNome" value="#{departamentoController.nome}"/>
+                    <h:outputLabel value="Área"/>
+                    <h:inputText id="filtrarCampus" value="#{departamentoController.campus}"/>
+                    <h:outputLabel value="Campus"/>
+                    <h:inputText id="filtrarArea" value="#{departamentoController.area}"/>
+                    <h:outputLabel value="Núcleo"/>
+                    <h:inputText id="filtrarNucleo" value="#{departamentoController.nucleo}"/>
+                    <p:commandButton update="msg,tabela" oncomplete="dialogFiltrarDepartamento.hide();"
+                                     actionListener="#{departamentoController.filtrarDepartamento}"
+                                     value="Filtrar"/>
                 </h:panelGrid>
             </h:form>
         </p:dialog>

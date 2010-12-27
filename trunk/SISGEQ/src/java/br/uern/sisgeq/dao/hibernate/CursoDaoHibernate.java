@@ -22,10 +22,12 @@ public class CursoDaoHibernate implements CursoDao {
         return (Curso) session.load(Curso.class, id);
     }
 
-    public List<Curso> getCursos() {
+    public List<Curso> getCursos(Boolean ativo) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();
-        List lista = session.createQuery("from Curso").list();
+        List lista = session.createQuery("from Curso where ativo = :ativo")
+                .setParameter("ativo", ativo)
+                .list();
         t.commit();
         session.close();
         return lista;

@@ -25,10 +25,12 @@ public class PessoaDaoHibernate implements PessoaDao {
         return (Pessoa) session.load(Pessoa.class, id);
     }
 
-    public List<Pessoa> list() {
+    public List<Pessoa> list(Boolean ativo) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();
-        List lista = session.createQuery("from Pessoa").list();
+        List lista = session.createQuery("from Pessoa where ativo = :ativo")
+                .setParameter("ativo", ativo)
+                .list();
         t.commit();
         return lista;
     }

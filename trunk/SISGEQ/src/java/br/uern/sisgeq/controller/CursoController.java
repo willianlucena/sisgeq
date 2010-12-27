@@ -24,7 +24,7 @@ public class CursoController implements Serializable {
     private DataModel listaCursos;
 
     public DataModel getListarCursos() {
-        List<Curso> lista = new CursoDaoHibernate().getCursos();
+        List<Curso> lista = new CursoDaoHibernate().getCursos(true);
         listaCursos = new ListDataModel(lista);
         return listaCursos;
     }

@@ -19,10 +19,12 @@ public class NucleoDaoHibernate implements NucleoDao {
         return (Nucleo) session.load(Nucleo.class, id);
     }
 
-    public List<Nucleo> getNucleos() {
+    public List<Nucleo> getNucleos(Boolean ativo) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();
-        List lista = session.createQuery("from Nucleo").list();
+        List lista = session.createQuery("from Nucleo where ativo = :ativo")
+                .setParameter("ativo", ativo)
+                .list();
         t.commit();
         session.close();
         return lista;
