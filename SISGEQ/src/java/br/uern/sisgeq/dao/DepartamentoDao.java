@@ -19,6 +19,8 @@ public interface DepartamentoDao extends DAO {
 
     public List<Departamento> getDepartamentosByNucleo(Nucleo nucleo);
 
+    public List<Departamento> getDepartamentosComFiltros(String nome, String area, String nucleo, String campus);
+
     public void save(Departamento departamento);
 
     public void update(Departamento departamento);
