@@ -20,12 +20,13 @@ import javax.faces.model.ListDataModel;
 public class PerfilController implements Serializable {
 
     private Perfil perfil;
-    private DataModel listaPerfis;
+    private DataModel dataModelPerfis = getListarPerfis();
+    private String tipo;
 
     public DataModel getListarPerfis() {
         List<Perfil> lista = new PerfilDaoHibernate().list();
-        listaPerfis = new ListDataModel(lista);
-        return listaPerfis;
+        dataModelPerfis = new ListDataModel(lista);
+        return dataModelPerfis;
     }
 
     public Perfil getPerfil() {
@@ -41,13 +42,18 @@ public class PerfilController implements Serializable {
     }
 
     public void prepararAlterarPerfil(ActionEvent actionEvent) {
-        perfil = (Perfil) (listaPerfis.getRowData());
+        perfil = (Perfil) (dataModelPerfis.getRowData());
+    }
+
+    public void prepararFiltrarPerfil(ActionEvent actionEvent){
+        tipo = null;
     }
 
     public String excluirPerfil() {
-        Perfil perfilTemp = (Perfil) (listaPerfis.getRowData());
+        Perfil perfilTemp = (Perfil) (dataModelPerfis.getRowData());
         PerfilDao dao = new PerfilDaoHibernate();
         dao.remove(perfilTemp);
+        dataModelPerfis = getListarPerfis();
         return "perfil";
 
     }
@@ -55,11 +61,36 @@ public class PerfilController implements Serializable {
     public void adicionarPerfil(ActionEvent actionEvent) {
         PerfilDao dao = new PerfilDaoHibernate();
         dao.save(perfil);
-
+        dataModelPerfis = getListarPerfis();
     }
 
     public void alterarPerfil(ActionEvent actionEvent) {
         PerfilDao dao = new PerfilDaoHibernate();
         dao.update(perfil);
+        dataModelPerfis = getListarPerfis();
+    }
+
+    public void filtrarPerfil(ActionEvent actionEvent){
+        List<Perfil> lista = new PerfilDaoHibernate().getPerfisComFiltros(tipo);
+        for (Perfil p : lista) {
+            System.out.println(p.getTipo());
+        }
+        dataModelPerfis = new ListDataModel(lista);
+    }
+
+    public DataModel getDataModelPerfis() {
+        return dataModelPerfis;
+    }
+
+    public void setDataModelPerfis(DataModel dataModelPerfis) {
+        this.dataModelPerfis = dataModelPerfis;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 }

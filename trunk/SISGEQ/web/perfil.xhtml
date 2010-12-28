@@ -41,7 +41,7 @@
                 <h:form prependId="false">
                     <p:messages id="msg"/>
                     <p:dataTable id="tabela" emptyMessage="Não há registros"
-                                 var="perfil" value="#{perfilController.listarPerfis}"
+                                 var="perfil" value="#{perfilController.dataModelPerfis}"
                                  rows="10" paginator="true"
                                  onselectComplete="dialog.show()"
                                  selection="#{perfilController.perfil}"
@@ -71,6 +71,15 @@
                             <h:commandLink action="#{perfilController.excluirPerfil}"
                                            value="Excluir"/>
                         </p:column>
+
+                        <f:facet name="footer">
+                            <p:commandButton actionListener="#{perfilController.prepararFiltrarPerfil}"
+                            value="Filtrar" update="filtrarPerfil" oncomplete="dialogFiltrarPerfil.show()"/>
+
+                            <p:commandButton update="tabela" action="#{perfilController.getListarPerfis}"
+                            value="Resetar Filtro"/>
+
+                        </f:facet>
 
                     </p:dataTable>
                 </h:form>
@@ -110,6 +119,19 @@
 
                     <p:commandButton update="msg,tabela" oncomplete="dialogAtualizarPerfil.hide();" actionListener="#{perfilController.alterarPerfil}" value="Alterar"/>
 
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog header="Filtrar Perfil" widgetVar="dialogFiltrarPerfil"
+                  resizable="false" modal="true" showEffect="slide" width="500">
+            <h:form prependId="false">
+                <h:panelGrid id="filtrarPerfil" columns="2" style="margin-bottom:10px">
+                    <h:outputLabel value="Tipo:" />
+                    <h:inputText id="filtrarTipo" value="#{perfilController.tipo}"/>
+                    <p:commandButton update="msg,tabela" oncomplete="dialogFiltrarPerfil.hide();"
+                                     actionListener="#{perfilController.filtrarPerfil}"
+                                     value="Filtrar"/>
                 </h:panelGrid>
             </h:form>
         </p:dialog>
