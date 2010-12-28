@@ -59,6 +59,7 @@ public class DepartamentoController implements Serializable {
         Departamento departamentoTemp = (Departamento) (dataModelDepartamentos.getRowData());
         DepartamentoDao dao = new DepartamentoDaoHibernate();
         dao.remove(departamentoTemp);
+        dataModelDepartamentos = getListarDepartamentos();
         return "departamento";
     }
 
@@ -87,11 +88,13 @@ public class DepartamentoController implements Serializable {
         DepartamentoDao dao = new DepartamentoDaoHibernate();
         departamento.setAtivo(Boolean.TRUE);
         dao.save(departamento);
+        dataModelDepartamentos = getListarDepartamentos();
     }
 
     public void alterarDepartamento(ActionEvent actionEvent) {
         DepartamentoDao dao = new DepartamentoDaoHibernate();
         dao.update(departamento);
+        dataModelDepartamentos = getListarDepartamentos();
     }
 
     public DataModel getDataModelDepartamentos() {

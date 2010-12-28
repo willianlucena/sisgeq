@@ -58,6 +58,7 @@ public class CursoController implements Serializable {
         Curso cursoTemp = (Curso) (dataModelCursos.getRowData());
         CursoDao dao = new CursoDaoHibernate();
         dao.remove(cursoTemp);
+        dataModelCursos = getListarCursos();
         return "curso";
     }
 
@@ -74,11 +75,13 @@ public class CursoController implements Serializable {
         CursoDao dao = new CursoDaoHibernate();
         curso.setAtivo(Boolean.TRUE);
         dao.save(curso);
+        dataModelCursos = getListarCursos();
     }
 
     public void alterarCurso(ActionEvent actionEvent) {
         CursoDao dao = new CursoDaoHibernate();
         dao.update(curso);
+        dataModelCursos = getListarCursos();
     }
 
     public String getCodigo() {

@@ -20,12 +20,14 @@ import javax.faces.model.ListDataModel;
 public class CampusController implements Serializable {
 
     private Campus campus;
-    private DataModel listaCampi;
+    private DataModel dataModelCampi = getListarCampi();
+    String nome;
 
     public DataModel getListarCampi() {
+        System.out.println("listar!!!!");
         List<Campus> lista = new CampusDaoHibernate().getCampi(true);
-        listaCampi = new ListDataModel(lista);
-        return listaCampi;
+        dataModelCampi = new ListDataModel(lista);
+        return dataModelCampi;
     }
 
     public Campus getCampus() {
@@ -41,24 +43,55 @@ public class CampusController implements Serializable {
     }
 
     public void prepararAlterarCampus(ActionEvent actionEvent) {
-        campus = (Campus) (listaCampi.getRowData());
+        campus = (Campus) (dataModelCampi.getRowData());
+    }
+
+    public void prepararFiltrarCampus(ActionEvent actionEvent) {
+        nome = null;
     }
 
     public String excluirCampus() {
-        Campus campusTemp = (Campus) (listaCampi.getRowData());
+        Campus campusTemp = (Campus) (dataModelCampi.getRowData());
         CampusDao dao = new CampusDaoHibernate();
         dao.remove(campusTemp);
+        dataModelCampi = getListarCampi();
         return "campus";
+    }
+
+    public void filtrarCampus(ActionEvent actionEvent) {
+        List<Campus> lista = new CampusDaoHibernate().getCampiComFiltros(nome);
+        for (Campus c : lista) {
+            System.out.println(c.getNome());
+        }
+        dataModelCampi = new ListDataModel(lista);
     }
 
     public void adicionarCampus(ActionEvent actionEvent) {
         CampusDao dao = new CampusDaoHibernate();
         campus.setAtivo(Boolean.TRUE);
         dao.save(campus);
+        dataModelCampi = getListarCampi();
     }
 
     public void alterarCampus(ActionEvent actionEvent) {
         CampusDao dao = new CampusDaoHibernate();
         dao.update(campus);
+        dataModelCampi = getListarCampi();
+    }
+
+    public DataModel getDataModelCampi() {
+        return dataModelCampi;
+    }
+
+    public void setDataModelCampi(DataModel dataModelCampi) {
+        this.dataModelCampi = dataModelCampi;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 }

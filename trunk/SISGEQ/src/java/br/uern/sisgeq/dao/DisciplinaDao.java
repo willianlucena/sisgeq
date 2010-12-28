@@ -15,6 +15,8 @@ public interface DisciplinaDao {
 
     public List<Disciplina> list(Boolean ativo);
 
+    public List<Disciplina> getDisciplinaComFiltros(String codigo, String nome, String departamento);
+
     public void remove(Disciplina disciplina);
 
     public void update(Disciplina disciplina);
