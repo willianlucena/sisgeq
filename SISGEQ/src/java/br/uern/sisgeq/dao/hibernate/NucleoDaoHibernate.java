@@ -37,7 +37,7 @@ public class NucleoDaoHibernate implements NucleoDao {
         return session.createSQLQuery("from Nucleo as n where n.campus.id = :campus").setParameter("campus", campus.getId()).list();
     }
 
-    public List<Nucleo> getNucleoComFiltros(String nome, Campus campus) {
+    public List<Nucleo> getNucleoComFiltros(String nome, String campus) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();
         Criteria criteria = session.createCriteria(Nucleo.class);
@@ -53,7 +53,7 @@ public class NucleoDaoHibernate implements NucleoDao {
             System.out.println("add campus no criteria");
             System.out.println("campus: " + campus);
             //acessando o campo campus de nucleo
-            criteria.createCriteria("nucleo.campus").add(Restrictions.ilike("nome", campus + "%"));
+            criteria.createCriteria("campus").add(Restrictions.ilike("nome", campus + "%"));
         }
 
         List lista = criteria.list();
