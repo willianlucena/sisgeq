@@ -37,7 +37,7 @@
                 <br/>
                 <h:form prependId="false">
                     <p:messages id="msg"/>
-                    <p:dataTable id="tabela" var="nucleo" value="#{nucleoController.listarNucleos}" rows="10" paginator="true">
+                    <p:dataTable id="tabela" var="nucleo" value="#{nucleoController.dataModelNucleos}" rows="10" paginator="true">
 
                         <p:column style="text-align: center">
                             <f:facet name="header">
@@ -67,8 +67,17 @@
                             <h:commandLink action="#{nucleoController.excluirNucleo}" value="Excluir"/>
                         </p:column>
 
+                        <f:facet name="footer">
+                            <p:commandButton actionListener="#{nucleoController.prepararFiltrarNucleo}"
+                                             value="Filtrar" update="filtrarNucleo" oncomplete="dialogFiltrarNucleo.show()"/>
+
+                            <p:commandButton update="tabela" action="#{nucleoController.getListarNucleos}"
+                                             value="Resetar Filtro"/>
+
+                        </f:facet>
+
                     </p:dataTable>
-                    
+
                 </h:form>
             </p:layoutUnit>
         </p:layout>
@@ -107,6 +116,21 @@
 
                     <p:commandButton update="msg,tabela" oncomplete="dialogAtualizarNucleo.hide();" actionListener="#{nucleoController.alterarNucleo}" value="Atualizar"/>
 
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog header="Filtrar Nucleo" widgetVar="dialogFiltrarNucleo"
+                  resizable="false" modal="true" showEffect="slide" width="500">
+            <h:form prependId="false">
+                <h:panelGrid id="filtrarNucleo" columns="2" style="margin-bottom:10px">
+                    <h:outputLabel value="Nome:" />
+                    <h:inputText id="filtrarNome" value="#{nucleoController.nome}"/>
+                    <h:outputLabel value="Campus"/>
+                    <h:inputText id="filtrarCampus" value="#{nucleoController.campus}"/>
+                    <p:commandButton update="msg,tabela" oncomplete="dialogFiltrarNucleo.hide();"
+                                     actionListener="#{nucleoController.filtrarNucleo}"
+                                     value="Filtrar"/>
                 </h:panelGrid>
             </h:form>
         </p:dialog>

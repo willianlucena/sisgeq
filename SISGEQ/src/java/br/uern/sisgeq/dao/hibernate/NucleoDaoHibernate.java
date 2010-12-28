@@ -5,8 +5,10 @@ import br.uern.sisgeq.model.Campus;
 import br.uern.sisgeq.model.Nucleo;
 import br.uern.sisgeq.util.HibernateUtil;
 import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -33,6 +35,31 @@ public class NucleoDaoHibernate implements NucleoDao {
     public List<Nucleo> getNucleosByCampus(Campus campus) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         return session.createSQLQuery("from Nucleo as n where n.campus.id = :campus").setParameter("campus", campus.getId()).list();
+    }
+
+    public List<Nucleo> getNucleoComFiltros(String nome, Campus campus) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t = session.beginTransaction();
+        Criteria criteria = session.createCriteria(Nucleo.class);
+        criteria.add(Restrictions.eq("ativo", true));
+
+        if (nome != null && nome.length() > 1) {
+            System.out.println("add nome no criteria");
+            System.out.println("nome: " + nome);
+            criteria.add(Restrictions.ilike("nome", nome + "%"));
+        }
+
+        if (campus != null) {
+            System.out.println("add campus no criteria");
+            System.out.println("campus: " + campus);
+            //acessando o campo campus de nucleo
+            criteria.createCriteria("nucleo.campus").add(Restrictions.ilike("nome", campus + "%"));
+        }
+
+        List lista = criteria.list();
+        t.commit();
+        session.close();
+        return lista;
     }
 
     public void save(Nucleo nucleo) {

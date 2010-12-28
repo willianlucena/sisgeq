@@ -21,13 +21,15 @@ import javax.faces.model.ListDataModel;
 public class NucleoController implements Serializable {
 
     private Nucleo nucleo;
-    private DataModel listaNucleos;
+    private DataModel dataModelNucleos = getListarNucleos();
     private Campus campus = new Campus();
+    private String nome;
+    //private String campus;
 
     public DataModel getListarNucleos() {
         List<Nucleo> lista = new NucleoDaoHibernate().getNucleos(true);
-        listaNucleos = new ListDataModel(lista);
-        return listaNucleos;
+        dataModelNucleos = new ListDataModel(lista);
+        return dataModelNucleos;
     }
 
     public void prepararAdicionarNucleo(ActionEvent actionEvent) {
@@ -36,13 +38,19 @@ public class NucleoController implements Serializable {
     }
 
     public void prepararAlterarNucleo(ActionEvent actionEvent) {
-        nucleo = (Nucleo) (listaNucleos.getRowData());
+        nucleo = (Nucleo) (dataModelNucleos.getRowData());
+    }
+
+    public void prepararFiltrarNucleo(ActionEvent actionEvent) {
+        nome = null;
+        campus = null;
     }
 
     public String excluirNucleo() {
-        Nucleo nucleoTemp = (Nucleo) (listaNucleos.getRowData());
+        Nucleo nucleoTemp = (Nucleo) (dataModelNucleos.getRowData());
         NucleoDao dao = new NucleoDaoHibernate();
         dao.remove(nucleoTemp);
+        dataModelNucleos = getListarNucleos();
         return "nucleo";
     }
 
@@ -50,11 +58,23 @@ public class NucleoController implements Serializable {
         NucleoDao dao = new NucleoDaoHibernate();
         nucleo.setAtivo(Boolean.TRUE);
         dao.save(nucleo);
+        dataModelNucleos = getListarNucleos();
     }
 
     public void alterarNucleo(ActionEvent actionEvent) {
         NucleoDao dao = new NucleoDaoHibernate();
         dao.update(nucleo);
+        dataModelNucleos = getListarNucleos();
+    }
+
+    public void filtrarNucleo(ActionEvent actionEvent) {
+        List<Nucleo> lista = new NucleoDaoHibernate().getNucleoComFiltros(nome, campus);
+        for (Nucleo n : lista) {
+            System.out.println(n.getNome());
+            System.out.println(n.getCampus());
+        }
+        dataModelNucleos = new ListDataModel(lista);
+
     }
 
     public Campus getCampus() {
@@ -66,7 +86,7 @@ public class NucleoController implements Serializable {
     }
 
     public void setListaNucleos(DataModel listaNucleos) {
-        this.listaNucleos = listaNucleos;
+        this.dataModelNucleos = listaNucleos;
     }
 
     public Nucleo getNucleo() {
@@ -76,4 +96,28 @@ public class NucleoController implements Serializable {
     public void setNucleo(Nucleo nucleo) {
         this.nucleo = nucleo;
     }
+
+    public DataModel getDataModelNucleos() {
+        return dataModelNucleos;
+    }
+
+    public void setDataModelNucleos(DataModel dataModelNucleos) {
+        this.dataModelNucleos = dataModelNucleos;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    /*public String getCampus() {
+    return campus;
+    }
+
+    public void setCampus(String campus) {
+    this.campus = campus;
+    }*/
 }
