@@ -37,7 +37,7 @@
                 <br/>
                 <h:form prependId="false">
                     <p:messages id="msg"/>
-                    <p:dataTable id="tabela" var="campus" value="#{campusController.listarCampi}" rows="10" paginator="true">
+                    <p:dataTable id="tabela" var="campus" value="#{campusController.dataModelCampi}" rows="10" paginator="true">
                         <p:column style="text-align: center">
                             <f:facet name="header">
                                 <h:outputText value="Nome"/>
@@ -56,6 +56,14 @@
                             </f:facet>
                             <h:commandLink action="#{campusController.excluirCampus}" value="Excluir"/>
                         </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton actionListener="#{campusController.prepararFiltrarCampus}"
+                                             value="Filtrar" update="filtrarCampus" oncomplete="dialogFiltrarCampus.show()"/>
+
+                            <p:commandButton update="tabela" action="#{campusController.getListarCampi}"
+                                             value="Resetar Filtro"/>
+
+                        </f:facet>
                     </p:dataTable>
                 </h:form>
             </p:layoutUnit>
@@ -85,6 +93,19 @@
 
                     <p:commandButton update="msg,tabela" oncomplete="dialogAtualizarCampus.hide();" actionListener="#{campusController.alterarCampus}" value="Atualizar"/>
 
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog header="Filtrar Campus" widgetVar="dialogFiltrarCampus"
+                  resizable="false" modal="true" showEffect="slide" width="500">
+            <h:form prependId="false">
+                <h:panelGrid id="filtrarCampus" columns="2" style="margin-bottom:10px">
+                    <h:outputLabel value="Nome:" />
+                    <h:inputText id="filtrarNome" value="#{campusController.nome}"/>
+                    <p:commandButton update="msg,tabela" oncomplete="dialogFiltrarCampus.hide();"
+                                     actionListener="#{campusController.filtrarCampus}"
+                                     value="Filtrar"/>
                 </h:panelGrid>
             </h:form>
         </p:dialog>

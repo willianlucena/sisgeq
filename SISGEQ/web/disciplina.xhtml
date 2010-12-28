@@ -41,27 +41,27 @@
                 <h:form prependId="false">
                     <p:messages id="msg"/>
                     <p:dataTable id="tabela" emptyMessage="Não há registros"                                 
-                                 var="disciplina" value="#{disciplinaController.listarDisciplinas}"
+                                 var="disciplina" value="#{disciplinaController.dataModelDisciplinas}"
                                  rows="10" paginator="true"
                                  onselectComplete="dialog.show()"
                                  selection="#{disciplinaController.disciplina}"
                                  selectionMode="single" update="panel">
 
-                        <p:column style="text-align: center" sortBy="#{disciplina.codigo}" filterBy="#{disciplina.codigo}">
+                        <p:column style="text-align: center">
                             <f:facet name="header">
                                 <h:outputText value="Código"/>
                             </f:facet>
                             <h:outputText value="#{disciplina.codigo}" />
                         </p:column>
 
-                        <p:column style="text-align: center" sortBy="#{disciplina.nome}" filterBy="#{disciplina.nome}">
+                        <p:column style="text-align: center">
                             <f:facet name="header">
                                 <h:outputText value="Nome"/>
                             </f:facet>
                             <h:outputText value="#{disciplina.nome}"/>
                         </p:column>
 
-                        <p:column style="text-align: center" sortBy="#{disciplina.departamento.nome}" filterBy="#{disciplina.departamento.nome}">
+                        <p:column style="text-align: center">
                             <f:facet name="header">
                                 <h:outputText value="Departamento"/>
                             </f:facet>
@@ -86,6 +86,15 @@
                             </h:commandLink>
                   
                         </p:column>
+
+                        <f:facet name="footer">
+                            <p:commandButton actionListener="#{disciplinaController.prepararFiltrarDisciplina}"
+                                             value="Filtrar" update="filtrarDisciplina" oncomplete="dialogFiltrarDisciplina.show()"/>
+
+                            <p:commandButton update="tabela" action="#{disciplinaController.getListarDisciplinas}"
+                                             value="Resetar Filtro"/>
+
+                        </f:facet>
                     </p:dataTable>
                 </h:form>
             </p:layoutUnit>
@@ -133,6 +142,23 @@
 
                     <p:commandButton update="msg,tabela" oncomplete="dialogAtualizarDisciplina.hide();" actionListener="#{disciplinaController.alterarDisciplina}" value="Atualizar"/>
 
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog header="Filtrar Disciplina" widgetVar="dialogFiltrarDisciplina"
+                  resizable="false" modal="true" showEffect="slide" width="500">
+            <h:form prependId="false">
+                <h:panelGrid id="filtrarDisciplina" columns="2" style="margin-bottom:10px">
+                    <h:outputLabel value="Código"/>
+                    <h:inputText id="filtrarCodigo" value="#{disciplinaController.codigo}"/>
+                    <h:outputLabel value="Nome:" />
+                    <h:inputText id="filtrarNome" value="#{disciplinaController.nome}"/>
+                    <h:outputLabel value="Departamento"/>
+                    <h:inputText id="filtrarDepartamento" value="#{disciplinaController.departamento}"/>
+                    <p:commandButton update="msg,tabela" oncomplete="dialogFiltrarDisciplina.hide();"
+                                     actionListener="#{disciplinaController.filtrarDisciplina}"
+                                     value="Filtrar"/>
                 </h:panelGrid>
             </h:form>
         </p:dialog>

@@ -7,7 +7,6 @@ import br.uern.sisgeq.model.Nucleo;
 import br.uern.sisgeq.util.HibernateUtil;
 import java.util.List;
 import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;

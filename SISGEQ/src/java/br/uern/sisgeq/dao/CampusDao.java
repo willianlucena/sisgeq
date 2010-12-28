@@ -14,6 +14,8 @@ public interface CampusDao extends DAO {
 
     public List<Campus> getCampi(Boolean ativo);
 
+    public List<Campus> getCampiComFiltros(String nome);
+
     public void save(Campus Campus);
 
     public void update(Campus campus);
