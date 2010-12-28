@@ -87,8 +87,8 @@
                             <f:facet name="header">
                                 <h:outputText value="Excluir"/>
                             </f:facet>
-                            <h:commandLink action="#{departamentoController.excluirDepartamento}"
-                                           value="Excluir"/>
+                             <p:commandButton value="Excluir" update="excluirDepartamento"
+                                             oncomplete="dialogExcluirDepartamento.show()"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton actionListener="#{departamentoController.prepararFiltrarDepartamento}"
@@ -153,6 +153,19 @@
                     <p:commandButton update="msg,tabela" oncomplete="dialogAtualizarDepartamento.hide();"
                                      actionListener="#{departamentoController.alterarDepartamento}"
                                      value="Atualizar"/>
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog header="Excluir Departamento" widgetVar="dialogExcluirDepartamento"
+                  resizable="false" modal="true" showEffect="slide" width="500">
+            <h:form prependId="false">
+                <h:panelGrid id="excluirDepartamento" columns="2" style="margin-bottom:10px">
+                    <h:outputLabel value="Você tem certeza disso?" />
+                    <h:outputLabel value="Essa ação não pode ser desfeita." />
+                    <p:commandButton update="msg,tabela" oncomplete="dialogExcluirDepartamento.hide();"
+                                     actionListener="#{departamentoController.excluirDepartamento}"
+                                     value="Excluir"/>
                 </h:panelGrid>
             </h:form>
         </p:dialog>
