@@ -41,7 +41,7 @@
                 <h:form prependId="false">
                     <p:messages id="msg"/>
                     <p:dataTable id="tabela" emptyMessage="Não há registros"
-                                 var="curso" value="#{cursoController.listarCursos}"
+                                 var="curso" value="#{cursoController.dataModelCursos}"
                                  rows="10" paginator="true"
                                  onselectComplete="dialog.show()"
                                  selection="#{cursoController.curso}"
