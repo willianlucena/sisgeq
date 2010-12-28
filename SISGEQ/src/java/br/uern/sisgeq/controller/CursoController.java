@@ -21,7 +21,7 @@ import javax.faces.model.ListDataModel;
 public class CursoController implements Serializable {
 
     private Curso curso;
-    private DataModel dataModelCursos;
+    private DataModel dataModelCursos = getListarCursos();
     String codigo;
     String nome;
     String departamento;
