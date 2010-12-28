@@ -16,6 +16,8 @@ public interface NucleoDao extends DAO {
 
     public List<Nucleo> getNucleosByCampus(Campus campus);
 
+    public List<Nucleo> getNucleoComFiltros(String nome, Campus campus);
+
     public void save(Nucleo nucleo);
     public void update(Nucleo nucleo);
 
