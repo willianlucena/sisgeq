@@ -15,6 +15,8 @@ public interface PerfilDao {
 
     public List<Perfil> list();
 
+    public List<Perfil> getPerfisComFiltros(String tipo);
+
     public void remove(Perfil perfil);
 
     public void update(Perfil perfil);

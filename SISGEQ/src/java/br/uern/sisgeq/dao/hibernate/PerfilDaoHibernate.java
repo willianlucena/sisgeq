@@ -4,8 +4,10 @@ import br.uern.sisgeq.dao.PerfilDao;
 import br.uern.sisgeq.model.Perfil;
 import br.uern.sisgeq.util.HibernateUtil;
 import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -49,5 +51,22 @@ public class PerfilDaoHibernate implements PerfilDao {
         session.update(perfil);
         t.commit();
         session.close();
+    }
+
+    public List<Perfil> getPerfisComFiltros(String tipo) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t = session.beginTransaction();
+        Criteria criteria = session.createCriteria(Perfil.class);
+        criteria.add(Restrictions.eq("ativo", true));
+        if (tipo != null && tipo.length() > 1) {
+            System.out.println("add tipo no criteria");
+            System.out.println("tipo: " + tipo);
+            criteria.add(Restrictions.ilike("nome", tipo + "%"));
+        }
+
+        List lista = criteria.list();
+        t.commit();
+        session.close();
+        return lista;
     }
 }
