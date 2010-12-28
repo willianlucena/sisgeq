@@ -22,9 +22,9 @@ public class NucleoController implements Serializable {
 
     private Nucleo nucleo;
     private DataModel dataModelNucleos = getListarNucleos();
-    private Campus campus = new Campus();
+    //private Campus campus = new Campus();
     private String nome;
-    //private String campus;
+    private String campus;
 
     public DataModel getListarNucleos() {
         List<Nucleo> lista = new NucleoDaoHibernate().getNucleos(true);
@@ -77,14 +77,6 @@ public class NucleoController implements Serializable {
 
     }
 
-    public Campus getCampus() {
-        return campus;
-    }
-
-    public void setCampus(Campus campus) {
-        this.campus = campus;
-    }
-
     public void setListaNucleos(DataModel listaNucleos) {
         this.dataModelNucleos = listaNucleos;
     }
@@ -113,11 +105,11 @@ public class NucleoController implements Serializable {
         this.nome = nome;
     }
 
-    /*public String getCampus() {
-    return campus;
+    public String getCampus() {
+        return campus;
     }
 
     public void setCampus(String campus) {
-    this.campus = campus;
-    }*/
+        this.campus = campus;
+    }
 }

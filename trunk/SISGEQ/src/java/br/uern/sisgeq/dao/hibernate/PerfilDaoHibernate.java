@@ -57,11 +57,11 @@ public class PerfilDaoHibernate implements PerfilDao {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();
         Criteria criteria = session.createCriteria(Perfil.class);
-        criteria.add(Restrictions.eq("ativo", true));
+
         if (tipo != null && tipo.length() > 1) {
             System.out.println("add tipo no criteria");
             System.out.println("tipo: " + tipo);
-            criteria.add(Restrictions.ilike("nome", tipo + "%"));
+            criteria.add(Restrictions.ilike("tipo", tipo + "%"));
         }
 
         List lista = criteria.list();
