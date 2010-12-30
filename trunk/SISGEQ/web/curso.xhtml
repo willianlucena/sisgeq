@@ -8,6 +8,11 @@
     <h:head>
         <title>Gerenciador de Cursos</title>
         <link type="text/css" rel="stylesheet" href="css/skin.css"/>
+        <script type="text/javascript">
+            function confirmarExclusao() {
+		return confirm('Advertência: A ação não poderá ser desfeita! bla bla bla...');
+            }
+        </script>
     </h:head>
     <h:body>
         <p:layout fullPage="true">
@@ -79,7 +84,7 @@
                             <f:facet name="header">
                                 <h:outputText value="Excluir"/>
                             </f:facet>
-                            <h:commandLink action="#{cursoController.excluirCurso}" value="Excluir"/>
+                            <h:commandLink onclick="confirmarExclusao();" action="#{cursoController.excluirCurso}" value="Excluir"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton actionListener="#{cursoController.prepararFiltrarCurso}"

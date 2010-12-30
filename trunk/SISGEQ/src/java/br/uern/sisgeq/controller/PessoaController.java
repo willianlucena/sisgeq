@@ -24,6 +24,10 @@ public class PessoaController {
     private String nome;
     private String curso;
     private String departamento;
+    private String cidade;
+    private String estado;
+    private String naturalidade;
+    private String nacionalidade;
 
     public DataModel getListarPessoas() {
         List<Pessoa> lista = new PessoaDaoHibernate().list(true);
@@ -73,7 +77,7 @@ public class PessoaController {
     }
 
     public void filtrarPessoa(ActionEvent actionEvent){
-        List<Pessoa> lista = new PessoaDaoHibernate().getPessoasComFiltros(matricula, nome, curso, departamento);
+        List<Pessoa> lista = new PessoaDaoHibernate().getPessoasComFiltros(matricula, nome, curso, departamento,cidade,estado,naturalidade,nacionalidade);
         for (Pessoa p : lista) {
             System.out.println(p.getNome());
             System.out.println(p.getMatricula());
@@ -120,4 +124,37 @@ public class PessoaController {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getNacionalidade() {
+        return nacionalidade;
+    }
+
+    public void setNacionalidade(String nacionalidade) {
+        this.nacionalidade = nacionalidade;
+    }
+
+    public String getNaturalidade() {
+        return naturalidade;
+    }
+
+    public void setNaturalidade(String naturalidade) {
+        this.naturalidade = naturalidade;
+    }
+    
 }

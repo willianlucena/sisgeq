@@ -15,7 +15,7 @@ public interface PessoaDao {
 
     public List<Pessoa> list(Boolean ativo);
 
-    public List<Pessoa> getPessoasComFiltros(String matricula, String nome, String curso, String departamento);
+    public List<Pessoa> getPessoasComFiltros(String matricula, String nome, String curso, String departamento, String cidade, String estado, String naturalidade, String nacionalidade);
 
     public void remove(Pessoa pessoa);
 
