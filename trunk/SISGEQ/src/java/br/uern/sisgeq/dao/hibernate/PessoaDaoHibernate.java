@@ -20,6 +20,7 @@ public class PessoaDaoHibernate implements PessoaDao {
         Transaction t = session.beginTransaction();
         session.save(pessoa);
         t.commit();
+        session.close();
     }
 
     public Pessoa getPessoa(long id) {
@@ -32,6 +33,7 @@ public class PessoaDaoHibernate implements PessoaDao {
         Transaction t = session.beginTransaction();
         List lista = session.createQuery("from Pessoa where ativo = :ativo").setParameter("ativo", ativo).list();
         t.commit();
+        session.close();
         return lista;
     }
 
@@ -40,6 +42,7 @@ public class PessoaDaoHibernate implements PessoaDao {
         Transaction t = session.beginTransaction();
         session.delete(pessoa);
         t.commit();
+        session.close();
     }
 
     public void update(Pessoa pessoa) {
@@ -47,6 +50,7 @@ public class PessoaDaoHibernate implements PessoaDao {
         Transaction t = session.beginTransaction();
         session.update(pessoa);
         t.commit();
+        session.close();
     }
 
     public List<Pessoa> getPessoasComFiltros(String matricula, String nome, String curso, String departamento, String cidade, String estado, String naturalidade, String nacionalidade) {

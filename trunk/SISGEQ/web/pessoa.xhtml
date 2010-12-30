@@ -67,19 +67,19 @@
                         </p:column>
 
                         <p:column headerText="Cidade">
-                            <h:outputText value="#{pessoa.departamento.cidade}"/>
+                            <h:outputText value="#{pessoa.cidade}"/>
                         </p:column>
 
                         <p:column headerText="Estado">
-                            <h:outputText value="#{pessoa.departamento.estado}"/>
+                            <h:outputText value="#{pessoa.estado}"/>
                         </p:column>
 
                         <p:column headerText="Naturalidade">
-                            <h:outputText value="#{pessoa.departamento.naturalidade}"/>
+                            <h:outputText value="#{pessoa.naturalidade}"/>
                         </p:column>
 
                         <p:column headerText="Nacionalidade">
-                            <h:outputText value="#{pessoa.departamento.nacionalidade}"/>
+                            <h:outputText value="#{pessoa.nacionalidade}"/>
                         </p:column>
 
                         <p:column headerText="Alterar">
@@ -113,53 +113,42 @@
             <h:form prependId="false">
                 <h:panelGrid id="infosPessoa" columns="2" style="margin-bottom:10px">
 
-                    <h:outputLabel for="pessoa-matricula"
-                                   value="Matrícula:" style="font-weight: bold" />
-                    <h:inputText id="pessoa-matricula"
-                                 value="#{pessoaController.pessoa.matricula}"
+                    <h:outputLabel value="Matrícula:" style="font-weight: bold" />
+                    <h:inputText id="matricula" value="#{pessoaController.pessoa.matricula}"
                                  required="true" requiredMessage="Campo Matrícula Obrigatório!"/>
 
-                    <h:outputLabel for="pessoa-nome"
-                                   value="Nome:" style="font-weight: bold"/>
-                    <h:inputText id="pessoa-nome" value="#{pessoaController.pessoa.nome}"
+                    <h:outputLabel value="Nome:" style="font-weight: bold"/>
+                    <h:inputText id="nome" value="#{pessoaController.pessoa.nome}"
                                  required="true" requiredMessage="Campo Nome Obrigatório!"/>
 
-                    <h:outputLabel for="pessoa-curso"
-                                   value="Curso:" style="font-weight: bold"/>
-                    <h:selectOneMenu id="pessoa-curso" value="#{pessoaController.pessoa.curso.id}">
+                    <h:outputLabel value="Cidade:" style="font-weight: bold"/>
+                    <h:inputText id="cidade" value="#{pessoaController.pessoa.cidade}"
+                                 required="true" requiredMessage="Campo Cidade Obrigatório!"/>
+
+                    <h:outputLabel value="Estado:" style="font-weight: bold"/>
+                    <h:inputText id="estado" value="#{pessoaController.pessoa.estado}"
+                                 required="true" requiredMessage="Campo Estado Obrigatório!"/>
+
+                    <h:outputLabel value="Naturalidade:" style="font-weight: bold"/>
+                    <h:inputText id="naturalidade" value="#{pessoaController.pessoa.naturalidade}"
+                                 required="true" requiredMessage="Campo Naturalidade Obrigatório!"/>
+
+                    <h:outputLabel value="Nacionalidade:" style="font-weight: bold"/>
+                    <h:inputText id="nacionalidade" value="#{pessoaController.pessoa.nacionalidade}"
+                                 required="true" requiredMessage="Campo Nacionalidade Obrigatório!"/>
+
+                    <h:outputLabel value="Curso:" style="font-weight: bold"/>
+                    <h:selectOneMenu id="curso" value="#{pessoaController.pessoa.curso.id}">
                         <f:selectItems value="#{cursoController.listarCursos}"
                                        var="c" itemLabel="#{c.nome}"
                                        itemValue="#{c.id}"/>
                     </h:selectOneMenu>
 
-                    <h:outputLabel for="pessoa-departamento"
-                                   value="Departamento:" style="font-weight: bold"/>
-
-                    <h:selectOneMenu id="pessoa-departamento" immediate="false"
-                                     value="#{pessoaController.pessoa.departamento.id}">
+                    <h:outputLabel value="Departamento:" style="font-weight: bold"/>
+                    <h:selectOneMenu id="departamento" value="#{pessoaController.pessoa.departamento.id}">
                         <f:selectItems value="#{departamentoController.listarDepartamentos}"
                                        var="d" itemLabel="#{d.nome}" itemValue="#{d.id}"/>
                     </h:selectOneMenu>
-
-                    <h:outputLabel for="pessoa-cidade"
-                                   value="Cidade:" style="font-weight: bold"/>
-                    <h:inputText id="pessoa-cidade" value="#{pessoaController.pessoa.cidade}"
-                                 required="true" requiredMessage="Campo Cidade Obrigatório!"/>
-
-                    <h:outputLabel for="pessoa-estado"
-                                   value="Estado:" style="font-weight: bold"/>
-                    <h:inputText id="pessoa-estado" value="#{pessoaController.pessoa.estado}"
-                                 required="true" requiredMessage="Campo Estado Obrigatório!"/>
-
-                    <h:outputLabel for="pessoa-naturalidade"
-                                   value="Naturalidade:" style="font-weight: bold"/>
-                    <h:inputText id="pessoa-naturalidade" value="#{pessoaController.pessoa.naturalidade}"
-                                 required="true" requiredMessage="Campo Naturalidade Obrigatório!"/>
-
-                    <h:outputLabel for="pessoa-nacionalidade"
-                                   value="Nacionalidade:" style="font-weight: bold"/>
-                    <h:inputText id="pessoa-nacionalidade" value="#{pessoaController.pessoa.nacionalidade}"
-                                 required="true" requiredMessage="Campo Nacionalidade Obrigatório!"/>
 
                     <p:commandButton update="msg,tabela"
                                      oncomplete="dialogInserirPessoa.hide();"
@@ -173,52 +162,43 @@
             <h:form prependId="false">
                 <h:panelGrid id="atualizarPessoa" columns="2" style="margin-bottom:10px">
 
-                    <h:outputLabel for="pessoa-matricula"
-                                   value="Matrícula:" style="font-weight: bold" />
+                    <h:outputLabel value="Matrícula:" style="font-weight: bold" />
                     <h:inputText id="atualizarMatricula"
                                  value="#{pessoaController.pessoa.matricula}"
                                  required="true" requiredMessage="Campo Obrigatório!"/>
 
-                    <h:outputLabel for="pessoa-nome"
-                                   value="Nome:" style="font-weight: bold"/>
+                    <h:outputLabel value="Nome:" style="font-weight: bold"/>
                     <h:inputText id="atualizarNome" value="#{pessoaController.pessoa.nome}"
                                  required="true" requiredMessage="Campo Nome Obrigatório!"/>
 
-                    <h:outputLabel for="pessoa-curso"
-                                   value="Curso:" style="font-weight: bold"/>
+                    <h:outputLabel value="Cidade:" style="font-weight: bold"/>
+                    <h:inputText id="atualizarCidade" value="#{pessoaController.pessoa.cidade}"
+                                 required="true" requiredMessage="Campo Cidade Obrigatório!"/>
+
+                    <h:outputLabel value="Estado:" style="font-weight: bold"/>
+                    <h:inputText id="atualizarEstado" value="#{pessoaController.pessoa.estado}"
+                                 required="true" requiredMessage="Campo Estado Obrigatório!"/>
+
+                    <h:outputLabel value="Naturalidade:" style="font-weight: bold"/>
+                    <h:inputText id="atualizarNaturalidade" value="#{pessoaController.pessoa.naturalidade}"
+                                 required="true" requiredMessage="Campo Naturalidade Obrigatório!"/>
+
+                    <h:outputLabel value="Nacionalidade:" style="font-weight: bold"/>
+                    <h:inputText id="atualizarNacionalidade" value="#{pessoaController.pessoa.nacionalidade}"
+                                 required="true" requiredMessage="Campo Nacionalidade Obrigatório!"/>
+
+                    <h:outputLabel value="Curso:" style="font-weight: bold"/>
                     <h:selectOneMenu id="atualizarCurso" value="#{pessoaController.pessoa.curso.id}">
                         <f:selectItems value="#{cursoController.listarCursos}"
                                        var="c" itemLabel="#{c.nome}" itemValue="#{c.id}"/>
                     </h:selectOneMenu>
 
-                    <h:outputLabel for="pessoa-departamento"
-                                   value="Departamento:" style="font-weight: bold"/>
-
-                    <h:selectOneMenu id="atualizarDepartamento" immediate="false"
+                    <h:outputLabel value="Departamento:" style="font-weight: bold"/>
+                    <h:selectOneMenu id="atualizarDepartamento" 
                                      value="#{pessoaController.pessoa.departamento.id}">
                         <f:selectItems value="#{departamentoController.listarDepartamentos}"
                                        var="d" itemLabel="#{d.nome}" itemValue="#{d.id}"/>
                     </h:selectOneMenu>
-
-                     <h:outputLabel for="pessoa-cidade"
-                                   value="Cidade:" style="font-weight: bold"/>
-                    <h:inputText id="atualizarCidade" value="#{pessoaController.pessoa.cidade}"
-                                 required="true" requiredMessage="Campo Cidade Obrigatório!"/>
-
-                    <h:outputLabel for="pessoa-estado"
-                                   value="Estado:" style="font-weight: bold"/>
-                    <h:inputText id="atualizarEstado" value="#{pessoaController.pessoa.estado}"
-                                 required="true" requiredMessage="Campo Estado Obrigatório!"/>
-
-                    <h:outputLabel for="pessoa-naturalidade"
-                                   value="Naturalidade:" style="font-weight: bold"/>
-                    <h:inputText id="atualizarNaturalidade" value="#{pessoaController.pessoa.naturalidade}"
-                                 required="true" requiredMessage="Campo Naturalidade Obrigatório!"/>
-
-                    <h:outputLabel for="pessoa-nacionalidade"
-                                   value="Nacionalidade:" style="font-weight: bold"/>
-                    <h:inputText id="atualizarNacionalidade" value="#{pessoaController.pessoa.nacionalidade}"
-                                 required="true" requiredMessage="Campo Nacionalidade Obrigatório!"/>
 
                     <p:commandButton update="msg,tabela"
                                      oncomplete="dialogAtualizarPessoa.hide();"
@@ -250,6 +230,14 @@
                     <h:inputText id="filtrarMatricula" value="#{pessoaController.matricula}"/>
                     <h:outputLabel value="Nome:" />
                     <h:inputText id="filtrarNome" value="#{pessoaController.nome}"/>
+                    <h:outputLabel value="Cidade"/>
+                    <h:inputText id="filtrarCidade" value="#{pessoaController.cidade}"/>
+                    <h:outputLabel value="Estado"/>
+                    <h:inputText id="filtrarEstado" value="#{pessoaController.estado}"/>
+                    <h:outputLabel value="Naturalidade"/>
+                    <h:inputText id="filtrarNaturalidade" value="#{pessoaController.naturalidade}"/>
+                    <h:outputLabel value="Nacionalidade"/>
+                    <h:inputText id="filtrarNacionalidade" value="#{pessoaController.nacionalidade}"/>
                     <h:outputLabel value="Curso"/>
                     <h:inputText id="filtrarCurso" value="#{pessoaController.curso}"/>
                     <h:outputLabel value="Departamento"/>
