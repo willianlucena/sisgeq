@@ -49,15 +49,18 @@ public class DisciplinaController implements Serializable {
         disciplina = (Disciplina) (dataModelDisciplinas.getRowData());
     }
 
+    public void prepararExcluirDisciplina(ActionEvent actionEvent) {
+        disciplina = (Disciplina) (dataModelDisciplinas.getRowData());
+    }
+
     public void prepararFiltrarDisciplina(ActionEvent actionEvent) {
         codigo = nome = departamento = null;
     }
 
     public String excluirDisciplina() {
-
-        Disciplina disciplinaTemp = (Disciplina) (dataModelDisciplinas.getRowData());
+        //Disciplina disciplinaTemp = (Disciplina) (dataModelDisciplinas.getRowData());
         DisciplinaDao dao = new DisciplinaDaoHibernate();
-        dao.remove(disciplinaTemp);
+        dao.remove(disciplina);
         dataModelDisciplinas = getListarDisciplinas();
         return "disciplina";
 

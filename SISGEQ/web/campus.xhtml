@@ -54,7 +54,7 @@
                             <f:facet name="header">
                                 <h:outputText value="Excluir"/>
                             </f:facet>
-                            <h:commandLink action="#{campusController.excluirCampus}" value="Excluir"/>
+                            <p:commandButton actionListener="#{campusController.prepararExcluirCampus}" value="Excluir" update="excluirCampus" oncomplete="dialogExcluirCampus.show()"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton actionListener="#{campusController.prepararFiltrarCampus}"
@@ -92,6 +92,20 @@
                                  requiredMessage="Nome do Campus é Obrigatório!"/>
 
                     <p:commandButton update="msg,tabela" oncomplete="dialogAtualizarCampus.hide();" actionListener="#{campusController.alterarCampus}" value="Atualizar"/>
+
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog header="Excluir Campus" widgetVar="dialogExcluirCampus"  resizable="false" modal="true" showEffect="slide" width="500">
+            <h:form prependId="false">
+                <h:panelGrid id="excluirCampus" columns="2" style="margin-bottom:10px">
+                    <h:outputLabel value="Você tem certeza disso?" />
+                    <h:outputLabel value="Essa ação não pode ser desfeita." />
+                    <p:commandButton update="msg,tabela"
+                                     oncomplete="dialogExcluirCampus.hide();"
+                                     actionListener="#{campusController.excluirCampus}"
+                                     value="Excluir"/>
 
                 </h:panelGrid>
             </h:form>

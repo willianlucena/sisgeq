@@ -50,14 +50,18 @@ public class CursoController implements Serializable {
         curso = (Curso) (dataModelCursos.getRowData());
     }
 
+    public void prepararExcluirCurso(ActionEvent actionEvent) {
+        curso = (Curso) (dataModelCursos.getRowData());
+    }
+
      public void prepararFiltrarCurso(ActionEvent actionEvent) {
         nome = codigo = departamento = null;
     }
 
     public String excluirCurso() {
-        Curso cursoTemp = (Curso) (dataModelCursos.getRowData());
+        //Curso cursoTemp = (Curso) (dataModelCursos.getRowData());
         CursoDao dao = new CursoDaoHibernate();
-        dao.remove(cursoTemp);
+        dao.remove(curso);
         dataModelCursos = getListarCursos();
         return "curso";
     }
