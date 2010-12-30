@@ -55,7 +55,7 @@ public class PessoaController {
         Pessoa pessoaTemp = (Pessoa) (dataModelPessoas.getRowData());
         PessoaDao dao = new PessoaDaoHibernate();
         dao.remove(pessoaTemp);
-        dataModelPessoas = getDataModelPessoas();
+        dataModelPessoas = getListarPessoas();
         return "pessoa";
     }
 
@@ -63,13 +63,13 @@ public class PessoaController {
         PessoaDao dao = new PessoaDaoHibernate();
         pessoa.setAtivo(Boolean.TRUE);
         dao.save(pessoa);
-        dataModelPessoas = getDataModelPessoas();
+        dataModelPessoas = getListarPessoas();
     }
 
     public void alterarPessoa(ActionEvent actionEvent) {
         PessoaDao dao = new PessoaDaoHibernate();
         dao.update(pessoa);
-        dataModelPessoas = getDataModelPessoas();
+        dataModelPessoas = getListarPessoas();
     }
 
     public void filtrarPessoa(ActionEvent actionEvent){
