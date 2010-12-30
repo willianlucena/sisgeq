@@ -88,6 +88,7 @@
                                 <h:outputText value="Excluir"/>
                             </f:facet>
                              <p:commandButton value="Excluir" update="excluirDepartamento"
+                                              actionListener="#{departamentoController.prepararExcluirDepartamento}"
                                              oncomplete="dialogExcluirDepartamento.show()"/>
                         </p:column>
                         <f:facet name="footer">
