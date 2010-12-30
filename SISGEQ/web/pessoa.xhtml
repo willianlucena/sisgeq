@@ -41,39 +41,28 @@
                 <h:form prependId="false">
                     <p:messages id="msg"/>
                     <p:dataTable id="tabela" var="pessoa"
-                                 value="#{pessoaController.listarPessoas}"
+                                 value="#{pessoaController.dataModelPessoas}"
                                  style="text-align: center"
                                  rows="10" paginator="true"
                                  onselectComplete="dialog.show();"
                                  selection="#{pessoaController.pessoa}"
                                  update="panel"
-                                 paginatorPosition="bottom"
-                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                 rowsPerPageTemplate="10,20,30"
                                  emptyMessage="Nenhum registro encontrado."
                                  selectionMode="single">
 
-                        <p:column headerText="MATRÍCULA"
-                                  filterBy="#{pessoa.matricula}"
-                                  sortBy="#{pessoa.matricula}">
+                        <p:column headerText="MATRÍCULA">
                             <h:outputText value="#{pessoa.matricula}"/>
                         </p:column>
 
-                        <p:column headerText="NOME"
-                                  filterBy="#{pessoa.nome}"
-                                  sortBy="#{pessoa.nome}">
+                        <p:column headerText="NOME">
                             <h:outputText value="#{pessoa.nome}"/>
                         </p:column>
 
-                        <p:column headerText="CURSO"
-                                  filterBy="#{pessoa.curso.nome}"
-                                  sortBy="#{pessoa.curso.nome}">
+                        <p:column headerText="CURSO">
                             <h:outputText value="#{pessoa.curso.nome}"/>
                         </p:column>
 
-                        <p:column headerText="DEPARTAMENTO"
-                                  filterBy="#{pessoa.departamento.nome}"
-                                  sortBy="#{pessoa.departamento.nome}">
+                        <p:column headerText="DEPARTAMENTO">
                             <h:outputText value="#{pessoa.departamento.nome}"/>
                         </p:column>
 
@@ -85,6 +74,15 @@
                             <h:commandLink style="margin-left: 10px" value="Excluir"
                                            action="#{pessoaController.excluirPessoa}"/>
                         </p:column>
+
+                        <f:facet name="footer">
+                            <p:commandButton actionListener="#{pessoaController.prepararFiltrarPessoa}"
+                                             value="Filtrar" update="filtrarPessoa" oncomplete="dialogFiltrarPessoa.show()"/>
+
+                            <p:commandButton update="tabela" action="#{pessoaController.getListarPessoas}"
+                                             value="Resetar Filtro"/>
+
+                        </f:facet>
 
                     </p:dataTable>
                 </h:form>
@@ -192,6 +190,25 @@
                                      actionListener="#{pessoaController.alterarPessoa}"
                                      value="Atualizar"/>
 
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog header="Filtrar Pessoa" widgetVar="dialogFiltrarPessoa"
+                  resizable="false" modal="true" showEffect="slide" width="500">
+            <h:form prependId="false">
+                <h:panelGrid id="filtrarPessoa" columns="2" style="margin-bottom:10px">
+                    <h:outputLabel value="Matricula:" />
+                    <h:inputText id="filtrarMatricula" value="#{pessoaController.matricula}"/>
+                    <h:outputLabel value="Nome:" />
+                    <h:inputText id="filtrarNome" value="#{pessoaController.nome}"/>
+                    <h:outputLabel value="Curso"/>
+                    <h:inputText id="filtrarCurso" value="#{pessoaController.curso}"/>
+                    <h:outputLabel value="Departamento"/>
+                    <h:inputText id="filtrarDepartamento" value="#{pessoaController.departamento}"/>
+                    <p:commandButton update="msg,tabela" oncomplete="dialogFiltrarPessoa.hide();"
+                                     actionListener="#{pessoaController.filtrarPessoa}"
+                                     value="Filtrar"/>
                 </h:panelGrid>
             </h:form>
         </p:dialog>

@@ -19,12 +19,16 @@ import javax.faces.model.ListDataModel;
 public class PessoaController {
 
     private Pessoa pessoa;
-    private DataModel listaPessoas;
+    private DataModel dataModelPessoas = getListarPessoas();
+    private String matricula;
+    private String nome;
+    private String curso;
+    private String departamento;
 
     public DataModel getListarPessoas() {
         List<Pessoa> lista = new PessoaDaoHibernate().list(true);
-        listaPessoas = new ListDataModel(lista);
-        return listaPessoas;
+        dataModelPessoas = new ListDataModel(lista);
+        return dataModelPessoas;
     }
 
     public Pessoa getPessoa() {
@@ -40,13 +44,18 @@ public class PessoaController {
     }
 
     public void prepararAlterarPessoa(ActionEvent actionEvent) {
-        pessoa = (Pessoa) (listaPessoas.getRowData());
+        pessoa = (Pessoa) (dataModelPessoas.getRowData());
+    }
+
+    public void prepararFiltrarPessoa(ActionEvent actionEvent) {
+        matricula = nome = curso = departamento = null;
     }
 
     public String excluirPessoa() {
-        Pessoa pessoaTemp = (Pessoa) (listaPessoas.getRowData());
+        Pessoa pessoaTemp = (Pessoa) (dataModelPessoas.getRowData());
         PessoaDao dao = new PessoaDaoHibernate();
         dao.remove(pessoaTemp);
+        dataModelPessoas = getDataModelPessoas();
         return "pessoa";
     }
 
@@ -54,10 +63,61 @@ public class PessoaController {
         PessoaDao dao = new PessoaDaoHibernate();
         pessoa.setAtivo(Boolean.TRUE);
         dao.save(pessoa);
+        dataModelPessoas = getDataModelPessoas();
     }
 
     public void alterarPessoa(ActionEvent actionEvent) {
         PessoaDao dao = new PessoaDaoHibernate();
         dao.update(pessoa);
+        dataModelPessoas = getDataModelPessoas();
+    }
+
+    public void filtrarPessoa(ActionEvent actionEvent){
+        List<Pessoa> lista = new PessoaDaoHibernate().getPessoasComFiltros(matricula, nome, curso, departamento);
+        for (Pessoa p : lista) {
+            System.out.println(p.getNome());
+            System.out.println(p.getMatricula());
+        }
+        dataModelPessoas = new ListDataModel(lista);
+    }
+
+    public String getCurso() {
+        return curso;
+    }
+
+    public void setCurso(String curso) {
+        this.curso = curso;
+    }
+
+    public DataModel getDataModelPessoas() {
+        return dataModelPessoas;
+    }
+
+    public void setDataModelPessoas(DataModel dataModelPessoas) {
+        this.dataModelPessoas = dataModelPessoas;
+    }
+
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 }
