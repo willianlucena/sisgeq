@@ -46,10 +46,14 @@ public class NucleoController implements Serializable {
         campus = null;
     }
 
+    public void prepararExcluirNucleo(ActionEvent actionEvent){
+        nucleo = (Nucleo) (dataModelNucleos.getRowData());
+    }
+
     public String excluirNucleo() {
-        Nucleo nucleoTemp = (Nucleo) (dataModelNucleos.getRowData());
+        //Nucleo nucleoTemp = (Nucleo) (dataModelNucleos.getRowData());
         NucleoDao dao = new NucleoDaoHibernate();
-        dao.remove(nucleoTemp);
+        dao.remove(nucleo);
         dataModelNucleos = getListarNucleos();
         return "nucleo";
     }
