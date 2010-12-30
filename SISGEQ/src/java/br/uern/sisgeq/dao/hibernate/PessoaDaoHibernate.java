@@ -30,9 +30,7 @@ public class PessoaDaoHibernate implements PessoaDao {
     public List<Pessoa> list(Boolean ativo) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();
-        List lista = session.createQuery("from Pessoa where ativo = :ativo")
-                .setParameter("ativo", ativo)
-                .list();
+        List lista = session.createQuery("from Pessoa where ativo = :ativo").setParameter("ativo", ativo).list();
         t.commit();
         return lista;
     }
@@ -51,7 +49,7 @@ public class PessoaDaoHibernate implements PessoaDao {
         t.commit();
     }
 
-    public List<Pessoa> getPessoasComFiltros(String matricula, String nome, String curso, String departamento) {
+    public List<Pessoa> getPessoasComFiltros(String matricula, String nome, String curso, String departamento, String cidade, String estado, String naturalidade, String nacionalidade) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();
         Criteria criteria = session.createCriteria(Pessoa.class);
@@ -67,6 +65,30 @@ public class PessoaDaoHibernate implements PessoaDao {
             System.out.println("add nome no criteria");
             System.out.println("nome: " + nome);
             criteria.add(Restrictions.ilike("nome", nome + "%"));
+        }
+
+        if (cidade != null && cidade.length() > 1) {
+            System.out.println("add cidade no criteria");
+            System.out.println("cidade: " + cidade);
+            criteria.add(Restrictions.ilike("cidade", cidade + "%"));
+        }
+
+        if (estado != null && estado.length() > 1) {
+            System.out.println("add estado no criteria");
+            System.out.println("estado: " + estado);
+            criteria.add(Restrictions.ilike("estado", estado + "%"));
+        }
+
+        if (naturalidade != null && naturalidade.length() > 1) {
+            System.out.println("add naturalidade no criteria");
+            System.out.println("naturalidade: " + naturalidade);
+            criteria.add(Restrictions.ilike("naturalidade", naturalidade + "%"));
+        }
+
+        if (nacionalidade != null && nacionalidade.length() > 1) {
+            System.out.println("add nacionalidade no criteria");
+            System.out.println("nacionalidade: " + nacionalidade);
+            criteria.add(Restrictions.ilike("nacionalidade", nacionalidade + "%"));
         }
 
         if (curso != null && curso.length() > 1) {
