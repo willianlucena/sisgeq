@@ -31,7 +31,7 @@
                 <ui:include src="includes/inc_rodape.xhtml"/>
             </p:layoutUnit>
 
-            <p:layoutUnit position="center" header="GERÊNCIA DE USUÁRIOS">
+            <p:layoutUnit position="center" header="GERENCIADOR DE USUÁRIOS">
                 <br/>
                 <h:form prependId="false">
                     <p:commandLink value="Adicionar Pessoa" style="margin-left: 10px" actionListener="#{pessoaController.prepararAdicionarPessoa}"
@@ -68,7 +68,7 @@
 
                         <p:column headerText="ALTERAR / EXCLUIR">
                             <p:commandButton actionListener="#{pessoaController.prepararAlterarPessoa}"
-                                             update="infosPessoa"
+                                             update="atualizarPessoa"
                                              oncomplete="dialogAtualizarPessoa.show()"
                                              image="css/images/delete.png"/>
                             <h:commandLink style="margin-left: 10px" value="Excluir"
@@ -97,19 +97,6 @@
                 <p:commandButton value="nao" onclick="cd.hide();" type="button"/>
             </h:form>
         </p:confirmDialog>
-
-        <p:dialog widgetVar="dialog" modal="true" header="INFORMAÇÕES">
-            <h:panelGrid columns="2" id="panel">
-                <h:outputText value="Matrícula:" style="font-weight: bold"/>
-                <h:outputText value="#{pessoaController.pessoa.matricula}" />
-                <h:outputText value="Nome:" style="font-weight: bold"/>
-                <h:outputText value="#{pessoaController.pessoa.nome}" />
-                <h:outputText value="Curso:" style="font-weight: bold"/>
-                <h:outputText value="#{pessoaController.pessoa.curso.nome}" />
-                <h:outputText value="Departamento:" style="font-weight: bold"/>
-                <h:outputText value="#{pessoaController.pessoa.departamento.nome}" />
-            </h:panelGrid>
-        </p:dialog>
 
         <p:dialog header="Inserir Usuário" widgetVar="dialogInserirPessoa"
                   resizable="true" modal="true" showEffect="slide" width="500">

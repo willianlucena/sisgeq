@@ -29,8 +29,8 @@
                 <ui:include src="includes/inc_rodape.xhtml"/>
             </p:layoutUnit>
 
-            <p:layoutUnit position="center">
-                <h1>Gerenciador de Perfis</h1>
+            <p:layoutUnit position="center" header="GERENCIADOR DE PERFIS">
+                <br/>
                 <h:form prependId="false">
                     <p:commandLink value="Novo Perfil"
                                    actionListener="#{perfilController.prepararAdicionarPerfil}"
@@ -85,13 +85,6 @@
                 </h:form>
             </p:layoutUnit>
         </p:layout>
-
-        <p:dialog widgetVar="dialog" modal="true" header="Informações">
-            <h:panelGrid columns="2" id="panel">
-                <h:outputText value="Tipo:" />
-                <h:outputText value="#{perfilController.perfil.tipo}" />
-            </h:panelGrid>
-        </p:dialog>
 
         <p:dialog header="Inserir Perfil" widgetVar="dialogInserirPerfil"
                   resizable="false" modal="true" showEffect="slide" width="500">

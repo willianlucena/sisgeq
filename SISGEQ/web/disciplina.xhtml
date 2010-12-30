@@ -29,8 +29,8 @@
                 <ui:include src="includes/inc_rodape.xhtml"/>
             </p:layoutUnit>
 
-            <p:layoutUnit position="center">
-                <h1>Gerenciador de Disciplinas</h1>
+            <p:layoutUnit position="center" header="GERENCIADOR DE DISCIPLINAS">
+                <br/>
                 <h:form prependId="false">
                     <p:commandLink value="Nova Disciplina"
                                    actionListener="#{disciplinaController.prepararAdicionarDisciplina}"
@@ -72,19 +72,15 @@
                             <f:facet name="header">
                                 <h:outputText value="Alterar"/>
                             </f:facet>
-                            <p:commandButton actionListener="#{disciplinaController.prepararAlterarDisciplina}" value="Alterar" update="atualizarDisciplina" oncomplete="dialogAtualizarDisciplina.show()">
-                                <h:graphicImage value="css/images/edit.png"/>
-                            </p:commandButton>
+                            <p:commandButton actionListener="#{disciplinaController.prepararAlterarDisciplina}" value="Alterar" update="atualizarDisciplina" oncomplete="dialogAtualizarDisciplina.show()"/>
                         </p:column>
 
                         <p:column style="text-align: center">
                             <f:facet name="header">
                                 <h:outputText value="Excluir"/>
                             </f:facet>
-                            <h:commandLink action="#{disciplinaController.excluirDisciplina}" style="border: 0px; text-decoration: none;">
-                                <h:graphicImage value="css/images/delete.png"/>
-                            </h:commandLink>
-                  
+                            <h:commandLink action="#{disciplinaController.excluirDisciplina}" style="border: 0px; text-decoration: none;"/>
+                                
                         </p:column>
 
                         <f:facet name="footer">
@@ -112,9 +108,9 @@
                     <h:inputText id="nome" required="true" value="#{disciplinaController.disciplina.nome}"
                                  requiredMessage="Nome da Disciplina é Obrigatório!"/>
 
-                          <h:outputLabel for="departamento" value="Departamento:" />
-                          <h:selectOneMenu id="departamento" value="#{disciplinaController.disciplina.departamento.id}">
-                              <f:selectItems value="#{departamentoController.listarDepartamentos}" var="dep" itemLabel="#{dep.nome}" itemValue="#{dep.id}"/>
+                    <h:outputLabel for="departamento" value="Departamento:" />
+                    <h:selectOneMenu id="departamento" value="#{disciplinaController.disciplina.departamento.id}">
+                        <f:selectItems value="#{departamentoController.listarDepartamentos}" var="dep" itemLabel="#{dep.nome}" itemValue="#{dep.id}"/>
                     </h:selectOneMenu>
 
                     <p:commandButton update="msg,tabela" oncomplete="dialogInserirDisciplina.hide();" actionListener="#{disciplinaController.adicionarDisciplina}" value="Inserir"/>
@@ -135,9 +131,9 @@
                     <h:inputText id="atualizarNome" required="true" value="#{disciplinaController.disciplina.nome}"
                                  requiredMessage="Nome da Disciplina é Obrigatório!"/>
 
-                          <h:outputLabel for="departamento" value="Departamento:" />
-                          <h:selectOneMenu id="atualizarDepartamento" value="#{disciplinaController.disciplina.departamento.id}">
-                              <f:selectItems value="#{departamentoController.listarDepartamentos}" var="dep" itemLabel="#{dep.nome}" itemValue="#{dep.id}"/>
+                    <h:outputLabel for="departamento" value="Departamento:" />
+                    <h:selectOneMenu id="atualizarDepartamento" value="#{disciplinaController.disciplina.departamento.id}">
+                        <f:selectItems value="#{departamentoController.listarDepartamentos}" var="dep" itemLabel="#{dep.nome}" itemValue="#{dep.id}"/>
                     </h:selectOneMenu>
 
                     <p:commandButton update="msg,tabela" oncomplete="dialogAtualizarDisciplina.hide();" actionListener="#{disciplinaController.alterarDisciplina}" value="Atualizar"/>
