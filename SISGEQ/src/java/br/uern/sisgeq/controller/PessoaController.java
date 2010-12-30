@@ -52,13 +52,17 @@ public class PessoaController {
     }
 
     public void prepararFiltrarPessoa(ActionEvent actionEvent) {
-        matricula = nome = curso = departamento = null;
+        matricula = nome = curso = departamento = cidade = estado = nacionalidade = naturalidade = null;
+    }
+
+    public void prepararExcluirPessoa(ActionEvent actionEvent) {
+        pessoa = (Pessoa) (dataModelPessoas.getRowData());
     }
 
     public String excluirPessoa() {
-        Pessoa pessoaTemp = (Pessoa) (dataModelPessoas.getRowData());
+        //Pessoa pessoaTemp = (Pessoa) (dataModelPessoas.getRowData());
         PessoaDao dao = new PessoaDaoHibernate();
-        dao.remove(pessoaTemp);
+        dao.remove(pessoa);
         dataModelPessoas = getListarPessoas();
         return "pessoa";
     }
@@ -76,8 +80,8 @@ public class PessoaController {
         dataModelPessoas = getListarPessoas();
     }
 
-    public void filtrarPessoa(ActionEvent actionEvent){
-        List<Pessoa> lista = new PessoaDaoHibernate().getPessoasComFiltros(matricula, nome, curso, departamento,cidade,estado,naturalidade,nacionalidade);
+    public void filtrarPessoa(ActionEvent actionEvent) {
+        List<Pessoa> lista = new PessoaDaoHibernate().getPessoasComFiltros(matricula, nome, curso, departamento, cidade, estado, naturalidade, nacionalidade);
         for (Pessoa p : lista) {
             System.out.println(p.getNome());
             System.out.println(p.getMatricula());
@@ -156,5 +160,4 @@ public class PessoaController {
     public void setNaturalidade(String naturalidade) {
         this.naturalidade = naturalidade;
     }
-    
 }

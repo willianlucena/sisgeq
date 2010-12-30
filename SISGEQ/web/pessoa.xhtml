@@ -50,29 +50,48 @@
                                  emptyMessage="Nenhum registro encontrado."
                                  selectionMode="single">
 
-                        <p:column headerText="MATRÍCULA">
+                        <p:column headerText="Matricula">
                             <h:outputText value="#{pessoa.matricula}"/>
                         </p:column>
 
-                        <p:column headerText="NOME">
+                        <p:column headerText="Nome">
                             <h:outputText value="#{pessoa.nome}"/>
                         </p:column>
 
-                        <p:column headerText="CURSO">
+                        <p:column headerText="Curso">
                             <h:outputText value="#{pessoa.curso.nome}"/>
                         </p:column>
 
-                        <p:column headerText="DEPARTAMENTO">
+                        <p:column headerText="Departamento">
                             <h:outputText value="#{pessoa.departamento.nome}"/>
                         </p:column>
 
-                        <p:column headerText="ALTERAR / EXCLUIR">
+                        <p:column headerText="Cidade">
+                            <h:outputText value="#{pessoa.departamento.cidade}"/>
+                        </p:column>
+
+                        <p:column headerText="Estado">
+                            <h:outputText value="#{pessoa.departamento.estado}"/>
+                        </p:column>
+
+                        <p:column headerText="Naturalidade">
+                            <h:outputText value="#{pessoa.departamento.naturalidade}"/>
+                        </p:column>
+
+                        <p:column headerText="Nacionalidade">
+                            <h:outputText value="#{pessoa.departamento.nacionalidade}"/>
+                        </p:column>
+
+                        <p:column headerText="Alterar">
                             <p:commandButton actionListener="#{pessoaController.prepararAlterarPessoa}"
                                              update="atualizarPessoa"
                                              oncomplete="dialogAtualizarPessoa.show()"
                                              image="css/images/delete.png"/>
-                            <h:commandLink style="margin-left: 10px" value="Excluir"
-                                           action="#{pessoaController.excluirPessoa}"/>
+                        </p:column>
+                        <p:column headerText="Excluir">
+                                  <p:commandButton value="Excluir" update="excluirPessoa"
+                                             actionListener="#{pessoaController.prepararExcluirPessoa}"
+                                             oncomplete="dialogExcluirPessoa.show()"/>
                         </p:column>
 
                         <f:facet name="footer">
@@ -88,15 +107,6 @@
                 </h:form>
             </p:layoutUnit>
         </p:layout>
-
-        <p:confirmDialog header="Titulo" message="Deseja?"
-                         severity="alert" widgetVar="cd" modal="true">
-            <h:form id="frmRemover">
-                <p:commandButton value="sim" actionListener="#{pessoaController.excluirPessoa}"
-                                 update="teste" oncomplete="cd.hide();"/>
-                <p:commandButton value="nao" onclick="cd.hide();" type="button"/>
-            </h:form>
-        </p:confirmDialog>
 
         <p:dialog header="Inserir Usuário" widgetVar="dialogInserirPessoa"
                   resizable="true" modal="true" showEffect="slide" width="500">
@@ -116,21 +126,40 @@
 
                     <h:outputLabel for="pessoa-curso"
                                    value="Curso:" style="font-weight: bold"/>
-                    <h:selectOneMenu id="pessoa-curso" value="#{pessoaController.pessoa.curso_id}">
+                    <h:selectOneMenu id="pessoa-curso" value="#{pessoaController.pessoa.curso.id}">
                         <f:selectItems value="#{cursoController.listarCursos}"
-                                       var="curso" itemValue="#{curso.id}"
-                                       itemLabel="#{curso.nome}" />
+                                       var="c" itemLabel="#{c.nome}"
+                                       itemValue="#{c.id}"/>
                     </h:selectOneMenu>
 
                     <h:outputLabel for="pessoa-departamento"
                                    value="Departamento:" style="font-weight: bold"/>
 
                     <h:selectOneMenu id="pessoa-departamento" immediate="false"
-                                     value="#{pessoaController.pessoa.departamento_id}">
+                                     value="#{pessoaController.pessoa.departamento.id}">
                         <f:selectItems value="#{departamentoController.listarDepartamentos}"
-                                       var="departamento" itemValue="#{departamento.id}"
-                                       itemLabel="#{departamento.nome}" />
+                                       var="d" itemLabel="#{d.nome}" itemValue="#{d.id}"/>
                     </h:selectOneMenu>
+
+                    <h:outputLabel for="pessoa-cidade"
+                                   value="Cidade:" style="font-weight: bold"/>
+                    <h:inputText id="pessoa-cidade" value="#{pessoaController.pessoa.cidade}"
+                                 required="true" requiredMessage="Campo Cidade Obrigatório!"/>
+
+                    <h:outputLabel for="pessoa-estado"
+                                   value="Estado:" style="font-weight: bold"/>
+                    <h:inputText id="pessoa-estado" value="#{pessoaController.pessoa.estado}"
+                                 required="true" requiredMessage="Campo Estado Obrigatório!"/>
+
+                    <h:outputLabel for="pessoa-naturalidade"
+                                   value="Naturalidade:" style="font-weight: bold"/>
+                    <h:inputText id="pessoa-naturalidade" value="#{pessoaController.pessoa.naturalidade}"
+                                 required="true" requiredMessage="Campo Naturalidade Obrigatório!"/>
+
+                    <h:outputLabel for="pessoa-nacionalidade"
+                                   value="Nacionalidade:" style="font-weight: bold"/>
+                    <h:inputText id="pessoa-nacionalidade" value="#{pessoaController.pessoa.nacionalidade}"
+                                 required="true" requiredMessage="Campo Nacionalidade Obrigatório!"/>
 
                     <p:commandButton update="msg,tabela"
                                      oncomplete="dialogInserirPessoa.hide();"
@@ -152,31 +181,63 @@
 
                     <h:outputLabel for="pessoa-nome"
                                    value="Nome:" style="font-weight: bold"/>
-                    <h:inputText id="atualizarNome" value="#{pessoaController.pessoa.nome}"/>
+                    <h:inputText id="atualizarNome" value="#{pessoaController.pessoa.nome}"
+                                 required="true" requiredMessage="Campo Nome Obrigatório!"/>
 
                     <h:outputLabel for="pessoa-curso"
                                    value="Curso:" style="font-weight: bold"/>
-                    <h:selectOneMenu id="atualizarCurso" value="#{pessoaController.pessoa.curso_id}">
+                    <h:selectOneMenu id="atualizarCurso" value="#{pessoaController.pessoa.curso.id}">
                         <f:selectItems value="#{cursoController.listarCursos}"
-                                       var="curso" itemValue="#{curso.id}"
-                                       itemLabel="#{curso.nome}" />
+                                       var="c" itemLabel="#{c.nome}" itemValue="#{c.id}"/>
                     </h:selectOneMenu>
 
                     <h:outputLabel for="pessoa-departamento"
                                    value="Departamento:" style="font-weight: bold"/>
 
                     <h:selectOneMenu id="atualizarDepartamento" immediate="false"
-                                     value="#{pessoaController.pessoa.departamento_id}">
+                                     value="#{pessoaController.pessoa.departamento.id}">
                         <f:selectItems value="#{departamentoController.listarDepartamentos}"
-                                       var="departamento" itemValue="#{departamento.id}"
-                                       itemLabel="#{departamento.nome}" />
+                                       var="d" itemLabel="#{d.nome}" itemValue="#{d.id}"/>
                     </h:selectOneMenu>
+
+                     <h:outputLabel for="pessoa-cidade"
+                                   value="Cidade:" style="font-weight: bold"/>
+                    <h:inputText id="atualizarCidade" value="#{pessoaController.pessoa.cidade}"
+                                 required="true" requiredMessage="Campo Cidade Obrigatório!"/>
+
+                    <h:outputLabel for="pessoa-estado"
+                                   value="Estado:" style="font-weight: bold"/>
+                    <h:inputText id="atualizarEstado" value="#{pessoaController.pessoa.estado}"
+                                 required="true" requiredMessage="Campo Estado Obrigatório!"/>
+
+                    <h:outputLabel for="pessoa-naturalidade"
+                                   value="Naturalidade:" style="font-weight: bold"/>
+                    <h:inputText id="atualizarNaturalidade" value="#{pessoaController.pessoa.naturalidade}"
+                                 required="true" requiredMessage="Campo Naturalidade Obrigatório!"/>
+
+                    <h:outputLabel for="pessoa-nacionalidade"
+                                   value="Nacionalidade:" style="font-weight: bold"/>
+                    <h:inputText id="atualizarNacionalidade" value="#{pessoaController.pessoa.nacionalidade}"
+                                 required="true" requiredMessage="Campo Nacionalidade Obrigatório!"/>
 
                     <p:commandButton update="msg,tabela"
                                      oncomplete="dialogAtualizarPessoa.hide();"
                                      actionListener="#{pessoaController.alterarPessoa}"
                                      value="Atualizar"/>
 
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog header="Excluir Pessoa" widgetVar="dialogExcluirPessoa"
+                  resizable="false" modal="true" showEffect="slide" width="500">
+            <h:form prependId="false">
+                <h:panelGrid id="excluirNucleo" columns="2" style="margin-bottom:10px">
+                    <h:outputLabel value="Você tem certeza disso?" />
+                    <h:outputLabel value="Essa ação não pode ser desfeita." />
+                    <p:commandButton update="msg,tabela" oncomplete="dialogExcluirPessoa.hide();"
+                                     actionListener="#{pessoaController.excluirPessoa}"
+                                     value="Excluir"/>
                 </h:panelGrid>
             </h:form>
         </p:dialog>

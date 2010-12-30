@@ -49,10 +49,14 @@ public class PerfilController implements Serializable {
         tipo = null;
     }
 
+    public void prepararExcluirPerfil(ActionEvent actionEvent){
+        perfil = (Perfil) (dataModelPerfis.getRowData());
+    }
+
     public String excluirPerfil() {
-        Perfil perfilTemp = (Perfil) (dataModelPerfis.getRowData());
+        //Perfil perfilTemp = (Perfil) (dataModelPerfis.getRowData());
         PerfilDao dao = new PerfilDaoHibernate();
-        dao.remove(perfilTemp);
+        dao.remove(perfil);
         dataModelPerfis = getListarPerfis();
         return "perfil";
 
