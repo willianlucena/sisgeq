@@ -20,7 +20,7 @@ public class Pessoa implements Serializable {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private Integer id;
     private String matricula;
     @ManyToOne
     private Departamento departamento;
@@ -42,11 +42,11 @@ public class Pessoa implements Serializable {
         this.pessoaTurmas = new HashSet<PessoaTurma>();
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -3,6 +3,7 @@ package br.uern.sisgeq.controller;
 import br.uern.sisgeq.dao.PessoaDao;
 import br.uern.sisgeq.dao.hibernate.PessoaDaoHibernate;
 import br.uern.sisgeq.model.Pessoa;
+import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -16,7 +17,7 @@ import javax.faces.model.ListDataModel;
  */
 @ManagedBean
 @SessionScoped
-public class PessoaController {
+public class PessoaController implements Serializable {
 
     private Pessoa pessoa;
     private DataModel dataModelPessoas = getListarPessoas();
@@ -68,10 +69,15 @@ public class PessoaController {
     }
 
     public void adicionarPessoa(ActionEvent actionEvent) {
+        System.out.println("entrou no save");
         PessoaDao dao = new PessoaDaoHibernate();
+        System.out.println("criou novo objeto dao");
         pessoa.setAtivo(Boolean.TRUE);
+        System.out.println("setou ativ comom true");
         dao.save(pessoa);
+        System.out.println("salvou pessoa");
         dataModelPessoas = getListarPessoas();
+        System.out.println("listou tudo novamente");
     }
 
     public void alterarPessoa(ActionEvent actionEvent) {

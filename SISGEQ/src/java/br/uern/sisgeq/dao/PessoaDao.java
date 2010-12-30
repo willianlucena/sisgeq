@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @author Felipe Lemos
  */
-public interface PessoaDao {
+public interface PessoaDao extends DAO {
 
     public void save(Pessoa pessoa);
 

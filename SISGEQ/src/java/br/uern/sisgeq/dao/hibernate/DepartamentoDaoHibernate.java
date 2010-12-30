@@ -25,9 +25,7 @@ public class DepartamentoDaoHibernate implements DepartamentoDao {
     public List<Departamento> getDepartamentos(Boolean ativo) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();
-        List lista = session.createQuery("from Departamento where ativo = :ativo")
-                .setParameter("ativo", ativo)
-                .list();
+        List lista = session.createQuery("from Departamento where ativo = :ativo").setParameter("ativo", ativo).list();
         t.commit();
         session.close();
         return lista;
@@ -38,10 +36,7 @@ public class DepartamentoDaoHibernate implements DepartamentoDao {
         Transaction t = session.beginTransaction();
         List lista = session.createQuery("select d from Departamento as d where "
                 + "d.ativo = :ativo and d.nucleo in (select n.id from Nucleo as"
-                + " n where n.campus = :campus)")
-                .setParameter("ativo", true)
-                .setParameter("campus", campus)
-                .list();
+                + " n where n.campus = :campus)").setParameter("ativo", true).setParameter("campus", campus).list();
         t.commit();
         session.close();
         return lista;
@@ -50,9 +45,7 @@ public class DepartamentoDaoHibernate implements DepartamentoDao {
 
     public List<Departamento> getDepartamentosByNucleo(Nucleo nucleo) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        return session.createSQLQuery("from Departamento as d where d.nucleo = :nucleo")
-                .setParameter("nucleo", nucleo)
-                .list();
+        return session.createSQLQuery("from Departamento as d where d.nucleo = :nucleo").setParameter("nucleo", nucleo).list();
     }
 
     public void save(Departamento departamento) {
