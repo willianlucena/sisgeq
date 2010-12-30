@@ -29,8 +29,8 @@
                 <ui:include src="includes/inc_rodape.xhtml"/>
             </p:layoutUnit>
 
-            <p:layoutUnit position="center">
-                <h1>Gerenciador de Campus</h1>
+            <p:layoutUnit position="center" header="GERENCIADOR DE CAMPUS">
+                <br/>
                 <h:form prependId="false">
                     <p:commandLink value="Novo Campus" actionListener="#{campusController.prepararAdicionarCampus}" update="infosCampus" oncomplete="dialogInserirCampus.show()"/>
                 </h:form>

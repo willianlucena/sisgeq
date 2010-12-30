@@ -29,8 +29,8 @@
                 <ui:include src="includes/inc_rodape.xhtml"/>
             </p:layoutUnit>
 
-            <p:layoutUnit position="center">
-                <h1>Gerenciador de Núcleos</h1>
+            <p:layoutUnit position="center" header="GERENCIADOR DE NÚCLEOS">
+                <br/>
                 <h:form prependId="false">
                     <p:commandLink value="Novo Núcleo" actionListener="#{nucleoController.prepararAdicionarNucleo}" update="infosNucleo" oncomplete="dialogInserirNucleo.show()"/>
                 </h:form>
