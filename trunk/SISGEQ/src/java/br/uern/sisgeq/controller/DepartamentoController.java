@@ -55,10 +55,14 @@ public class DepartamentoController implements Serializable {
         nome = nucleo = area = campus = null;
     }
 
+    public void prepararExcluirDepartamento(ActionEvent actionEvent) {
+        departamento = (Departamento) (dataModelDepartamentos.getRowData());
+    }
+
     public String excluirDepartamento() {
-        Departamento departamentoTemp = (Departamento) (dataModelDepartamentos.getRowData());
+        //Departamento departamentoTemp = (Departamento) (dataModelDepartamentos.getRowData());
         DepartamentoDao dao = new DepartamentoDaoHibernate();
-        dao.remove(departamentoTemp);
+        dao.remove(departamento);
         dataModelDepartamentos = getListarDepartamentos();
         return "departamento";
     }
