@@ -46,14 +46,18 @@ public class CampusController implements Serializable {
         campus = (Campus) (dataModelCampi.getRowData());
     }
 
+    public void prepararExcluirCampus(ActionEvent actionEvent) {
+        campus = (Campus) (dataModelCampi.getRowData());
+    }
+
     public void prepararFiltrarCampus(ActionEvent actionEvent) {
         nome = null;
     }
 
     public String excluirCampus() {
-        Campus campusTemp = (Campus) (dataModelCampi.getRowData());
+        //Campus campusTemp = (Campus) (dataModelCampi.getRowData());
         CampusDao dao = new CampusDaoHibernate();
-        dao.remove(campusTemp);
+        dao.remove(campus);
         dataModelCampi = getListarCampi();
         return "campus";
     }
